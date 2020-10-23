@@ -57,6 +57,7 @@ We sequenced *Ectopleura crocea* Actinula larvae at the 6 developmental stages (
    
 #### 8. Find Actinula Transcripts in Shared Orthogroups (OGs) with Sensory Genes (In R environment)
   Using the two output files (gene_symbols_accid and blastout) from step 7 and the orthofinder results, we will annotate the Orthogroups with the human gene symbols. Next we will identify the actinula sequences within the orthogroups of sensory genes for each gene set.  
+  
    What you will need for this step:  
   * **Rscripts for each gene set:** Ec_Sensory_percep_Chem_Stim-updated.Rmd Ec_Sensory_percep_light_stim-updated.Rmd Ec_Sensory_percep_Mechan_Stim_heatmap-updated.Rmd
   * **gene_symbo_accid files for each gene set:** gene_symbol_accid_sens_percep_chem_stim gene_symbol_accid_sens_percep_light_stim gene_symbol_accid_percep_mechan_stim
@@ -65,15 +66,26 @@ We sequenced *Ectopleura crocea* Actinula larvae at the 6 developmental stages (
   * **Orthofinder gene count file:** Orthogroups.GeneCount_5-11-20.tsv
   
 #### 9. Find Significant Differentially Expressed Genes (DEGs) 
-  Since we have modified the headers for our Human protien FASTA, we want to identify the NCBI sequences from the gene sets in our Human FASTA. So we are going to BLAST the NCBI gene set sequences to our Human FASTA with altered headers. We are going to create 2 files that will be used in R in the next step. 
+  To find significant DEGs we first ran EdgeR in R. Next, we exported the significant pariwise comparisons for each stage to the terminal. Using this, we compared the headers from the sensory orthorgroups to the significant DEGs from EdgeR to identify signficant genes in the gene sets.  
 
+  * Run EdgeR script in R 
+   edgeR_actinula_6_groups_0.05_4-3-20.R  
+
+  * find_sig_degs_in_geneset.py
+  *Run this for each pairwise comparison and compile the results into one text document for each gene set*  
+  
 #### 10. Generate Heatmaps of Significant DEGs of Gene Sets (In R environment)
-  Since we have modified the headers for our Human protien FASTA, we want to identify the NCBI sequences from the gene sets in our Human FASTA. So we are going to BLAST the NCBI gene set sequences to our Human FASTA with altered headers. We are going to create 2 files that will be used in R in the next step. 
+  Now that we have identified the significant actinula DEGs in the gene sets we can visualize their expression. However, first we have to run 2 prep steps before running the R script. 
+  
+  * Prep scripts for heatmaps *(run on each gene set)*
+   9.B_get_all_symbols_for_OGs.py.  
+   9.C_prep_sig_DEGs_for_heatmaps.py.  
 
+  * Using the output from the prep scripts, run the heatmap scripts in R *(run on each gene set)*
+   Ec_Sensory_percep_Chem_Stim_heatmap-updated.R.  
+   Ec_Sensory_percep_light_stim_heatmap-updated.R.  
+   Ec_Sensory_percep_Mechan_Stim_heatmap-updated.R  
+   
+   
 
-
-
-
-
-
-
+   
