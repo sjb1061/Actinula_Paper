@@ -28,17 +28,34 @@ We sequenced *Ectopleura crocea* Actinula larvae at the 6 developmental stages (
 ..* 5_orthofinder.slurm
 
 #### 6. Download Gene Sets 
-.. Search the Broad Institute Gene Set Enrichment Analysis (GSEA) for sensory gene sets [https://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp]. We used 3 gene sets for this paper: [GO_SENSORY_PERCEPTION_OF_LIGHT_STIMULUS](https://www.gsea-msigdb.org/gsea/msigdb/cards/GO_SENSORY_PERCEPTION_OF_LIGHT_STIMULUS.html), [GO_SENSORY_PERCEPTION_OF_MECHANICAL_STIMULUS] (https://www.gsea-msigdb.org/gsea/msigdb/cards/GO_SENSORY_PERCEPTION_OF_MECHANICAL_STIMULUS.html), and [GO_SENSORY_PERCEPTION_OF_CHEMICAL_STIMULUS] (https://www.gsea-msigdb.org/gsea/msigdb/cards/GO_SENSORY_PERCEPTION_OF_CHEMICAL_STIMULUS.html)
+.. Search the Broad Institute Gene Set Enrichment Analysis (GSEA) for sensory gene sets [https://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp]. 
+.. We used 3 gene sets for this paper: 
+.. [GO_SENSORY_PERCEPTION_OF_LIGHT_STIMULUS](https://www.gsea-msigdb.org/gsea/msigdb/cards/GO_SENSORY_PERCEPTION_OF_LIGHT_STIMULUS.html)
+.. [GO_SENSORY_PERCEPTION_OF_MECHANICAL_STIMULUS](https://www.gsea-msigdb.org/gsea/msigdb/cards/GO_SENSORY_PERCEPTION_OF_MECHANICAL_STIMULUS.html)
+.. [GO_SENSORY_PERCEPTION_OF_CHEMICAL_STIMULUS](https://www.gsea-msigdb.org/gsea/msigdb/cards/GO_SENSORY_PERCEPTION_OF_CHEMICAL_STIMULUS.html)
+
 ..* A. For each gene set, click on the show members link and then copy all info into an excel file and save as csv files. 
 
 ..* B. Download Gene set sequences 
-....* import CSV files to terminal 
-....* Run clean up script: 6.B.2_clean_up_csv.py 
-
+..*   B.1 Import CSV files to terminal 
+..*   B.2 Run clean up script: 6.B.2_clean_up_csv.py
+..*   B.3 Download Sequences using NCBI Entrez database (2 scripts): 
+..      6.B.3b_1_split_get_entrez_fasta-v5.py 
+..      6.B.3b_2_split_get_entrez_fasta-v5.py 
+..*   B.4 Check for missing seqs: 6.B.4_check_missing_seqs-v2.py
+.. *Move Newly created FASTAs and gene accession files to another directory for next steps*
 
 #### 7. Get Human Representative Sequences for Gene Sets from my Human prot models  
-.. Run OrthoFinder using translated Actinula Assembly with 6 other taxa: *Homo sapiens, Drosophila, Nematostella, Hydra, Hydractinia (larva), Hydractinia (Adult)* 
-..* 5_orthofinder.slurm
+.. Since we have modified the headers for our Human protien FASTA, we want to identify the NCBI sequences from the gene sets in our Human FASTA. So we are going to BLAST the NCBI gene set sequences to our Human FASTA with altered headers. We are going to create 2 files that will be used in R in the next step. 
+
+..* A. Make blast db (only need to run once):
+..     7.A_blastdb.sh
+..* B. Run BLAST:
+..     7.B_blast.sh
+..* C. Check for any duplicates or missing seqs after blast
+..     7.C_check_for_dups_mis.py
+
+
 
 
 
