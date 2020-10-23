@@ -1,5 +1,6 @@
 # Actinula_Paper
-This contains the developmental transcriptome work for the Actinula paper along with the R scripts used to make figures
+Welcome!  
+This repository contains my developmental transcriptome and gene expression work for the actinula paper along with the R scripts used to make figures. I am currently working on updating and adding all of the scripts used in this analysis. 
 
 ## Work Flow/Steps for Developmental Transciptome Work and Gene Set Investigation
 We sequenced *Ectopleura crocea* Actinula larvae at the 6 developmental stages (star embryo, preactinula, actinula (precompetent), settling (competent), settled, and metamorphosed juvenile polyps). Samples were pooled with ~25 larva per replicate and each stage contained 6 replicates.  
