@@ -36,7 +36,7 @@ We sequenced *Ectopleura crocea* Actinula larvae at the 6 developmental stages (
 
   * A. For each gene set, click on the show members link and then copy all info into an excel file and save as csv files. 
 
-  * B. Download Gene set sequences 
+  * B. Download Gene set sequences *(run on each gene set)* 
   *   B.1 Import CSV files to terminal 
   *   B.2 Run clean up script: 6.B.2_clean_up_csv.py
   *   B.3 Download Sequences using NCBI Entrez database (2 scripts):   
@@ -45,17 +45,30 @@ We sequenced *Ectopleura crocea* Actinula larvae at the 6 developmental stages (
   *   B.4 Check for missing seqs: 6.B.4_check_missing_seqs-v2.py.  
    *Move Newly created FASTAs and gene accession files to another directory for next steps*.   
 
-#### 7. Get Human Representative Sequences for Gene Sets from my Human prot models  
+#### 7. Find Human Representative Sequences for Gene Sets from our Human protein models  
   Since we have modified the headers for our Human protien FASTA, we want to identify the NCBI sequences from the gene sets in our Human FASTA. So we are going to BLAST the NCBI gene set sequences to our Human FASTA with altered headers. We are going to create 2 files that will be used in R in the next step. 
 
-  * A. Make blast db (only need to run once):
-       7.A_blastdb.sh.  
-  * B. Run BLAST:
-       7.B_blast.sh.  
-  * C. Check for any duplicates or missing seqs after blast
-       7.C_check_for_dups_mis.py.  
+  * A. Make blast db *(only need to run once)*:  
+   7.A_blastdb.sh.    
+  * B. Run BLAST *(for each gene set)*:  
+   7.B_blast.sh.  
+  * C. Check for any duplicates or missing seqs after blast *(for each gene set)*:  
+   7.C_check_for_dups_mis.py.  
+   
+#### 8. Find Actinula Transcripts in Shared Orthogroups (OGs) with Sensory Genes (In R environment)
+  Using the two output files (gene_symbols_accid and blastout) from step 7 and the orthofinder results, we will annotate the Orthogroups with the human gene symbols. Next we will identify the actinula sequences within the orthogroups of sensory genes for each gene set.  
+   What you will need for this step:  
+  * **Rscripts for each gene set:** Ec_Sensory_percep_Chem_Stim-updated.Rmd Ec_Sensory_percep_light_stim-updated.Rmd Ec_Sensory_percep_Mechan_Stim_heatmap-updated.Rmd
+  * **gene_symbo_accid files for each gene set:** gene_symbol_accid_sens_percep_chem_stim gene_symbol_accid_sens_percep_light_stim gene_symbol_accid_percep_mechan_stim
+  * **blastout files for each gene set:** Homo.fa_ref_blastout_sens_percep_chem_stim Homo.fa_ref_blastout_sens_percep_light_stim Homo.fa_ref_blastout_percep_mechan_stim 
+  * **Orthofinder tsv file:** Orthogroups_5-11-20.tsv
+  * **Orthofinder gene count file:** Orthogroups.GeneCount_5-11-20.tsv
+  
+#### 9. Find Significant Differentially Expressed Genes (DEGs) 
+  Since we have modified the headers for our Human protien FASTA, we want to identify the NCBI sequences from the gene sets in our Human FASTA. So we are going to BLAST the NCBI gene set sequences to our Human FASTA with altered headers. We are going to create 2 files that will be used in R in the next step. 
 
-
+#### 10. Generate Heatmaps of Significant DEGs of Gene Sets (In R environment)
+  Since we have modified the headers for our Human protien FASTA, we want to identify the NCBI sequences from the gene sets in our Human FASTA. So we are going to BLAST the NCBI gene set sequences to our Human FASTA with altered headers. We are going to create 2 files that will be used in R in the next step. 
 
 
 
