@@ -39,21 +39,21 @@ We sequenced *Ectopleura crocea* Actinula larvae at the 6 developmental stages (
   * B. Download Gene set sequences 
   *   B.1 Import CSV files to terminal 
   *   B.2 Run clean up script: 6.B.2_clean_up_csv.py
-  *   B.3 Download Sequences using NCBI Entrez database (2 scripts): 
-         6.B.3b_1_split_get_entrez_fasta-v5.py.  
-         6.B.3b_2_split_get_entrez_fasta-v5.py.  
-  *   B.4 Check for missing seqs: 6.B.4_check_missing_seqs-v2.py
-    *Move Newly created FASTAs and gene accession files to another directory for next steps*. 
+  *   B.3 Download Sequences using NCBI Entrez database (2 scripts):   
+         6.B.3b_1_split_get_entrez_fasta-v5.py.    
+         6.B.3b_2_split_get_entrez_fasta-v5.py.    
+  *   B.4 Check for missing seqs: 6.B.4_check_missing_seqs-v2.py.  
+   *Move Newly created FASTAs and gene accession files to another directory for next steps*.   
 
 #### 7. Get Human Representative Sequences for Gene Sets from my Human prot models  
   Since we have modified the headers for our Human protien FASTA, we want to identify the NCBI sequences from the gene sets in our Human FASTA. So we are going to BLAST the NCBI gene set sequences to our Human FASTA with altered headers. We are going to create 2 files that will be used in R in the next step. 
 
   * A. Make blast db (only need to run once):
-       7.A_blastdb.sh
+       7.A_blastdb.sh.  
   * B. Run BLAST:
-       7.B_blast.sh
+       7.B_blast.sh.  
   * C. Check for any duplicates or missing seqs after blast
-       7.C_check_for_dups_mis.py
+       7.C_check_for_dups_mis.py.  
 
 
 
