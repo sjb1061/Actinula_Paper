@@ -10,8 +10,8 @@ We sequenced *Ectopleura crocea* Actinula larvae at the 6 developmental stages (
   * 1.B_steps_3b-4b.py
 
 #### 2. Assemble - Run Oyster River Protocol (ORP)
-... Submit ORP slurm
-..* 2_orp.slurm
+   Submit ORP slurm. 
+  * 2_orp.slurm
 
 #### 3. Quantify Reads - Run Salmon 
    Before running salmon, change headers from the assembly and then run (2 scripts). 
@@ -30,9 +30,9 @@ We sequenced *Ectopleura crocea* Actinula larvae at the 6 developmental stages (
 #### 6. Download Gene Sets 
    Search the Broad Institute Gene Set Enrichment Analysis (GSEA) for sensory gene sets [https://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp].   
    We used 3 gene sets for this paper:   
-   [GO_SENSORY_PERCEPTION_OF_LIGHT_STIMULUS](https://www.gsea-msigdb.org/gsea/msigdb/cards/GO_SENSORY_PERCEPTION_OF_LIGHT_STIMULUS.html)
-   [GO_SENSORY_PERCEPTION_OF_MECHANICAL_STIMULUS](https://www.gsea-msigdb.org/gsea/msigdb/cards/GO_SENSORY_PERCEPTION_OF_MECHANICAL_STIMULUS.html)
-   [GO_SENSORY_PERCEPTION_OF_CHEMICAL_STIMULUS](https://www.gsea-msigdb.org/gsea/msigdb/cards/GO_SENSORY_PERCEPTION_OF_CHEMICAL_STIMULUS.html)
+   [GO_SENSORY_PERCEPTION_OF_LIGHT_STIMULUS](https://www.gsea-msigdb.org/gsea/msigdb/cards/GO_SENSORY_PERCEPTION_OF_LIGHT_STIMULUS.html). 
+   [GO_SENSORY_PERCEPTION_OF_MECHANICAL_STIMULUS](https://www.gsea-msigdb.org/gsea/msigdb/cards/GO_SENSORY_PERCEPTION_OF_MECHANICAL_STIMULUS.html). 
+   [GO_SENSORY_PERCEPTION_OF_CHEMICAL_STIMULUS](https://www.gsea-msigdb.org/gsea/msigdb/cards/GO_SENSORY_PERCEPTION_OF_CHEMICAL_STIMULUS.html). 
 
   * A. For each gene set, click on the show members link and then copy all info into an excel file and save as csv files. 
 
