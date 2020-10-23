@@ -68,20 +68,21 @@ We sequenced *Ectopleura crocea* Actinula larvae at the 6 developmental stages (
 #### 9. Find Significant Differentially Expressed Genes (DEGs) 
   To find significant DEGs we first ran EdgeR in R. Next, we exported the significant pariwise comparisons for each stage to the terminal. Using this, we compared the headers from the sensory orthorgroups to the significant DEGs from EdgeR to identify signficant genes in the gene sets.  
 
-  * Run EdgeR script in R 
+  * Run EdgeR script in R   
    edgeR_actinula_6_groups_0.05_4-3-20.R  
 
-  * find_sig_degs_in_geneset.py
+  * Identify significant DEGs in gene sets (in terminal)  
+   find_sig_degs_in_geneset.py  
   *Run this for each pairwise comparison and compile the results into one text document for each gene set*  
   
 #### 10. Generate Heatmaps of Significant DEGs of Gene Sets (In R environment)
   Now that we have identified the significant actinula DEGs in the gene sets we can visualize their expression. However, first we have to run 2 prep steps before running the R script. 
   
-  * Prep scripts for heatmaps *(run on each gene set)*
-   9.B_get_all_symbols_for_OGs.py.  
+  * Prep scripts for heatmaps *(run on each gene set)*  
+   9.B_get_all_symbols_for_OGs.py.    
    9.C_prep_sig_DEGs_for_heatmaps.py.  
 
-  * Using the output from the prep scripts, run the heatmap scripts in R *(run on each gene set)*
+  * Using the output from the prep scripts, run the heatmap scripts in R *(run on each gene set)*  
    Ec_Sensory_percep_Chem_Stim_heatmap-updated.R.  
    Ec_Sensory_percep_light_stim_heatmap-updated.R.  
    Ec_Sensory_percep_Mechan_Stim_heatmap-updated.R  
