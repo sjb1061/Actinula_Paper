@@ -15,7 +15,8 @@ This file is the step by step instructions of our Transcriptome analysis. You wi
    
    To run this script you will need to organize your directory as such:   
     `mkdir ORP_Prep`.  
-    `mkdir raw_larva_reads`.  
+    `mkdir ORP_Prep/raw_larva_reads`.  
+    
     Within raw_larva_reads you should have subdirectories for each sample. Rename your subdirs with this format: STG_1_R1, STG_1_R2, STG_1_R3, ... For the actinula data there are a total of 36 sub dirs with a total of 72 files (an R1 and R2 read file for each sample). 
     
     
