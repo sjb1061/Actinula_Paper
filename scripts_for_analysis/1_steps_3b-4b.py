@@ -1,5 +1,8 @@
 #! /usr/bin/env python3
 
+#The previous script organized group/rep structure and ran FastQC, now this script will calculate stats using the FastQC output to determine which rep for each stage
+#is the highest quality rep to be used in the reference transcriptome. For this script I did have to mannually hard code the collection returend from step 1 and assigned it 
+#to the variable group_db on line 23. I will add a script that is the full process of all 3 scripts that doesn't require the user to hard code a collection. 
 
 #import modules        #dont forget to module load linuxbrew/colsa 
 import argparse
@@ -13,19 +16,15 @@ from zipfile import ZipFile
 #create an instance of Argument Parser and add positional argument 
 parser = argparse.ArgumentParser()
 parser.add_argument("--dir", "-d", help="Path to directory with sub directories of raw reads - subdir names should be in the format of group_additional-info")
-#parser.add_argument("--command", "-c", help="command using the wining reads - MUST place {0} in command for where to insert read (if need R1 and R2 use {0} {1}")
-#parser.add_argument("--cat", "-cat", action="store_true", help="if specified will make total R1 and total R2 files of wining reads to be used in command given")
 
 args = parser.parse_args()
 
 #returned collection from step 1:  
 group_db = {'STG3': ['STG_3_R6', 'STG_3_R3', 'STG_3_R4', 'STG_3_R5', 'STG_3_R1', 'STG_3_R2'], 'STG5': ['STG_5_R5', 'STG_5_R1', 'STG_5_R2', 'STG_5_R3', 'STG_5_R6', 'STG_5_R4'], 'STG2': ['STG_2_R4', 'STG_2_R2', 'STG_2_R1', 'STG_2_R6', 'STG_2_R5', 'STG_2_R3'], 'STG6': ['STG_6_R6', 'STG_6_R1', 'STG_6_R2', 'STG_6_R5', 'STG_6_R4', 'STG_6_R3'], 'STG1': ['STG_1_R5', 'STG_1_R2', 'STG_1_R1', 'STG_1_R6', 'STG_1_R3', 'STG_1_R4'], 'STG4': ['STG_4_R6', 'STG_4_R5', 'STG_4_R2', 'STG_4_R3', 'STG_4_R4', 'STG_4_R1']}
-#group_db = {'STG1': ['STG_1_R2', 'STG_1_R1']} #for testing script
 
 
 
-
-#3b) iterate through keys and values of group_db to get the base name of files to use in a path to open file    
+#3b) iterate through keys and values of group_db to get the base name of files to use in a path to open FastQ files    
 try: 
     def stats(db):
         #make empty dictionaries to keep track of stats values with keys 
@@ -68,13 +67,13 @@ try:
                                 stats_db["{0}.R1".format(value)].append(sp_line[1])
                                 #print("sq len sp line ", sp_line[1]) #for debug
 		
-                            #Extract the mean and take the average of the mean and add to the stats_dbb
+                            #Extract the mean and take the average of the mean and add to the stats_db
                             if sp_line[0] == "#Base":
                                 trigger = True
 		
                             elif trigger:
                                 if sp_line[0] == ">>END_MODULE":
-                        	        #calculate the average of the means and append to list then find the lowest min and highest max for all files 
+                        	    #calculate the average of the means and append to list then find the lowest min and highest max for all files 
                                     avg_of_mean = sum(avg_list)/len(avg_list)
                                     #print("avg:", avg_of_mean) #for debug
                                     stats_db["{0}.R1".format(value)].append(avg_of_mean)
@@ -127,7 +126,7 @@ try:
 		
                             elif trigger:
                                 if sp_line[0] == ">>END_MODULE":
-                        	        #calculate the average of the means and append to list then find the lowest min and highest max for all files 
+                        	    #calculate the average of the means and append to list then find the lowest min and highest max for all files 
                                     avg_of_mean = sum(avg_list)/len(avg_list)
                                     #print("avg:", avg_of_mean) #for debug
                                     stats_db["{0}.R2".format(value)].append(avg_of_mean)
@@ -150,7 +149,7 @@ try:
                         #print("min db at end of iteration: ", min_db) #for debug
 		
 
-        print("stats db at end: ", stats_db)
+        print("stats db at end of value collection: ", stats_db)
         #print("max db at end: ", max_db) #for debug
         #print("min db at end: ", min_db) #for debug
 
@@ -224,7 +223,7 @@ def select_best_reads(group_db, score_db):
                     print("name list: ", name_list_r1)
 
         #id the highest score per group using the counter variable, the index variable keeps track of where the position
-        #of the largest score - once finished iterating through lists it will append the highest scoring name to the winners list per group 
+        #of the highest score - once finished iterating through lists it will append the highest scoring name to the winners list per group 
         counter = 0
         idx = 0
         for item in range(len(score_list_r1)):
@@ -258,50 +257,38 @@ for name in winners:
 print("winners 2 ", winners_2)
 
 
-print("Going to step 4 b")
+print("Going to step 4b")
 #Step 4 b) Concatenate the winning reads into Total R1 and Total R2 files (zipped)
 def make_totals_files(samp_dir, win_list, win_list2):
-    #change into the samples dir, if cat is present then cat all R1 and R2 files for total R1 and R2, if not present then submit reads in specified program 
+    #change into the correct dir, open new files and concatenate the highest scoring reps for each stage in order  
     #os.chdir("./fastqc_results") #only for testing - this is where we are after the previous code 
     print("Beginning concatenation of Total R1 and Total R2 files, cwd: ", os.getcwd()) #for debug
     os.chdir("../{0}".format(samp_dir))
     print(os.getcwd()) #for debug
-    #if bool:
-        #if cat is present then open files to write to 
+    
+    #Open two zipped files to write to - total_R1 and total_R2 
     with gzip.open("total_R1.fastq.gz", "wb") as out_handel_1:
         with gzip.open("total_R2.fastq.gz", "wb") as out_handel_2:
 
-            #iterate through dir and cat files that are in the winning lists
-            for item in os.scandir("."):
-                #print("item in os.scandir", item) #for debug
-                if item.is_file():
-                    #print("item is a file: ", item) 
-                    for file_name in win_list: 
-                        #print("file_name for r1 ", file_name) #for debug
-                        #print("item.name for r1: ", item.name)
-                        if item.name == "{0}.fastq.gz".format(file_name):
-                            print("name of matching file", item.name)
-                            print("matching fastq file base", file_name)
+            for idx in range(len(win_list)): 
+                match_name_1 = win_list[idx]
+                print("idx: ", idx)
+                print("match name 1: ", match_name_1)
+                match_name_2 = win_list2[idx]
+                print("match name 2: ", match_name_2)
 
-                            #write total r1 file - read in each line and write out each line
-                            with gzip.open(item.name, "rb") as in_handel_1:
-                                print("writing for file:", item.name)
-                                for line in in_handel_1:
-                                    out_handel_1.write(line)
-
-                    for file_name in win_list2: 
-                        #print("item.name for r2: ", item.name)
-                        #print("file_name for r2: ", file_name)
-                        if item.name == "{0}.fastq.gz".format(file_name):
-                            print("name of match r2 file", item.name)
-                            print("matching fastq file base r2", file_name)
-
-                            #write total r1 file - read in each line and write out each line
-                            with gzip.open(item.name, "rb") as in_handel_2:
-                                print("writing for file", item.name)
-                                for line in in_handel_2:
-                                    out_handel_2.write(line)
-
+                #write total r1 file - read in each line and write out each line
+                with gzip.open("{0}.fastq.gz".format(match_name_1), "rb") as in_handel_1:
+                    print("writing for file:", match_name_1)
+                    for line in in_handel_1:
+                        out_handel_1.write(line)
+                        
+                #write total r2 file - read in each line and write out each line
+                with gzip.open("{0}.fastq.gz".format(match_name_2), "rb") as in_handel_2:
+                    print("writing for file", match_name_2)
+                    for line in in_handel_2:
+                        out_handel_2.write(line)
+                    
     print("total R1 and R2 files have been made")
 
 #Call function 
