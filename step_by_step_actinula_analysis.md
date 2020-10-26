@@ -22,6 +22,9 @@ This file is the step by step instructions of our Transcriptome analysis. You wi
    Once your directory is set up, run the script:   
    `./1_Full_Ref_Transcriptome_prep.py -d ORP_Prep`  
     
+   The highest quality replicates were:  
+   winners = ['STG_3_R2.R1', 'STG_5_R2.R1', 'STG_2_R4.R1', 'STG_6_R4.R1', 'STG_1_R6.R1', 'STG_4_R3.R1']   
+   
     
 
 
