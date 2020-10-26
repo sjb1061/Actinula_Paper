@@ -1,5 +1,9 @@
 #! /usr/bin/env python3
 
+#This script is one cohesive script (the combo of 1_steps_1-3a_v3.py and 1_steps_3b-4b.py) to prep my raw reads for assembling a reference transcriptome. Our data was sequenced by novogene. We have 6 developmental stages each with 6 replicates
+#The goal is to identify the highest quality replicate in each stage to use in the reference transcriptome. We are doing this by using FastQC and calculating basic stats on each
+#replicate - which ever rep for each stage gets the highest score will be used in the reference transcriptome (they will be concatenated and used in the R1 and R2 files for assembly).
+
 
 #import modules        #dont forget to module load linuxbrew/colsa 
 import argparse
@@ -12,8 +16,6 @@ import shutil
 #create an instance of Argument Parser and add positional argument 
 parser = argparse.ArgumentParser()
 parser.add_argument("--dir", "-d", help="Path to directory with sub directories of raw reads - subdir names should be in the format of group_additional-info")
-#parser.add_argument("--command", "-c", help="command using the wining reads - MUST place {0} in command for where to insert read (if need R1 and R2 use {0} {1}")
-#parser.add_argument("--cat", "-cat", action="store_true", help="if specified will make total R1 and total R2 files of wining reads to be used in command given")
 
 args = parser.parse_args()
 
