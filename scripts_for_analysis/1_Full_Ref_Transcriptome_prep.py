@@ -1,6 +1,7 @@
 #! /usr/bin/env python3
 
-#This script is one cohesive script (the combo of 1_steps_1-3a_v3.py and 1_steps_3b-4b.py) to prep my raw reads for assembling a reference transcriptome. Our data was sequenced by novogene. We have 6 developmental stages each with 6 replicates
+#This script is one cohesive script (the combo of 1_steps_1-3a_v3.py and 1_steps_3b-4b.py) to prep my raw reads for assembling a reference transcriptome. 
+#Our data was sequenced by novogene. We have 6 developmental stages each with 6 replicates
 #The goal is to identify the highest quality replicate in each stage to use in the reference transcriptome. We are doing this by using FastQC and calculating basic stats on each
 #replicate - which ever rep for each stage gets the highest score will be used in the reference transcriptome (they will be concatenated and used in the R1 and R2 files for assembly).
 
@@ -52,7 +53,7 @@ print("structure of fastqc prep db: ", fastqc_prep_result) #for debug
 
 
 
-#Step 2) iterate through directory specified - copy zipped files and rename them - place in directory specified
+#Step 2) iterate through subdirectory specified in args.d - copy zipped files and rename them - place in directory specified
 try:
     iter_v = 0
     #iterate through the subdirectories in the directory specified - make the file name you want to change it to
@@ -107,7 +108,7 @@ except IOError as err:
 print("heading to step 3 - fastqc")
 
 #Step 3 run fastqc and calculate scores  
-#3a) run fastqc using a function - this will run in the directory specified using the zipped 
+#3a) run fastqc using a function - this will run in the directory specified (args.d) using the zipped 
 #files copied from step 2 - output will be in the fastqc dir which is outside the dir specified 
 def run_fastqc():
     os.chdir(args.dir)
@@ -185,7 +186,7 @@ try:
 		
                             elif trigger:
                                 if sp_line[0] == ">>END_MODULE":
-                        	        #calculate the average of the means and append to list then find the lowest min and highest max for all files 
+                        	    #calculate the average of the means and append to list then find the lowest min and highest max for all files 
                                     avg_of_mean = sum(avg_list)/len(avg_list)
                                     #print("avg:", avg_of_mean) #for debug
                                     stats_db["{0}.R1".format(value)].append(avg_of_mean)
@@ -238,7 +239,7 @@ try:
 		
                             elif trigger:
                                 if sp_line[0] == ">>END_MODULE":
-                        	        #calculate the average of the means and append to list then find the lowest min and highest max for all files 
+                        	    #calculate the average of the means and append to list then find the lowest min and highest max for all files 
                                     avg_of_mean = sum(avg_list)/len(avg_list)
                                     #print("avg:", avg_of_mean) #for debug
                                     stats_db["{0}.R2".format(value)].append(avg_of_mean)
@@ -261,7 +262,7 @@ try:
                         #print("min db at end of iteration: ", min_db) #for debug
 		
 
-        print("stats db at end: ", stats_db)
+        print("stats db at end of value collection: ", stats_db)
         #print("max db at end: ", max_db) #for debug
         #print("min db at end: ", min_db) #for debug
 
@@ -307,8 +308,8 @@ except IOError as err:
 
 
 #Call stats function 
-#results = stats(fastqc_prep_result) #if running in 1 full script use this call 
-results = stats(group_db) #if doing in steps use the group_db variable - need to hardcode the db in
+results = stats(fastqc_prep_result) #if running in 1 full script use this call 
+#results = stats(group_db) #if doing in steps use the group_db variable - need to hardcode the db in
 
 
 #Step 4 a) identify the best reads to use for reference transcriptome 
@@ -334,7 +335,7 @@ def select_best_reads(group_db, score_db):
                     print("name list: ", name_list_r1)
 
         #id the highest score per group using the counter variable, the index variable keeps track of where the position
-        #of the largest score - once finished iterating through lists it will append the highest scoring name to the winners list per group 
+        #of the highest score - once finished iterating through lists it will append the highest scoring name to the winners list per group 
         counter = 0
         idx = 0
         for item in range(len(score_list_r1)):
@@ -356,7 +357,7 @@ def select_best_reads(group_db, score_db):
     return winners_r1
 
 #Call function
-winners = select_best_reads(group_db, results)
+winners = select_best_reads(fastqc_prep_result, results)
 print("returned list from function: ", winners)
 
 
@@ -374,9 +375,9 @@ print("winners 2 ", winners_2)
 #winners_2 = ['STG_3_R2.R2', 'STG_5_R2.R2', 'STG_2_R4.R2', 'STG_6_R4.R2', 'STG_1_R6.R2', 'STG_4_R3.R2']
 
 
-#Step 4 b) Concatenate the winning reads into Total R1 and Total R2 files (zipped)
+#Step 4 b) Concatenate the winning reads into Total R1 and Total R2 files (zipped) (the updated re-wored 4b code)
 def make_totals_files(samp_dir, win_list, win_list2):
-    #change into the samples dir, if cat is present then cat all R1 and R2 files for total R1 and R2, if not present then submit reads in specified program 
+    #change into the correct dir, open new files and concatenate the highest scoring reps for each stage in order 
     #os.chdir("./fastqc_results") #only for testing - this is where we are after the previous code 
     print("Beginning concatenation of Total R1 and Total R2 files, cwd: ", os.getcwd()) #for debug
     os.chdir("../{0}".format(samp_dir))
