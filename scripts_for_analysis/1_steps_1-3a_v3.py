@@ -1,5 +1,7 @@
 #! /usr/bin/env python3
-
+#This script is the first of 2 scripts to prep my raw reads for assembling a reference transcriptome. Our data was sequenced by novogene. We have 6 developmental stages each with 6 replicates
+#The goal is to identify the highest quality replicate in each stage to use in the reference transcriptome. We are doing this by using FastQC and calculating basic stats on each
+#replicate - which ever rep for each stage gets the highest score will be used in the reference transcriptome (they will be concatenated and used in the R1 and R2 files for assembly).
 
 #import modules 
 import argparse
@@ -12,8 +14,6 @@ import shutil
 #create an instance of Argument Parser and add positional argument 
 parser = argparse.ArgumentParser()
 parser.add_argument("--dir", "-d", help="Path to directory with sub directories of raw reads - subdir names should be in the format of group_additional-info")
-#parser.add_argument("--command", "-c", help="command using the wining reads - MUST place {0} in command for where to insert read (if need R1 and R2 use {0} {1}")
-#parser.add_argument("--cat", "-cat", action="store_true", help="if specified will make total R1 and total R2 files of wining reads to be used in command given")
 
 args = parser.parse_args()
 
@@ -46,7 +46,7 @@ print("structure of fastqc prep db: ", fastqc_prep_result) #for debug
 
 
 
-#Step 2) iterate through directories to concatenate raw reads(without unziping), change R2 headers and run fastqc
+#Step 2) iterate through subdirectories to concatenate raw reads(without unziping) - (don't need to fix R2 headers here)
 try:
     iter_v = 0
     #open 2 output files for writing so you are iterating through directories only once - helps performance 
@@ -58,7 +58,7 @@ try:
   
         iter_v += 1
         print("on iteration: ", iter_v) #for debug
-        for file in sorted(files): #in original code (v2) this was: for file in sorted(files): #maybe need this?
+        for file in sorted(files): 
             print("on file:",file)
 
                 #id if the current file is R1 or R2 and write to new files 
@@ -100,7 +100,7 @@ except IOError as err:
 print("heading to step 3 - fastqc")
 
 #Step 3 run fastqc and calculate scores  
-#3a) run fastqc using a function   ####This works un comment when ready to test whole thing again 
+#3a) run fastqc using a function   
 def run_fastqc():
     os.chdir(args.dir)
     #print(os.getcwd()) #for debug
