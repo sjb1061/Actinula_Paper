@@ -23,8 +23,8 @@ This file is the step by step instructions of our Transcriptome analysis. You wi
    `./1_Full_Ref_Transcriptome_prep.py -d ORP_Prep`  
     
    The highest quality replicates that are used in the Reference transcriptome are:  
-   winners = ['STG_3_R2.R1', 'STG_5_R2.R1', 'STG_2_R4.R1', 'STG_6_R4.R1', 'STG_1_R6.R1', 'STG_4_R3.R1']   
-   winners_2 = ['STG_3_R2.R2', 'STG_5_R2.R2', 'STG_2_R4.R2', 'STG_6_R4.R2', 'STG_1_R6.R2', 'STG_4_R3.R2']  
+   winners_R1 = ['STG_3_R2.R1', 'STG_5_R2.R1', 'STG_2_R4.R1', 'STG_6_R4.R1', 'STG_1_R6.R1', 'STG_4_R3.R1']   
+   winners_R2 = ['STG_3_R2.R2', 'STG_5_R2.R2', 'STG_2_R4.R2', 'STG_6_R4.R2', 'STG_1_R6.R2', 'STG_4_R3.R2']  
    
    
 ### 2. Run Transcriptome Assembler: Oyster River Protocol (ORP)    
