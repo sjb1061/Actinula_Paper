@@ -28,6 +28,29 @@ This file is the step by step instructions of our Transcriptome analysis. You wi
    
    
 ### 2. Run Transcriptome Assembler: Oyster River Protocol (ORP)    
-    
+   Now that we have our representative R1 and R2 files, we can assemble the transcriptome. Here we used the ORP which generates 3 assemblies and merges them into 1 high quality assembly. More information on this method can be found here: https://oyster-river-protocol.readthedocs.io/en/latest/  
+   
+   Submit the slurm:   
+   `sbatch 2_ORP.slurm`  
+   
+   The code in this slurm (full slurm script can be found in scripts_for_analysis folder):   
+   `oyster.mk \  
+   MEM=150 \  
+   CPU=24 \  
+   READ1=total_R1.fastq.gz \  
+   READ2=total_R2.fastq.gz \  
+   RUNOUT=actinula_total`  
 
+   The Quality Report for the assembly: 
+   *****  QUALITY REPORT FOR: actinula_total using the ORP version 2.2.8 ****    
+   *****  THE ASSEMBLY CAN BE FOUND HERE: /mnt/lustre/plachetzki/sjb1061/ectopleura_transcriptomics/assemblies/actinula_total.ORP.fasta ****.   
 
+   *****  BUSCO SCORE ---------------------->      C:98.3%[S:64.0%,D:34.3%],F:1.3%,M:0.4%,n:303.  
+   *****  TRANSRATE SCORE ------------------>      0.34022.  
+   *****  TRANSRATE OPTIMAL SCORE ---------->      0.39494.  
+   *****  UNIQUE GENES ORP ----------------->      16573.  
+   *****  UNIQUE GENES TRINITY ------------->      15118.  
+   *****  UNIQUE GENES SPADES55 ------------>      14755.  
+   *****  UNIQUE GENES SPADES75 ------------>      13630.  
+   *****  UNIQUE GENES TRANSABYSS ---------->      12942.  
+   *****  READS MAPPED AS PROPER PAIRS ----->      93.35%.  	
