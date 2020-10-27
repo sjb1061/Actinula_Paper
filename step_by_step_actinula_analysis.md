@@ -76,23 +76,29 @@ This file is the step by step instructions of our Transcriptome analysis. You wi
    Output: You will get directories for each sample - here I secure copied all of my output directories to my desktop and placed them in a folder named mapping. This will be used with EdgeR to find DEGs and when making heatmaps in R towards the end of this workflow. 
    
 ### 4. Run TransDecoder 
-   Next we need to translate our assembly into protien space so we can use our assembly in Orthofinder in the next step. We will also have to alter the headers again keeping only valuable information and then we will reduce the assembly by using cd-hit to get rid of duplicates.   
+   Next we need to translate our assembly into protien space so we can use our assembly in Orthofinder in the next step. We will also have to alter the headers again keeping only valuable information and then we will reduce the assembly by using cd-hit to get rid of duplicates. For more info on transdecoder go here: https://github.com/TransDecoder/TransDecoder/wiki.  
    
-   First, run Transdecoder:    
+   ##### First, run Transdecoder:    
    `sbatch 4.A_transdecoder.slurm`   
    
    The code in the slurm is:  
    `TransDecoder.LongOrfs -t actinula_total.ORP.fa-mod.fa`.    
    Use the longest_orfs.pep file in the transdecoder dir - copy the file and rename it: actinula_total_ORP_prot.fa   
    
-   Next, rename the headers in the prot fasta:   
-   `./4.B_rename_prot_headers.py -a actinula_total_ORP_prot.fa`       
-   The headers after running Transdecoder look like:  
+   ##### Next, rename the headers in the prot fasta:   
+   `./4.B_rename_prot_headers.py -a actinula_total_ORP_prot.fa`      
+   
+   The headers after running Transdecoder look like:   
     >Gene.1::Ec_actinula_t.1::g.1::m.1 type:complete len:236 gc:universal Ec_actinula_t.1:2328-1621(-)  
+    
    This script will take the last segment of the transdecoder header (>Gene.1::Ec_actinula_t.1::g.1::m.1 type:complete len:236 gc:universal **Ec_actinula_t.1:2328-1621(-)**) and will remove the direction ((-) or (+)) and the colon to make the new header which would be: >Ec_actinula_t.1..2328-1621. This header provides the original transcript from which it came (t.#) and also provides where in that sequence it came (#-#). The output file will have the -mod.fa tag at the end of the input fasta file.   
    
    The output file is: actinula_total_ORP_prot.fa-mod.fa.  
    
+   ##### Now to get rid of potential duplicates/bad sequences in the assembly, we can run cd-hit on our prot assembly:   
+   `sbatch 4.C_cdhit.slurm`
+   
+   The code in the slurm:
    
    
   
