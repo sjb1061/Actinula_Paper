@@ -39,7 +39,8 @@ This file is the step by step instructions of our Transcriptome analysis. You wi
    CPU=24 \   
    READ1=total_R1.fastq.gz \   
    READ2=total_R2.fastq.gz \   
-   RUNOUT=actinula_total```   
+   RUNOUT=actinula_total.  
+   ```
 
    Output Quality Metrics for the assembly:  
    
