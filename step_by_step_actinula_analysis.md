@@ -19,7 +19,7 @@ This file is the step by step instructions of our Transcriptome analysis. You wi
     
    Within raw_larva_reads you should have subdirectories for each sample. Rename your subdirs with this format: STG_1_R1, STG_1_R2, STG_1_R3, ... If you need to add additional info after the R# add a dash and the info (STG_1_R3-additional-info). For the actinula data there are a total of 36 sub dirs with a total of 72 files (an R1 and R2 read file for each sample).   
    
-   Once your directory is set up, run the script:   
+   ##### Once your directory is set up, run the script:   
    `./1_Full_Ref_Transcriptome_prep.py -d ORP_Prep`  
     
    The highest quality replicates that are used in the Reference transcriptome are:  
@@ -30,7 +30,7 @@ This file is the step by step instructions of our Transcriptome analysis. You wi
 ### 2. Run Transcriptome Assembler: Oyster River Protocol (ORP)    
    Now that we have our representative R1 and R2 files, we can assemble the transcriptome. Here we used the ORP which generates 3 assemblies and merges them into 1 high quality assembly. More information on this method can be found here: https://oyster-river-protocol.readthedocs.io/en/latest/  
    
-   Submit the slurm:   
+   ##### Submit the slurm:   
    `sbatch 2_ORP.slurm`  
    
    The code in this slurm (full slurm script can be found in scripts_for_analysis folder):   
@@ -61,7 +61,7 @@ This file is the step by step instructions of our Transcriptome analysis. You wi
 ### 3. Quantify Reads - Run Salmon
    Before we quantify our reads, we first need to change the headers in our new assembly. Some of the headers are very long and will be difficult to work with when we run Transdecoder in the next step so it is better to re-format the headers now. 
    
-   To reformat the headers, Run 3.A_rename_fa_headers.py.   
+   ##### To reformat the headers, Run 3.A_rename_fa_headers.py.   
    `./3.A_rename_fa_headers.py -a actinula_total.ORP.fa -b Ec_actinula`   
    
    The second argument here is the base of the new header, this script counts each header in order so the first header will look like: Ec_actinula_t.1   
@@ -70,7 +70,7 @@ This file is the step by step instructions of our Transcriptome analysis. You wi
      
    Now that the headers have been reformated, we can use this assembly in Salmon which quantifies reads. Info on salmon can be found here: https://salmon.readthedocs.io/en/latest/salmon.html#using-salmon. The two inputs you will need for this program are the assembly and all of the raw reads. This slurm script (3.B_salmon.slurm) will map each replicate to the assembly (note: you only have to make the index once). 
    
-   Run the salmon Slurm.  
+   ##### Run the salmon Slurm.  
    `sbatch 3.B_salmon.slurm`  
    
    Output: You will get directories for each sample - here I secure copied all of my output directories to my desktop and placed them in a folder named mapping. This will be used with EdgeR to find DEGs and when making heatmaps in R towards the end of this workflow. 
@@ -108,10 +108,16 @@ This file is the step by step instructions of our Transcriptome analysis. You wi
    
    The number of Protien models after cd-hit: `grep ">" actinula_total.ORP.fa-mod_reduced.fa | wc -l` = **77833 prot mods**.  
    
-  
+  ##### Side Note: At this point there should now be 5 fasta files:   
+ * The original ORP nuc fasta: *actinula_total.ORP.fa*.  
+ * The modified header ORP nuc fasta: *actinula_total.ORP.fa-mod.fa*.  
+ * The original Transdecoder prot fasta: *actinula_total_ORP_prot.fa*    
+ * The modified header prot fasta: *actinula_total_ORP_prot.fa-mod.fa*.  
+ * The reduced (cd-hit) prot fasta (w/ mod headers): *actinula_total.ORP.fa-mod_reduced.fa*.  
    
+   From here on, we will be using the reduced prot fasta: *actinula_total.ORP.fa-mod_reduced.fa*.  
    
-   
+   ### 5. Run OrthoFinder
    
    
 
