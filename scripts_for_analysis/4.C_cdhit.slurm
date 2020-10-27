@@ -46,4 +46,4 @@ module load linuxbrew/colsa
 ## As your job will be allocated an entire node, this should normally
 ## be 24.
 
-cd-hit -i actinula_total_ORP_prot.fa-mod.fa -o actinula_total.OR
+cd-hit -i actinula_total_ORP_prot.fa-mod.fa -o actinula_total.ORP.fa-mod_reduced.fa -c 0.98
