@@ -9,7 +9,7 @@
 #The output file will have the -mod.fa tag at the end of the input fasta file 
 
 #import modules
-import argparseuse
+import argparse
 
 #create an instance of Argument Parser and add positional argument 
 parser = argparse.ArgumentParser()
