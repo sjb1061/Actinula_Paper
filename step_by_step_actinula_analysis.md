@@ -95,11 +95,18 @@ This file is the step by step instructions of our Transcriptome analysis. You wi
    
    The output file is: actinula_total_ORP_prot.fa-mod.fa.  
    
-   ##### Now to get rid of potential duplicates/bad sequences in the assembly, we can run cd-hit on our prot assembly:   
+   ##### Now to get rid of potential duplicates in the assembly, run cd-hit on our protien assembly:   
    `sbatch 4.C_cdhit.slurm`
    
-   The code in the slurm:
+   The code in the slurm:  
+   `cd-hit -i actinula_total_ORP_prot.fa-mod.fa -o actinula_total.ORP.fa-mod_reduced.fa -c 0.98`  
    
+   output file: actinula_total.ORP.fa-mod_reduced.fa  
+   
+   The number of transcripts: `grep ">" actinula_total.ORP.fa-mod.fa | wc -l`  = **103929 transcripts**.  
+   The number of Protien models: `grep ">" actinula_total_ORP_prot.fa-mod.fa | wc -l` = **91038 prot mods**.  
+   
+   The number of Protien models after cd-hit: `grep ">" actinula_total.ORP.fa-mod_reduced.fa | wc -l` = **77833 prot mods**.  
    
   
    
