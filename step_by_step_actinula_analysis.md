@@ -75,7 +75,22 @@ This file is the step by step instructions of our Transcriptome analysis. You wi
    
    Output: You will get directories for each sample - here I secure copied all of my output directories to my desktop and placed them in a folder named mapping. This will be used with EdgeR to find DEGs and when making heatmaps in R towards the end of this workflow. 
    
-### 4. Cd-hit the assembly and run TransDecoder 
+### 4. Run TransDecoder 
+   Next we need to translate our assembly into protien space so we can use our assembly in Orthofinder in the next step. We will also have to alter the headers again keeping only valuable information and then we will reduce the assembly by using cd-hit to get rid of potential duplicates.   
+   
+   First, run Transdecoder:    
+   `sbatch 4.A_transdecoder.slurm`   
+   
+   The code in the slurm is:  
+   `TransDecoder.LongOrfs -t actinula_total.ORP.fa-mod.fa`.    
+   Use the longest_orfs.pep file in the transdecoder dir - copy the file and rename it to: actinula_total_ORP_prot.fa   
+   
+   Next, rename the headers in the prot fasta:   
+   `./4.B_rename_prot_headers.py -a actinula_total_ORP_prot.fa`     
+   This script   
+   
+   The output file is: actinula_total_ORP_prot.fa-mod.fa.  
+   
    
    
    
