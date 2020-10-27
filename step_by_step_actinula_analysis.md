@@ -34,14 +34,15 @@ This file is the step by step instructions of our Transcriptome analysis. You wi
    `sbatch 2_ORP.slurm`  
    
    The code in this slurm (full slurm script can be found in scripts_for_analysis folder):   
-   `oyster.mk \  
-   MEM=150 \  
-   CPU=24 \  
-   READ1=total_R1.fastq.gz \  
-   READ2=total_R2.fastq.gz \  
-   RUNOUT=actinula_total`  
+   ```oyster.mk \   
+   MEM=150 \   
+   CPU=24 \   
+   READ1=total_R1.fastq.gz \   
+   READ2=total_R2.fastq.gz \   
+   RUNOUT=actinula_total```   
 
-   The Quality Report for the assembly: 
+   Output Quality Metrics for the assembly:  
+   
    *****  QUALITY REPORT FOR: actinula_total using the ORP version 2.2.8 ****    
    *****  THE ASSEMBLY CAN BE FOUND HERE: /mnt/lustre/plachetzki/sjb1061/ectopleura_transcriptomics/assemblies/actinula_total.ORP.fasta ****.   
 
