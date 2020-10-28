@@ -1,8 +1,10 @@
 #! /usr/bin/env python3
 
+#This script will clean up the new csv file you just created of a gene set from the Broad Institute GSEA (it gets rid of the trailing .. at the end of the discription and brackets).
+#After this clean up step you can then move on to downloading the genes from the gene set in the next script.
+
 #import modules
 import argparse
-
 
 #create an instance of Argument Parser and add positional argument 
 parser = argparse.ArgumentParser()
