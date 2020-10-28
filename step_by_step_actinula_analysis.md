@@ -142,16 +142,48 @@ This file is the step by step instructions of our Transcriptome analysis. You wi
 
    The goal of step 6 is to download the protien fastas for genes in different sensory gene sets currated by the Broad Institute. This section is split up into two major steps, A and B. Within the B step there are 4 sub steps that need to be performed. This method uses the python module bio entrez to download each sequence within a gene set and it double checks that the correct number of sequences have been downloaded.     
    
-   ##### A. Select gene sets from the Broad Institute.  
+   ##### A. Select gene sets from the Broad Institute Gene Set Enrichment Analysis (GSEA) https://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp    
+   We used 3 gene sets for this paper:   
+   [GO_SENSORY_PERCEPTION_OF_LIGHT_STIMULUS](https://www.gsea-msigdb.org/gsea/msigdb/cards/GO_SENSORY_PERCEPTION_OF_LIGHT_STIMULUS.html).  
+   [GO_SENSORY_PERCEPTION_OF_MECHANICAL_STIMULUS](https://www.gsea-msigdb.org/gsea/msigdb/cards/GO_SENSORY_PERCEPTION_OF_MECHANICAL_STIMULUS.html).  
+   [GO_SENSORY_PERCEPTION_OF_CHEMICAL_STIMULUS](https://www.gsea-msigdb.org/gsea/msigdb/cards/GO_SENSORY_PERCEPTION_OF_CHEMICAL_STIMULUS.html).  
+
+   For each gene set, click on the show members link and then copy all info into seperate excel files and save as csv files. Make sure you have the entrez id, gene symbol, and the description.   
    
+   ##### B. Download Gene set sequences *(run on each gene set)* 
+   
+   ###### B.1 Import CSV files to terminal 
+   You can either secure copy csv files and send to terminal or open a nano window and copy and paste. 
+   
+   ###### B.2 Run clean up script: 6.B.2_clean_up_csv.py
+   This script will go through the csv file and will 
+   `./6.B.2_clean_up_csv.py -i sensory_percep_chem_stim_geneset.txt`  
+   
+   output: sensory_percep_chem_stim_geneset.txt-mod 
+   
+   ###### B.3 Download Sequences using NCBI Entrez database.  
+   There are two options here, both do the same thing but because of the number of sequences in a set, there needs to be a pause in the connection to the database. **Choose the correct option based on the number of genes in the gene set.** 
+   
+   Option 1: **1-150** genes in gene set use 6.B.3a_get_entrez_fastas-v5.py
+   `./6.B.3a_get_entrez_fastas-v5.py -i sensory_percep_chem_stim_geneset.txt-mod -o sensory_percep_chem_stim.fa`   
 
+   Option 2: **150-500** genes in gene set use 2 scripts:
+   `./6.B.3b_1_split_get_entrez_fasta-v5.py -i sensory_percep_chem_stim_geneset.txt-mod`   
+   `./6.B.3b_2_split_get_entrez_fasta-v5.py -o sensory_percep_chem_stim.fa`  
 
+###### B.4 Check for missing seqs: 6.B.4_check_missing_seqs-v2.py  
+   Make sure you have downloaded all of the genes in the gene set. This script will compare one of the output files (gene_symbol_accid) with the cleaned up csv file from step B.2. If there are missing/incorrect genes you will have to change them by hand by searching the entrez gene id in the NCBI gene database. Make sure to adjust both the FASTA file and the gene_symbol_accid file accordingly. At the end copy your FASTA file and your gene_symbol_accid file into a new directory to be used in the next step.  
+  
+  Run script
+  `./6.B.4_check_missing_seqs-v2.py -a sensory_percep_chem_stim_geneset.txt-mod -b gene_symbol_accid`   
 
+### 7. Find Human Representative Sequences for Gene Sets from our Human protein models  
+  Since we have modified the headers for our Human protien FASTA, we want to identify the NCBI sequences from the gene sets in our Human FASTA. So we are going to BLAST the NCBI gene set sequences to our Human FASTA with altered headers. We are going to create 2 files that will be used in R in the next step. 
 
-
-
-
-
-
-
+  * A. Make blast db *(only need to run once)*:  
+   7.A_blastdb.sh.    
+  * B. Run BLAST *(for each gene set)*:  
+   7.B_blast.sh.  
+  * C. Check for any duplicates or missing seqs after blast *(for each gene set)*:  
+   7.C_check_for_dups_mis.py.  
 
