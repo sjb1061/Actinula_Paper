@@ -2,7 +2,11 @@
 
 #Don't forget to module load linuxbrew/colsa
 
-#if you have 150-500 genes in gene set (Part 1)
+#Use if you have 150-500 genes in gene set (Part 1) This script will use the csv file you just created and cleaned up to search for and download the verified protien 
+#sequences of all of the genes in your selected gene set. You will need to change your email address for the NCBI search on line 37. 
+#This script will do steps: 1) initial search to get accids, and 2) make a dict of gene symbols and accids. 
+#The next step will be completed in the next script which is step 3) use dict to search and make fasta.  
+
 
 #import modules
 import argparse
@@ -12,7 +16,7 @@ import json
 
 #create an instance of Argument Parser and add positional argument
 parser = argparse.ArgumentParser()
-parser.add_argument("-i", help="input file with a list of gene symbols - each on a single line")
+parser.add_argument("-i", help="input csv file with a list of entrez ids, gene symbols and discriptions - each gene on a single line")
 #parser.add_argument("-o", help="output fasta file name")
 
 args = parser.parse_args()
@@ -24,7 +28,7 @@ with open("gene_tables.txt", "w") as out_handle:
     with open("summary_info.txt", "w") as out_handle_2:
         with open("tmp_dict_for_searches.txt", "w") as out_handle_3:
             with open(args.i, "r") as in_handle:
-                #Loop through input file of gene symbols - for each line(gene symbol) get a list of the searched ID of interest from Homo sapiens
+                #Loop through input file of gene symbols - for each line(gene) search ID of interest in Homo sapiens
                 for line in in_handle:
                     line = line.rstrip()
                     sp_line = line.split(",")  #entrez id   symbol   description
