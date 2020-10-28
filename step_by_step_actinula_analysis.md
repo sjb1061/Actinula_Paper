@@ -199,7 +199,7 @@ This file is the step by step instructions of our Transcriptome analysis. You wi
    
  output: dir called blastdb  
   
-  #### B. Run BLAST *(for each gene set)*:  
+  ##### B. Run BLAST *(for each gene set)*:  
   For each gene set you are investigating, run blast and change the bait file (output of step 6.B.3) for which ever gene set you are on. When blasting - you will only allow 1 hit per query sequence in your bait file.     
    `./7.B_blast.sh ./baits/sensory_percep_chem_stim.fa`  
    
@@ -208,6 +208,15 @@ This file is the step by step instructions of our Transcriptome analysis. You wi
    
    output: a dir called blastout - within this dir there will be a file called: Homo.fa_ref_blastout
    
-  #### C. Check for any duplicates or missing seqs after blast *(for each gene set)*:  
-   7.C_check_for_dups_mis.py.  
+  ##### C. Check for any duplicates or missing seqs after blast *(for each gene set)*:  
+  Before we check for duplicates in the blastout results, we first need to rename our new blastout directory and blastout file according to the gene set we are working on. Also move the gene_symbol_accid file for this gene set into the blastout dir. For example here is one of my gene set dirs:   
+  pwd: ectopleura_transcriptomics/human_seqs_blast/blastout_sens_percep_chem_stim  
+  Within blastout_sens_percep_chem_stim:   
+ * Homo.fa_ref_blastout_sens_percep_chem_stim   
+ * gene_symbol_accid (6.B.3 output file)   
+ 
+   Now that your dir is set up, run 7.C script:    
+   `./7.C_check_for_dups_mis.py -a gene_symbol_accid -b Homo.fa_ref_blastout_sens_percep_chem_stim`  
+   
+   This script goes through the blastout file that was just created and compares the accid in the blastout file to the accids in the gene_symbol_accid (6.B.3 output) file to identify if there are any duplicates or missing accids. If duplicates are found, you will need to manually go into the blastout file and remove them - keep the accid with the highest similarity (100) - the script will also tell you how many duplicates are found.   
 
