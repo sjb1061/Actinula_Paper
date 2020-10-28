@@ -138,4 +138,20 @@ This file is the step by step instructions of our Transcriptome analysis. You wi
   * Orthogroups.GeneCount.tsv (renamed it to: Orthogroups.GeneCount_5-11-20.tsv).  
 
 
-### 6. Download Gene Sets 
+### 6. Download Gene Sets  
+
+   The goal of step 6 is to download the protien fastas for genes in different sensory gene sets currated by the Broad Institute. This section is split up into two major steps, A and B. Within the B step there are 4 sub steps that need to be performed. This method uses the python module bio entrez to download each sequence within a gene set and it double checks that the correct number of sequences have been downloaded.     
+   
+   ##### A. Select gene sets from the Broad Institute.  
+   
+
+
+
+
+
+
+
+
+
+
+
