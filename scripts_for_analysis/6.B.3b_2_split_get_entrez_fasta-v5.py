@@ -2,7 +2,10 @@
 
 #Don't forget to module load linuxbrew/colsa
 
-#If you have 1-150 genes in gene set (Part 2)
+#Use if you have 1-150 genes in gene set (Part 2) This script continues from part 1 - it downloads the verified protien 
+#sequences of all of the genes in your selected gene set. You will need to change your email address for the NCBI search on line 64. 
+#The previous script completed steps: 1) initial search to get accids, and 2) make a dict of gene symbols and accids. 
+#This script runs step 3) use dict to search and make fasta. It will use the temporary file created from the first script and will generate the FASTA file. 
 
 #import modules
 import argparse
