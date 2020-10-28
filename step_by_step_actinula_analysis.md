@@ -186,13 +186,21 @@ This file is the step by step instructions of our Transcriptome analysis. You wi
   `./6.B.4_check_missing_seqs-v2.py -a sensory_percep_chem_stim_geneset.txt-mod -b gene_symbol_accid`   
 
 
-### 7. Find Human Representative Sequences for Gene Sets from our Human protein models  
-  Since we have modified the headers for our Human protien FASTA, we want to identify the NCBI sequences from the gene sets in our Human FASTA. So we are going to BLAST the NCBI gene set sequences to our Human FASTA with altered headers. We are going to create 2 files that will be used in R in the next step. 
+### 7. Find Human Representative Sequences for Gene Sets in our Human protein FASTA  
+  Since we have modified the headers of our Human protien FASTA, we want to identify the NCBI sequences from the gene sets in our Human FASTA. So we are going to BLAST the NCBI gene set sequences (query) to our Human FASTA with altered headers. We will only allow 1 hit per query sequence. We are going to create 2 files that will be used in R in the next step.  
 
-  * A. Make blast db *(only need to run once)*:  
-   7.A_blastdb.sh.    
-  * B. Run BLAST *(for each gene set)*:  
-   7.B_blast.sh.  
+   ##### A. Make blast db on Human FASTA *(only need to run once)*:  
+   You will need to set up your dir as follows:   
+  * make a fastas subdir - add your human prot fasta to this.  
+  * make another subdir called baits - add each of your gene set fastas to this dir.  
+ 
+ Run blastdb script:   
+   `./7.A_blastdb.sh`       
+   
+  #### B. Run BLAST *(for each gene set)*:  
+  For each gene set you are investigating, run blast and change the bait file (output of step 6.B.3) for which ever gene set you are on.   
+   `./7.B_blast.sh ./baits/sensory_percep_chem_stim.fa`  
+   
   * C. Check for any duplicates or missing seqs after blast *(for each gene set)*:  
    7.C_check_for_dups_mis.py.  
 
