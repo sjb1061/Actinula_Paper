@@ -2,7 +2,10 @@
 
 #Don't forget to module load linuxbrew/colsa
 
-#If you have 1-150 genes in gene set
+#Use if you have 1-150 genes in gene set. This script will use the csv file you just created and cleaned up to search for and download the verified protien 
+#sequences of all of the genes in your selected gene set. It will output 2 files that you will use in later step a FASTA file and a gene_symbol_accid file which will be 2 columns (tab delimited)
+#the first column with have the gene symbol and the 2nd will have the corresponding NCBI verified Accession ID. You will also get 3 other ouput files: gene_tables, 
+#summary_info, and search_by_hand. You will need to change your email address for the NCBI search on line 33 and 128. This script has 3 steps: 1) initial search to get accids, 2) make a dict of gene symbols and accids, 3) use dict to search and make fasta
 
 #import modules
 import argparse
@@ -11,7 +14,7 @@ import time
 
 #create an instance of Argument Parser and add positional argument
 parser = argparse.ArgumentParser()
-parser.add_argument("-i", help="input file with a list of gene symbols - each on a single line")
+parser.add_argument("-i", help="input cleaned up csv file with a list of gene symbols and info - each on a single line")
 parser.add_argument("-o", help="output fasta file name")
 
 args = parser.parse_args()
@@ -21,7 +24,7 @@ with open("gene_tables.txt", "w") as out_handle:
     with open("summary_info.txt", "w") as out_handle_2:
         with open("search_by_hand.txt", "w") as out_handle_3:
             with open(args.i, "r") as in_handle:
-                #Loop through input file of gene symbols - for each line(gene symbol) get a list of the searched ID of interest from Homo sapiens
+                #Loop through input file of entrez ids, gene symbols, and descriptions - for each line (gene) search ID of interest in Homo sapiens
                 for line in in_handle:
                     line = line.rstrip()
                     sp_line = line.split(",")  #entrez id   symbol   description
