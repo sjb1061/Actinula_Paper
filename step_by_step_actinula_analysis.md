@@ -195,12 +195,19 @@ This file is the step by step instructions of our Transcriptome analysis. You wi
   * make another subdir called baits - add each of your gene set fastas to this dir.  
  
  Run blastdb script:   
-   `./7.A_blastdb.sh`       
+   `./7.A_blastdb.sh`    
    
+ output: dir called blastdb  
+  
   #### B. Run BLAST *(for each gene set)*:  
-  For each gene set you are investigating, run blast and change the bait file (output of step 6.B.3) for which ever gene set you are on.   
+  For each gene set you are investigating, run blast and change the bait file (output of step 6.B.3) for which ever gene set you are on. When blasting - you will only allow 1 hit per query sequence in your bait file.     
    `./7.B_blast.sh ./baits/sensory_percep_chem_stim.fa`  
    
-  * C. Check for any duplicates or missing seqs after blast *(for each gene set)*:  
+   Code in script:   
+   `blastp -query $1 -db $fasta -out ${fasta%.}_ref_blastout -outfmt 6 -max_target_seqs 1 -evalue 0.00001`   
+   
+   output: a dir called blastout - within this dir there will be a file called: Homo.fa_ref_blastout
+   
+  #### C. Check for any duplicates or missing seqs after blast *(for each gene set)*:  
    7.C_check_for_dups_mis.py.  
 
