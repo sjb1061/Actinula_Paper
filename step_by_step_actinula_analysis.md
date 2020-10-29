@@ -237,9 +237,10 @@ This file is the step by step instructions of our Transcriptome analysis. You wi
    **The third part** of this script identifies the actinula sequences from the sensory gene orthogroups found in the previous step. A column of the actinula seqids are added to this dataframe of the gene accession, human seqid, OG, and gene symbol, one thing to note is that there can be multiple actinula seqids in 1 human sensory gene orthogroup or the opposite of no actinula seqids in a human sensory gene orthogroup. The script then modifies the headers of the actinula seqid, so after TransDecoder our headers looks like this: Ec_actinula_t.124..645-1 which was used in orthofinder. In later steps we will need to have the original header so we can use the gene count data from Salmon which is why after Transdecoder we modified our headers. That modification allows us to get back to the original transcript from where the protien model came from. So here the script removes the position in the sequence the protien model came from: Ec_actinula_t.124..**645-1** by splitting on the .. so we now have the identity of the original transcript: Ec_actinula_t.124. The script then writes out a file to the directory you are working in of this dataframe.    
 
    What you need to change in this script (in order):   
+  * Set your working directory
   * The orthofinder.tsv file name 
   * The blastout file name
-  * The gene_sybol_accid file name  
+  * The gene_symbol_accid file name  
   * The Orthofinder gene count file name
   * The name and path for your output file 
   
