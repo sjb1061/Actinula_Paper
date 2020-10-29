@@ -256,17 +256,31 @@ This file is the step by step instructions of our Transcriptome analysis. You wi
   * A summary file made mannually (you will add on to this file in the next step)  
   * The automatically generated file from R that contains the last dataframe:  gene_acc, Homo_seqid, OG, gene_symbol, Actinula_seqid   
 
+### 9. Find Significant Differentially Expressed Genes (DEGs) 
+  Ultimately, we want to visualize significant gene expression of actinula sensory genes across development (the 6 stages), which we will do in step 10, but first we need to identify significant DEGs by first running EdgeR in R. We will then export the significant pariwise comparisons for each stage into the terminal. Using this, we will compare the headers from the sensory orthorgroups (the output file from step 8) to the significant DEGs from EdgeR to identify signficant actinula genes in the different gene sets. We will then need to run 2 other scripts to re-organize the output info so we can easily add it into the R script of step 10.     
 
+##### A. Run EdgeR
+   To run EdgeR, we first need to make sure we have our salmon output in our current working directory on our desktop. Make sure all salmon data is in a folder called mapping. You wil also need to make a file called libraries_to_stages which will have 2 columns of info, the first will have the names of all the samples and the second will have stages the samples belong to. 
   
-#### 9. Find Significant Differentially Expressed Genes (DEGs) 
-  To find significant DEGs we first ran EdgeR in R. Next, we exported the significant pariwise comparisons for each stage to the terminal. Using this, we compared the headers from the sensory orthorgroups to the significant DEGs from EdgeR to identify signficant genes in the gene sets.  
-
-  * Run EdgeR script in R   
+  This script has 2 major parts. First it will read in your salmon data (the quant files) and assign them to their corresponding stages based on the libraries_to_stages file. It will then make a multidimensional scaling (MDS) plot so you can visualize the similarity of each sample.  
+  
+  The second part performs the pairwise comparisons between libraries. 
+  
+  
+  
    edgeR_actinula_6_groups_0.05_4-3-20.R  
 
   * Identify significant DEGs in gene sets (in terminal)  
    find_sig_degs_in_geneset.py  
   *Run this for each pairwise comparison and compile the results into one text document for each gene set*  
+  
+  
+  
+  
+  
+  
+  
+  
   
 #### 10. Generate Heatmaps of Significant DEGs of Gene Sets (In R environment)
   Now that we have identified the significant actinula DEGs in the gene sets we can visualize their expression. However, first we have to run 2 prep steps before running the R script. 
