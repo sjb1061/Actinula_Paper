@@ -26,7 +26,7 @@ fdrcutoff<-0.1
 FDR cut-off for significance is `r fdrcutoff`.
 
 ```{r parseOF}
-# parse OrthoFinder format to annotate with Human Gene Symbols
+# Part 1: parse OrthoFinder format to annotate with Human Gene Symbols
 parse_orthogroups <- function(path_2_ogroups)
 {
   orthogroups <- scan(path_2_ogroups, what = "",
@@ -74,12 +74,12 @@ head(meltedOG)
 
 ```
 
-### GeneGlobe apoptosis gene-set, blasted for *Homo* hits
+### Part 2 GeneGlobe apoptosis gene-set, blasted for *Homo* hits
 ```{r map_OrthoFinderIDs_2_humanIDs}
 #use Human ref_blastout to subset only apoptosis OGs from OGlist
 #links gene_acc to unique OrthoFinder seqid
 refblast<-read.table("Homo.fa_ref_blastout_sens_percep_chem_stim ",header=F,stringsAsFactors = F)
-head(refblast) #syds: 17
+head(refblast) 
 names(refblast)[1:2]<-c("gene_acc","seqid")
 
 #link gene_acc to gene symbol (human)
@@ -91,14 +91,14 @@ library(dplyr)
 apo_OGs_acc<-inner_join(refblast[,1:2],meltedOG,by="seqid")
 colnames(apo_OGs_acc)
 head(apo_OGs_acc)
-nrow(apo_OGs_acc) #syds: 141
+nrow(apo_OGs_acc) 
 #should have: gene_acc, seqid, OG
 
 #links symbols to apoptosis gene accs and OGs
 apo_OGs_acc_sym<-inner_join(apo_OGs_acc[,1:3],homo_symbols,by="gene_acc") 
 colnames(apo_OGs_acc_sym)
 #should have: gene_acc, seqid, OG, symbol
-nrow(apo_OGs_acc_sym) #141
+nrow(apo_OGs_acc_sym) 
 head(apo_OGs_acc_sym)
 unique(apo_OGs_acc_sym$OG)
 #multiple symbols/accs map to single OG, so just for now, just select the first listed
@@ -106,7 +106,7 @@ unique(apo_OGs_acc_sym$OG)
 
 #import OrthoFinder counts (All genes)
 system("head Orthogroups.GeneCount_5-11-20.tsv")
-all_OG_counts<-read.table("Orthogroups.GeneCount_5-11-20.tsv", header=T, stringsAsFactors = F,row.names=1) #18192 genes
+all_OG_counts<-read.table("Orthogroups.GeneCount_5-11-20.tsv", header=T, stringsAsFactors = F,row.names=1) 
 all_OG_counts<-all_OG_counts[,colnames(all_OG_counts)!="Total"]
 colnames(all_OG_counts)<-unlist(strsplit(colnames(all_OG_counts),split="[.]fa_ed"))
 colnames(all_OG_counts)<-gsub(x=colnames(all_OG_counts),pattern="_.+", replacement="", perl=T)
@@ -116,26 +116,26 @@ colnames(all_OG_counts)<-gsub(x=colnames(all_OG_counts),pattern="Hsym.trinity.st
 head(all_OG_counts)
 # 
 # #subset gene counts using apotosis OGs only
-unique(apo_OGs_acc_sym$OG) #112 unique OGs with symbols
+unique(apo_OGs_acc_sym$OG) 
 apo_gene_counts<-all_OG_counts[rownames(all_OG_counts) %in% unique(apo_OGs_acc_sym$OG),]
 unique(apo_OGs_acc_sym$OG) %in% rownames(apo_gene_counts) 
-nrow(apo_gene_counts) #117
+nrow(apo_gene_counts) 
 head(apo_gene_counts)
 # 
 # #re-label OGs based on human gene label
 apo_OGs_acc_sym$symbol[apo_OGs_acc_sym$OG %in% rownames(apo_gene_counts)]
 apo_OGs_acc_sym<-apo_OGs_acc_sym[order(apo_OGs_acc_sym$OG),]
-nrow(apo_OGs_acc_sym) #141
+nrow(apo_OGs_acc_sym) 
 z <- apo_OGs_acc_sym[!duplicated(apo_OGs_acc_sym$OG),]
 nrow(z) #117
 # 
 apo_counts_symbol<-apo_gene_counts; rownames(apo_counts_symbol)<-z$symbol[z$OG %in% rownames(apo_gene_counts)]
-nrow(apo_counts_symbol) #117
+nrow(apo_counts_symbol) 
 head(apo_counts_symbol)
 
 
 
-#### Get Species of Interest accids for OGs in gene set ###
+#### Part 3: Get Species of Interest accids for OGs in gene set ###
 
 #subset melted OG for species of interest
 Ec_melted<-subset(meltedOG, grepl("^Ec_actinula",meltedOG$seqid)) #works
@@ -144,18 +144,17 @@ actinula_acc_apo_OGs_acc_sym<-inner_join(apo_OGs_acc_sym[,1:4],Ec_melted,by="OG"
 #rename cols:
 names(actinula_acc_apo_OGs_acc_sym)[1:5]<- c("gene_acc", "Homo_seqid", "OG", "symbol", "Actinula_seqid")  #works
 head(actinula_acc_apo_OGs_acc_sym)
-nrow(actinula_acc_apo_OGs_acc_sym) #619
+nrow(actinula_acc_apo_OGs_acc_sym) 
 
-#Get original header for heatmap/salmon #almost
+#Get original header for heatmap/salmon 
 gene_acc_simple<-unlist(strsplit(actinula_acc_apo_OGs_acc_sym$Actinula_seqid,split="..", fixed = T))[c(T,F)] #split on .. and only keep first split objects
 
 actinula_acc_apo_OGs_acc_sym$Actinula_seqid<-gene_acc_simple #change col items to new headers
 head(actinula_acc_apo_OGs_acc_sym)
 
-unique(actinula_acc_apo_OGs_acc_sym$OG)#92
-unique(actinula_acc_apo_OGs_acc_sym$Actinula_seqid)#92
-#hydract_acc_apo_OGs_acc_sym$unique_hydract <-unique(hydract_acc_apo_OGs_acc_sym$OG)
-nrow(actinula_acc_apo_OGs_acc_sym) #619
+unique(actinula_acc_apo_OGs_acc_sym$OG)
+unique(actinula_acc_apo_OGs_acc_sym$Actinula_seqid)
+nrow(actinula_acc_apo_OGs_acc_sym) 
 
 write.table(actinula_acc_apo_OGs_acc_sym, "C:\\Desktop\\R\\Transcriptomics_Actinula_3-17-20\\Reduced_Ec_Sensory_Percep_Chem_Stim_R_output_genes.txt", sep="\t")
 
