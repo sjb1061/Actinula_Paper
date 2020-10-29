@@ -123,93 +123,104 @@ runEdgeRpwise<-function(salmonquantfiles, groups,colors){
 par(mfrow=c(2,2),oma=c(1,1,2,0))
 s1vs2<-runEdgeRpwise(c(dev1files,dev2files), c(1,1,1,1,1,1,2,2,2,2,2,2),rep(c(stage1col, stage2col),each=6))
 title("Stage 1 vs 2",outer=T)
-
+write.table(s1vs2, "C:\\Desktop\\R\\Transcriptomics_Actinula_3-17-20\\s1vs2_edgeR_output.txt", sep="\t")
 
 #evaluate stage1 vs stage3
 par(mfrow=c(2,2),oma=c(1,1,2,0))
 s1vs3<-runEdgeRpwise(c(dev1files,dev3files), c(1,1,1,1,1,1,3,3,3,3,3,3), rep(c(stage1col, stage3col),each=6))
 title("Stage 1 vs 3",outer=T)
+write.table(s1vs3, "C:\\Desktop\\R\\Transcriptomics_Actinula_3-17-20\\s1vs3_edgeR_output.txt", sep="\t")
 
 #evaluate stage1 vs stage4
 par(mfrow=c(2,2),oma=c(1,1,2,0))
 s1vs4<-runEdgeRpwise(c(dev1files,dev4files), c(1,1,1,1,1,1,4,4,4,4,4,4),rep(c(stage1col, stage4col),each=6))
 title("Stage 1 vs 4",outer=T)
+write.table(s1vs4, "C:\\Desktop\\R\\Transcriptomics_Actinula_3-17-20\\s1vs4_edgeR_output.txt", sep="\t")
 
 #evaluate stage1 vs stage5 :: positive logFC values mean high in stage 5 than stage 1
 par(mfrow=c(2,2),oma=c(1,1,2,0))
 s1vs5<-runEdgeRpwise(c(dev1files,dev5files), c(1,1,1,1,1,1,5,5,5,5,5,5),rep(c(stage1col, stage5col),each=6))
 title("Stage 1 vs 5",outer=T)
+write.table(s1vs5, "C:\\Desktop\\R\\Transcriptomics_Actinula_3-17-20\\s1vs5_edgeR_output.txt", sep="\t")
 
 #evaluate stage1 vs stage6 :: positive logFC values mean high in stage 6 than stage 1
 par(mfrow=c(2,2),oma=c(1,1,2,0))
 s1vs6<-runEdgeRpwise(c(dev1files,dev6files), c(1,1,1,1,1,1,6,6,6,6,6,6),rep(c(stage1col, stage6col),each=6))
 title("Stage 1 vs 6",outer=T)
+write.table(s1vs6, "C:\\Desktop\\R\\Transcriptomics_Actinula_3-17-20\\s1vs6_edgeR_output.txt", sep="\t")
 
 #evaluate stage2 vs stage3
 par(mfrow=c(2,2),oma=c(1,1,2,0))
 s2vs3<-runEdgeRpwise(c(dev2files,dev3files), c(2,2,2,2,2,2,3,3,3,3,3,3),rep(c(stage2col, stage3col),each=6))
 title("Stage 2 vs 3",outer=T)
+write.table(s2vs3, "C:\\Desktop\\R\\Transcriptomics_Actinula_3-17-20\\s2vs3_edgeR_output.txt", sep="\t")
 
 #evaluate stage2 vs stage4
 par(mfrow=c(2,2),oma=c(1,1,2,0))
 s2vs4<-runEdgeRpwise(c(dev2files,dev4files), c(2,2,2,2,2,2,4,4,4,4,4,4), rep(c(stage2col, stage4col),each=6))
 title("Stage 2 vs 4",outer=T)
+write.table(s2vs4, "C:\\Desktop\\R\\Transcriptomics_Actinula_3-17-20\\s2vs4_edgeR_output.txt", sep="\t")
 
 #evaluate stage2 vs stage5
 par(mfrow=c(2,2),oma=c(1,1,2,0))
 s2vs5<-runEdgeRpwise(c(dev2files,dev5files), c(2,2,2,2,2,2,5,5,5,5,5,5), rep(c(stage2col, stage5col),each=6))
 title("Stage 2 vs 5",outer=T)
+write.table(s2vs5, "C:\\Desktop\\R\\Transcriptomics_Actinula_3-17-20\\s2vs5_edgeR_output.txt", sep="\t")
 
 #evaluate stage2 vs stage6
 par(mfrow=c(2,2),oma=c(1,1,2,0))
 s2vs6<-runEdgeRpwise(c(dev2files,dev6files), c(2,2,2,2,2,2,6,6,6,6,6,6), rep(c(stage2col, stage6col),each=6))
 title("Stage 2 vs 6",outer=T)
+write.table(s2vs6, "C:\\Desktop\\R\\Transcriptomics_Actinula_3-17-20\\s2vs6_edgeR_output.txt", sep="\t")
 
 #evaluate stage3 vs stage4
 par(mfrow=c(2,2),oma=c(1,1,2,0))
 s3vs4<-runEdgeRpwise(c(dev3files,dev4files), c(3,3,3,3,3,3,4,4,4,4,4,4),rep(c(stage3col, stage4col),each=6))
 title("Stage 3 vs 4",outer=T)
+write.table(s3vs4, "C:\\Desktop\\R\\Transcriptomics_Actinula_3-17-20\\s3vs4_edgeR_output.txt", sep="\t")
 
 #evaluate stage3 vs stage5
 par(mfrow=c(2,2),oma=c(1,1,2,0))
 s3vs5<-runEdgeRpwise(c(dev3files,dev5files), c(3,3,3,3,3,3,5,5,5,5,5,5),rep(c(stage3col, stage5col),each=6))
 title("Stage 3 vs 5",outer=T)
+write.table(s3vs5, "C:\\Desktop\\R\\Transcriptomics_Actinula_3-17-20\\s3vs5_edgeR_output.txt", sep="\t")
 
 #evaluate stage3 vs stage6
 par(mfrow=c(2,2),oma=c(1,1,2,0))
 s3vs6<-runEdgeRpwise(c(dev3files,dev6files), c(3,3,3,3,3,3,6,6,6,6,6,6),rep(c(stage3col, stage6col),each=6))
 title("Stage 3 vs 6",outer=T)
+write.table(s3vs6, "C:\\Desktop\\R\\Transcriptomics_Actinula_3-17-20\\s3vs6_edgeR_output.txt", sep="\t")
 
 #evaluate stage4 vs stage5
 par(mfrow=c(2,2),oma=c(1,1,2,0))
 s4vs5<-runEdgeRpwise(c(dev4files,dev5files), c(4,4,4,4,4,4,5,5,5,5,5,5),rep(c(stage4col, stage5col),each=6))
 title("Stage 4 vs 5",outer=T)
 nrow(s4vs5)
+write.table(s4vs5, "C:\\Desktop\\R\\Transcriptomics_Actinula_3-17-20\\s4vs5_edgeR_output.txt", sep="\t")
 
 #evaluate stage4 vs stage6
 par(mfrow=c(2,2),oma=c(1,1,2,0))
 s4vs6<-runEdgeRpwise(c(dev4files,dev6files), c(4,4,4,4,4,4,6,6,6,6,6,6),rep(c(stage4col, stage6col),each=6))
 title("Stage 4 vs 6",outer=T)
+write.table(s4vs6, "C:\\Desktop\\R\\Transcriptomics_Actinula_3-17-20\\s4vs6_edgeR_output.txt", sep="\t")
 
 #evaluate stage5 vs stage6
 par(mfrow=c(2,2),oma=c(1,1,2,0))
 s5vs6<-runEdgeRpwise(c(dev5files,dev6files), c(5,5,5,5,5,5,6,6,6,6,6,6),rep(c(stage5col, stage6col),each=6))
 title("Stage 5 vs 6",outer=T)
-
-write.table(s4vs6, "C:\\Desktop\\R\\Transcriptomics_Actinula_3-17-20\\s4vs6_edgeR_output.txt", sep="\t")
+write.table(s5vs6, "C:\\Desktop\\R\\Transcriptomics_Actinula_3-17-20\\s5vs6_edgeR_output.txt", sep="\t")
 
 
 #these objects list the de genes. Note the logFC (log fold change) column. 
 #You can then find these seqs in the assemblies
 options(max.print = 1000000000)
-s1vs2
-s2vs3
+#visualize the number of degs 
 par(mfrow=c(1,1))
 barplot(c(nrow(s1vs2), nrow(s1vs3),nrow(s1vs4), nrow(s1vs5), nrow(s1vs6), nrow(s2vs3), nrow(s2vs4),nrow(s2vs5),nrow(s2vs6),nrow(s3vs5), nrow(s3vs6), nrow(s4vs5), nrow(s4vs6)),names.arg=c("s1vs2","s1vs3","s1vs4","s1vs5","s1vs6","s2vs3","s2vs4","s2vs5","s2vs6","s3vs5","s3vs6","s4vs5", "s4vs6"), main="Number of differentially expressed transcripts")
 
 #These are the items that needed to be removed because there are no DE transcrpts 
-#,"s3vs4" ,"s3vs5" ,"s4vs5" ,"s5vs6"
-#, nrow(s3vs4) , nrow(s3vs5) nrow(s4vs5), nrow(s5vs6)
+#"s3vs4","s5vs6"
+# nrow(s3vs4), nrow(s5vs6)
 
 223+859+1066+352+136+844+1067+278+120+0+45+63+25+40+0 #=5118 total number of significant genes across all comparisons
 is.de <- decideTestsDGE()
