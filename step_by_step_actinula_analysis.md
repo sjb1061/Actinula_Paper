@@ -281,11 +281,11 @@ This file is the step by step instructions of our Transcriptome analysis. You wi
  * The output files from each pairwise comparisons - since we have 6 stages there will be 15 files generated 
    
 ##### B. Identify significant DEGs in gene sets (in terminal)  
-  Now that we have all of the significant DEGs between each stage, we can now use this to identify which actinula genes are significantly expressed in the gene sets (out of the genes that share orthogroups with human sensory genes). 
+  Now that we have all of the significant DEGs between each stage, we can now use this to identify which actinula genes are significantly expressed in the gene sets (the genes that share orthogroups with human sensory genes). 
   
   In this first part, we are going to run the 9.B_find_sig_degs_in_geneset.py script but first we need to import data and set up our directory in the terminal. I created a new dir called Actinula_DEGs within my blastout dir for each of my gene sets from step 7. Import all 15 files of the edgeR output into your dir. I also recommend opening the text summary files that we created in step 8 to add more info. So the 9.B_find_sig_degs_in_geneset.py script takes in 2 files, the output file from step 8 of the headers of interest and one DEG edgeR comparison file. It also takes in the name for the output file. The script will create a dictionary from the step 8 output (since these are the headers that share orthogroups with sensory genes) and then it will compare each header from the edgeR file and will record the edgeR info if there is a matching header. This will then get written to a new file - I recommend copying this info into your summary file. You will have to do this for each edgeR output file (so 15 times) - In the future I want to make it so you only have to run it once (iterate through all the files in the dir using os.walk).   
   
-  Run 9.B_find_sig_degs_in_geneset.py *for each comparison file*: 
+  Run 9.B_find_sig_degs_in_geneset.py *__for each comparison file__*:   
   `./9.B_find_sig_degs_in_geneset.py -a Reduced_Ec_Sensory_Percep_Chem_Stim_R_output.txt -b s1vs2_0.05_6gr -c s1vs2`
    
    Output file: s1vs2_red_DEGs.txt (you will have 15 output files which is why I recommend copying all of the output into your summary file).  
@@ -294,17 +294,13 @@ This file is the step by step instructions of our Transcriptome analysis. You wi
  * The first will go through our summary file and will write out a file with all of our significant DEG headers on one line with quotes around each header seperated by a comma. Input your summary file and the name of the gene set for your output file. Copy the output and add it at the bottom of your summary text document.    
   `./9.C_prep_sig_DEGs_for_heatmap.py -a Summary_DEG_Results_Ec_Sensory_Percep_Chem.txt -b sens_percep_chem_stim`  
   
- * Now we will run the second prep script which will write out a file that has 2 columns, in the first it has the orthogroup and the second has all of the gene symbols associated with that orthogroup, if there are multiple gene symbols it seperates them with a comma. This script requires 2 input arguments: the output file from step 8 with all of the OG of interest and the gene set name for the output file.   
+ * The second prep script will write out a file that has 2 columns, in the first it has the orthogroup and the second has all of the gene symbols associated with that orthogroup, if there are multiple gene symbols it seperates them with a comma. This script requires 2 input arguments: the output file from step 8 with all of the OG of interest and the gene set name for the output file.   
  `./9.D_get_all_symbols_for_OGs.py -a Reduced_Ec_Sensory_Percep_Chem_Stim_R_output.txt -b sens_percep_chem_stim`   
   
   
 #### 10. Generate Heatmaps of Significant DEGs of Gene Sets (In R environment)
   Now that we have identified the significant actinula DEGs in the gene sets we can visualize their expression. However, first we have to run 2 prep steps before running the R script. 
   
-  * Prep scripts for heatmaps *(run on each gene set)*  
-   9.B_get_all_symbols_for_OGs.py.    
-   9.C_prep_sig_DEGs_for_heatmaps.py.  
-
   * Using the output from the prep scripts, run the heatmap scripts in R *(run on each gene set)*  
    Ec_Sensory_percep_Chem_Stim_heatmap-updated.R.  
    Ec_Sensory_percep_light_stim_heatmap-updated.R.  
