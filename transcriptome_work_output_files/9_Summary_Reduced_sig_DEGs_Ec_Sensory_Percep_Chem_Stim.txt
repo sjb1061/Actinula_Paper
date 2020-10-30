@@ -1,0 +1,81 @@
+##Used cript 9.B_find_sig_degs_in_geneset.py   8-11-20
+## Using REDUCED Prot models of Assembly 
+
+#Significant genes in Sensory Perception of Chemical Stim (501 genes in geneset originally)
+	#Homo Gene mods before Actinula join = 245 (Homo Gene Mods)
+	#50 Unique Homo OG
+	#231 Actinula gene models mapped to genes in this geneset  
+	#125 Unique Actinula Headers
+	#29 Unique Actinula OG 	
+
+
+	
+# Stage 1 vs Stage 2	
+Header  OG      Symbol  logFC   logCPM  Pvalue
+Ec_actinula_t.55411     OG0000042       UGT2A1  0.5356055       4.431997        5.27E-04
+
+# Stage 1 vs Stage 3
+Header  OG      Symbol  logFC   logCPM  Pvalue
+Ec_actinula_t.81080     OG0000899       PKD2L1  3.3805034       8.242718        2.45E-13
+	
+	
+# Stage 1 vs Stage 4
+Header  OG      Symbol  logFC   logCPM  Pvalue
+Ec_actinula_t.98433     OG0000071       LPO     -1.1308264      7.185289        1.64E-03	
+	
+# Stage 1 vs Stage 5
+Header  OG      Symbol  logFC   logCPM  Pvalue
+Ec_actinula_t.81080     OG0000899       PKD2L1  2.8243911       7.326844        1.29E-11	
+	
+# Stage 1 vs Stage 6
+No Significant Genes found from the comparison using script 9_find_sig_degs_in_geneset.py
+	
+	
+# Stage 2 vs Stage 3
+Header  OG      Symbol  logFC   logCPM  Pvalue
+Ec_actinula_t.66208     OG0000024       PKD1L3  1.7257283       6.502625        6.65E-07
+Ec_actinula_t.68440     OG0000071       LPO     0.9441767       5.248736        5.28E-06
+Ec_actinula_t.81080     OG0000899       PKD2L1  2.3855997       8.430459        1.64E-10	
+	
+# Stage 2 vs Stage 4
+Header  OG      Symbol  logFC   logCPM  Pvalue
+Ec_actinula_t.66208     OG0000024       PKD1L3  1.9633493       6.867757        2.20E-09
+Ec_actinula_t.98433     OG0000071       LPO     -0.9202161      7.108486        1.42E-02
+
+
+# Stage 2 vs Stage 5
+Header  OG      Symbol  logFC   logCPM  Pvalue
+Ec_actinula_t.81080     OG0000899       PKD2L1  1.8317837       7.609765        3.91E-08
+
+# Stage 2 vs Stage 6
+ No Significant Genes found from the comparison using script 9_find_sig_degs_in_geneset.py
+
+
+
+# Stage 3 vs Stage 4
+**** N/A ****
+	#EdgeR Found NO Significant genes between these 2 stages
+
+
+# Stage 3 vs Stage 5
+No Significant Genes found from the comparison using script 9_find_sig_degs_in_geneset.py
+ 
+
+# Stage 3 vs Stage 6
+ No Significant Genes found from the comparison using script 9_find_sig_degs_in_geneset.py
+
+
+# Stage 4 vs Stage 5
+No Significant Genes found from the comparison using script 9_find_sig_degs_in_geneset.py
+
+
+# Stage 4 vs Stage 6
+ No Significant Genes found from the comparison using script 9_find_sig_degs_in_geneset.py
+
+
+Stage 5 vs Stage 6
+**** N/A ****
+	#EdgeR Found NO Significant genes between these 2 stages
+	
+#RESULTS of 9.C_prep_sig_DEGs_for_Heatmap.py
+"Ec_actinula_t.55411","Ec_actinula_t.81080","Ec_actinula_t.98433","Ec_actinula_t.81080","Ec_actinula_t.66208","Ec_actinula_t.68440","Ec_actinula_t.81080","Ec_actinula_t.66208","Ec_actinula_t.98433","Ec_actinula_t.81080"
