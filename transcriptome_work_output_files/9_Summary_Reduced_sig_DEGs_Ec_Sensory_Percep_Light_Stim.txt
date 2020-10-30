@@ -1,0 +1,107 @@
+##Used script 9.B_find_sig_degs_in_geneset.py   8-11-20
+## Using REDUCED Prot models of Assembly 
+
+#Significant genes in Sensory Perception of Light Stim (212 genes in geneset originally)
+	#Homo Gene mods before Actinula join = 145 (Homo Gene Mods)
+	#119 Unique Homo OG
+	#560 Actinula gene models mapped to genes in this geneset  
+	#432 Unique Actinula Headers
+	#97 Unique Actinula OG 
+	
+	
+	
+# Stage 1 vs Stage 2	
+Header  OG      Symbol  logFC   logCPM  Pvalue
+Ec_actinula_t.97429     OG0000002       SEMA5B  0.8479919       5.315696        9.25E-04
+Ec_actinula_t.83196     OG0000974       SFRP5   -0.7758749      4.651061        2.67E-04
+Ec_actinula_t.66600     OG0003740       MYO3B   0.6108416       4.906727        6.74E-04
+
+
+# Stage 1 vs Stage 3
+Header  OG      Symbol  logFC   logCPM  Pvalue
+Ec_actinula_t.67621     OG0000012       CRX     -1.0681651      5.461061        2.33E-06
+Ec_actinula_t.66245     OG0000056       GUCY2F  0.5667388       4.606778        2.25E-03
+Ec_actinula_t.52088     OG0000457       ABLIM1  0.9312692       6.315475        3.03E-03
+Ec_actinula_t.97444     OG0002585       POU4F3  1.0515671       6.021669        1.01E-03
+Ec_actinula_t.66600     OG0003740       MYO3B   1.8609629       5.70163 4.02E-10
+Ec_actinula_t.65838     OG0007959       ADGRV1  0.8674059       5.115341        8.88E-04	
+	
+# Stage 1 vs Stage 4
+Header  OG      Symbol  logFC   logCPM  Pvalue
+Ec_actinula_t.52088     OG0000457       ABLIM1  0.4706475       6.190458        9.34E-03
+Ec_actinula_t.53746     OG0001090       TH      -1.0521157      7.058046        2.98E-03
+Ec_actinula_t.97444     OG0002585       POU4F3  0.9406257       6.110932        2.21E-04
+Ec_actinula_t.96544     OG0003169       CNNM4   0.5082246       6.237015        4.16E-03
+Ec_actinula_t.94044     OG0003517       RPGR    -0.4678251      6.806525        1.83E-02
+Ec_actinula_t.52283     OG0006759       LAMC3   0.7620474       7.167727        5.19E-03	
+	
+# Stage 1 vs Stage 5
+ No Significant Genes found from the comparison using script 9_find_sig_degs_in_geneset.py
+	
+	
+# Stage 1 vs Stage 6
+No Significant Genes found from the comparison using script 9_find_sig_degs_in_geneset.py
+	
+	
+# Stage 2 vs Stage 3
+Header  OG      Symbol  logFC   logCPM  Pvalue
+Ec_actinula_t.67621     OG0000012       CRX     -1.2033101      5.623038        4.11E-08
+Ec_actinula_t.68284     OG0000057       CYP1B1  -0.7763222      5.872588        6.42E-03
+Ec_actinula_t.83034     OG0000060       SOX14   0.7144077       4.82695 2.29E-04
+Ec_actinula_t.53522     OG0000489       EML2    -0.6248439      5.395683        5.20E-03
+Ec_actinula_t.102475    OG0000698       NR2E3   -0.8030618      5.592913        8.00E-04
+Ec_actinula_t.83179     OG0002020       WHRN    1.3464835       5.118162        1.77E-12
+Ec_actinula_t.97443     OG0002585       POU4F3  1.3283577       5.121913        2.01E-08
+Ec_actinula_t.97444     OG0002585       POU4F3  1.1189885       6.060907        4.60E-05
+Ec_actinula_t.66600     OG0003740       MYO3B   1.2451029       5.918862        7.37E-06
+Ec_actinula_t.53144     OG0005663       WDR36   0.6622237       5.339747        4.35E-03
+Ec_actinula_t.65960     OG0006520       USH1C   0.6088063       5.055636        3.46E-03	
+	
+# Stage 2 vs Stage 4
+Header  OG      Symbol  logFC   logCPM  Pvalue
+Ec_actinula_t.69692     OG0000002       SEMA5B  -0.6724175      5.858898        1.03E-02
+Ec_actinula_t.53746     OG0001090       TH      -0.7438261      6.931666        1.14E-03
+Ec_actinula_t.97444     OG0002585       POU4F3  1.0023664       6.166326        1.63E-06
+Ec_actinula_t.96544     OG0003169       CNNM4   0.4694084       6.326808        3.26E-03
+Ec_actinula_t.66600     OG0003740       MYO3B   1.1859667       6.059785        5.84E-09
+Ec_actinula_t.91272     OG0006019       LAMB2   0.5597705       7.288856        1.40E-02
+Ec_actinula_t.52283     OG0006759       LAMC3   0.92856 7.179826        6.49E-05
+
+
+# Stage 2 vs Stage 5
+Header  OG      Symbol  logFC   logCPM  Pvalue
+Ec_actinula_t.52283     OG0006759       LAMC3   0.8913561       6.589327        5.17E-04
+
+
+# Stage 2 vs Stage 6
+ No Significant Genes found from the comparison using script 9_find_sig_degs_in_geneset.py
+
+
+
+# Stage 3 vs Stage 4
+**** N/A ****
+	#EdgeR Found NO Significant genes between these 2 stages
+
+
+# Stage 3 vs Stage 5
+No Significant Genes found from the comparison using script 9_find_sig_degs_in_geneset.py
+ 
+
+# Stage 3 vs Stage 6
+ No Significant Genes found from the comparison using script 9_find_sig_degs_in_geneset.py
+
+
+# Stage 4 vs Stage 5
+No Significant Genes found from the comparison using script 9_find_sig_degs_in_geneset.py
+
+
+# Stage 4 vs Stage 6
+ No Significant Genes found from the comparison using script 9_find_sig_degs_in_geneset.py
+
+
+Stage 5 vs Stage 6
+**** N/A ****
+	#EdgeR Found NO Significant genes between these 2 stages
+	
+#RESULTS of 9.C_prep_sig_DEGs_for_Heatmap.py
+"Ec_actinula_t.97429","Ec_actinula_t.83196","Ec_actinula_t.66600","Ec_actinula_t.67621","Ec_actinula_t.66245","Ec_actinula_t.52088","Ec_actinula_t.97444","Ec_actinula_t.66600","Ec_actinula_t.65838","Ec_actinula_t.52088","Ec_actinula_t.53746","Ec_actinula_t.97444","Ec_actinula_t.96544","Ec_actinula_t.94044","Ec_actinula_t.52283","Ec_actinula_t.67621","Ec_actinula_t.68284","Ec_actinula_t.83034","Ec_actinula_t.53522","Ec_actinula_t.102475","Ec_actinula_t.83179","Ec_actinula_t.97443","Ec_actinula_t.97444","Ec_actinula_t.66600","Ec_actinula_t.53144","Ec_actinula_t.65960","Ec_actinula_t.69692","Ec_actinula_t.53746","Ec_actinula_t.97444","Ec_actinula_t.96544","Ec_actinula_t.66600","Ec_actinula_t.91272","Ec_actinula_t.52283","Ec_actinula_t.52283"
