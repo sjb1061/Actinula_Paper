@@ -1,3 +1,9 @@
+#This script generates 2 heatmaps - the first is for the full gene set using all the actinula genes found in this gene set. 
+#The second is using only significant DEGs identified for this gene set. 
+#Input files you will need for the first part (full gene set): 
+
+#Input files you will need for the second part (sig DEGs in gene set):
+
 library(tximport); library(readr); library(edgeR)
 
 setwd("~/Desktop/R /Transcriptomics_Actinula_3-17-20")
