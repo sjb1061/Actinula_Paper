@@ -69,24 +69,24 @@ We sequenced *Ectopleura crocea* Actinula larvae at the 6 developmental stages (
   * **Orthofinder gene count file:** Orthogroups.GeneCount_5-11-20.tsv
   
 #### 9. Find Significant Differentially Expressed Genes (DEGs) 
-  To find significant DEGs we first ran EdgeR in R. Next, we exported the significant pariwise comparisons for each stage to the terminal. Using this, we compared the headers from the sensory orthorgroups to the significant DEGs from EdgeR to identify signficant genes in the gene sets.  
+  To find significant DEGs we first ran EdgeR in R. Next, we exported the significant pariwise comparisons for each stage to the terminal. Using this, we compared the headers from the sensory orthorgroups to the significant DEGs from EdgeR to identify signficant genes in the gene sets. We then ran 2 prep scripts for making the heatmaps in step 10.  
 
-  * Run EdgeR script in R   
-   edgeR_actinula_6_groups_0.05_4-3-20.R  
+  * A. Run EdgeR script in R   
+   9.A_edgeR_actinula_6_groups_0.05_4-3-20.R  
 
-  * Identify significant DEGs in gene sets (in terminal)  
-   find_sig_degs_in_geneset.py  
+  * B. Identify significant DEGs in gene sets (in terminal)  
+   9.B_find_sig_degs_in_geneset.py  
   *Run this for each pairwise comparison and compile the results into one text document for each gene set*  
   
-#### 10. Generate Heatmaps of Significant DEGs of Gene Sets (In R environment)
-  Now that we have identified the significant actinula DEGs in the gene sets we can visualize their expression. However, first we have to run 2 prep steps before running the R script. 
+  * Run Prep scripts for heatmaps *(run on each gene set)*.  
+   9.C_prep_sig_DEGs_for_heatmaps.py     
+   9.D_get_all_symbols_for_OGs.py 
   
-  * Prep scripts for heatmaps *(run on each gene set)*  
-   9.B_get_all_symbols_for_OGs.py.    
-   9.C_prep_sig_DEGs_for_heatmaps.py.  
+#### 10. Generate Heatmaps of Significant DEGs of Gene Sets (In R environment)
+  Now that we have identified the significant actinula DEGs in the gene sets we can visualize their expression by making heatmaps. Each script makes 2 heatmaps, the first is a heatmap of all of the actinula genes found in the gene set and the second is a heatmap of the significant DEGs found in the heat map from step 9. 
 
   * Using the output from the prep scripts, run the heatmap scripts in R *(run on each gene set)*  
-   Ec_Sensory_percep_Chem_Stim_heatmap-updated.R.  
-   Ec_Sensory_percep_light_stim_heatmap-updated.R.  
-   Ec_Sensory_percep_Mechan_Stim_heatmap-updated.R  
+   10_Ec_Sensory_percep_Chem_Stim_heatmap-updated.R.  
+   10_Ec_Sensory_percep_light_stim_heatmap-updated.R.  
+   10_Ec_Sensory_percep_Mechan_Stim_heatmap-updated.R  
    
