@@ -1,3 +1,18 @@
+#This script generates 2 heatmaps - the first is for the full gene set using all the actinula genes found in this gene set. 
+#The second is using only significant DEGs identified for this gene set. 
+#Input files you will need for the first part (full gene set): 
+    #Salmon output (the mapping dir we used before in edgeR)
+    #libraries_to_stages.txt file that we used before in edgeR
+    #The R output file from step 8 (contains gene_acc, Homo_seqid, OG, gene symbol, Actinula_seqid)
+    #all_symbols_for_OGs output from 9.D_get_all_symbols_for_OGs.py
+
+#Input files you will need for the second part (sig DEGs in gene set):
+    #Salmon output (the mapping dir we used before in edgeR)
+    #libraries_to_stages.txt file that we used before in edgeR
+    #The R output file from step 8 (contains gene_acc, Homo_seqid, OG, gene symbol, Actinula_seqid)
+    #all_symbols_for_OGs output from 9.D_get_all_symbols_for_OGs.py
+    #The output string from 9.C_prep_sig_DEGs_for_heatmap.py 
+
 library(tximport); library(readr); library(edgeR)
 
 setwd("~/Desktop/R /Transcriptomics_Actinula_3-17-20")
@@ -8,7 +23,7 @@ list.files()
 
 #6 groups - Full Gene Set
 
-#library info file
+#library info file - import salmon quant data and assign stages to samples 
 devstages<-read.table("libraries_to_stages.txt",header=F,row.names=1)
 dev1<-rownames(devstages)[which(devstages$V2==1)]; dev1files <- file.path(dir, "mapping",dev1, "quant.sf"); names(dev1files)<-dev1
 dev2 <-rownames(devstages)[which(devstages$V2==2)]; dev2files <- file.path(dir, "mapping",dev2, "quant.sf"); names(dev2files)<-dev2
@@ -25,15 +40,13 @@ normcounts<-cpm(b, normalized.lib.sizes=T) #normalized library counts for all ge
 
 
 #set up geneID map (hashtable, dictionary, lookup, etc) 
-#homohydra.map<-hydract_acc_apo_OGs_acc_sym #use if inital with other r script
-#homohydra.map<- read.table("Hs_Sensory_percep_light_stim_R_output_genes.txt",header=T, stringsAsFactors=F) #Full
-homohydra.map<- read.table("Reduced_Ec_Sensory_Percep_Mechan_Stim_R_output_genes.txt",header=T, stringsAsFactors=F) #Reduced
+homohydra.map<- read.table("Reduced_Ec_Sensory_Percep_Mechan_Stim_R_output_genes.txt",header=T, stringsAsFactors=F) 
 
 str(homohydra.map) #should be data frame
-length(homohydra.map) #5 col with 619 enteries
+length(homohydra.map) 
 
-#import collapsed symbols for OG - add to dataset
-all_symbols_for_OGs <- read.delim("~/Desktop/R /Transcriptomics_Actinula_3-17-20/DEGs_p0.05_6groups/Reduced R output genes from geneset and symbols/sens_percep_mechan_stim-all_symbols_for_OGs.txt") #Reduced
+#import collapsed symbols for OG - add to dataset (the all_symbols_for_OG file)
+all_symbols_for_OGs <- read.delim("~/Desktop/R /Transcriptomics_Actinula_3-17-20/DEGs_p0.05_6groups/Reduced R output genes from geneset and symbols/sens_percep_mechan_stim-all_symbols_for_OGs.txt")
 names(all_symbols_for_OGs)[2] <- c("tot_symbol")
 str(all_symbols_for_OGs)
 all_symbols_for_OGs$OG<- as.character(all_symbols_for_OGs$OG)
@@ -49,7 +62,7 @@ library(tidyr)
 homohydra.map <-unite(homohydra.map, symbol_seqid, tot_symbol:Actinula_seqid, sep= "    ", remove=F, na.rm=FALSE )
 head(homohydra.map)
 
-#Keep only unique hydractinia headers
+#Keep only unique actinula headers
 #library(dplyr)
 length(homohydra.map$Actinula_seqid)
 length(unique(homohydra.map$Actinula_seqid))
@@ -57,31 +70,30 @@ length(unique(homohydra.map$Actinula_seqid))
 homohydra.map<- homohydra.map[!duplicated(homohydra.map$Actinula_seqid), ]
 length(homohydra.map$Actinula_seqid)
 
-keep<-unique(homohydra.map$Actinula_seqid); length(keep) #1 col with 32 enteries 
+keep<-unique(homohydra.map$Actinula_seqid); length(keep)  
 
 
 #select just TF genes
 TFcts <-normcounts[keep,]
 nrow(TFcts) #25
-sort(homohydra.map$symbol)  #doublecheck that IDs are correctly sampled - should be gene symbol #25 
+sort(homohydra.map$symbol)  #doublecheck that IDs are correctly sampled - should be gene symbol  
 sort(rownames(TFcts)) #25
 
-#construct heatmap of genes in map across devs
+#construct heatmap of genes in map across devs - can use either row as the color break or sepecify color break - we use row
 #using row as color break 
 rgb.palette <- colorRampPalette(c( "red","black","green"),space = "Lab")
 #specifying color break 
-rgb.palette2 <- colorRampPalette(c( "red","black","green"))(n=299) #,space = "Lab"
-col_breaks = c(seq(0,33,length=100), seq(33.01,66,length=100), seq(66.01,100,length=100))
+#rgb.palette2 <- colorRampPalette(c( "red","black","green"))(n=299) #,space = "Lab"
+#col_breaks = c(seq(0,33,length=100), seq(33.01,66,length=100), seq(66.01,100,length=100))
 #summary(TFcts) #to figure out range
 
 library(gplots)
 
-#pdf("BestTFhits all and averaged.pdf",height=11,width=8)  
+#View heatmap of all samples  
 #using row as color break (normal)
-heatmap.2(TFcts,  scale="row", labRow = homohydra.map$symbol_seqid,    Colv=F,  trace="none",  dendrogram="row",  key=F,  col=rgb.palette(120),  density.info=NULL,  margins=c(5, 11),  lmat=rbind(4:3, 2:1),  lhei=c(1, 30),  lwid=c(1, 1),cexRow = 0.80);
-#                                       change to symbol col  	
+heatmap.2(TFcts,  scale="row", labRow = homohydra.map$symbol_seqid,    Colv=F,  trace="none",  dendrogram="row",  key=F,  col=rgb.palette(120),  density.info=NULL,  margins=c(5, 11),  lmat=rbind(4:3, 2:1),  lhei=c(1, 30),  lwid=c(1, 1),cexRow = 0.80); 	
 #specifying color break
-heatmap.2(TFcts,  scale="none", labRow = homohydra.map$symbol_seqid,    Colv=F,  trace="none",  dendrogram="row",  key=F,  col=rgb.palette2, breaks=col_breaks, density.info=NULL,  margins=c(5, 11),  lmat=rbind(4:3, 2:1),  lhei=c(1, 30),  lwid=c(1, 1),cexRow = 0.80);
+#heatmap.2(TFcts,  scale="none", labRow = homohydra.map$symbol_seqid,    Colv=F,  trace="none",  dendrogram="row",  key=F,  col=rgb.palette2, breaks=col_breaks, density.info=NULL,  margins=c(5, 11),  lmat=rbind(4:3, 2:1),  lhei=c(1, 30),  lwid=c(1, 1),cexRow = 0.80);
 
 
 # take average (normalized) counts for each dev stage
@@ -89,16 +101,13 @@ tcts<-t(TFcts); dev<-factor(c(1,1,1,1,1,1,2,2,2,2,2,2,3,3,3,3,3,3,4,4,4,4,4,4,5,
 dev.means<-by(dat, dev, function(x) colMeans(x[, -1]))
 dev.means2<-as.data.frame(t(sapply(dev.means, I)))
 
-#heatmaps using row as color break (normal)
-#heatmap.2(t(dev.means2), labRow = homohydra.map$symbol, scale="row", Colv=F, trace="none", dendrogram="row", key=F, col=rgb.palette(120), density.info=NULL,  margins=c(3, 10),  lmat=rbind(4:3, 2:1),  lhei=c(1, 30),  lwid=c(1, 1));
-#heatmap.2(t(dev.means2), labRow = homohydra.map$Hydractinia_seqid, scale="row", Colv=F, trace="none", dendrogram="row", key=F, col=rgb.palette(120), density.info=NULL,  margins=c(3, 10),  lmat=rbind(4:3, 2:1),  lhei=c(1, 30),  lwid=c(1, 1));
+#heatmaps using row as color break (normal) - the second line (commented out) adds expression value in each box in heatmap
 heatmap.2(t(dev.means2), labRow = homohydra.map$symbol_seqid, scale="row", Colv=F, trace="none", dendrogram="row", key=F, col=rgb.palette(120), density.info=NULL,  margins=c(2.5, 10.75),  lmat=rbind(4:3, 2:1),  lhei=c(1, 30),  lwid=c(1, 1), cexRow = 0.80);
-heatmap.2(t(dev.means2), cellnote= round(t(dev.means2), digits = 3), notecol = "white", labRow = homohydra.map$symbol_seqid, scale="row", Colv=F, trace="none", dendrogram="row", key=F, col=rgb.palette(120), density.info=NULL,  margins=c(2.5, 10.75),  lmat=rbind(4:3, 2:1),  lhei=c(1, 30),  lwid=c(1, 1), cexRow = 0.80);
+#heatmap.2(t(dev.means2), cellnote= round(t(dev.means2), digits = 3), notecol = "white", labRow = homohydra.map$symbol_seqid, scale="row", Colv=F, trace="none", dendrogram="row", key=F, col=rgb.palette(120), density.info=NULL,  margins=c(2.5, 10.75),  lmat=rbind(4:3, 2:1),  lhei=c(1, 30),  lwid=c(1, 1), cexRow = 0.80);
 
-#heatmaps specifiying color break
-heatmap.2(t(dev.means2), labRow = homohydra.map$symbol_seqid, scale="none", Colv=F, trace="none", dendrogram="row", key=F, col=rgb.palette2, breaks=col_breaks, density.info=NULL,  margins=c(2.5, 10.75),  lmat=rbind(4:3, 2:1),  lhei=c(1, 30),  lwid=c(1, 1), cexRow = 0.80);
-#round(t(dev.means2), digits = 3) #round numbers in heatmap
-heatmap.2(t(dev.means2), cellnote= round(t(dev.means2), digits = 3), notecol = "white", notecex = 1 , labRow = homohydra.map$symbol_seqid, scale="none", Colv=F, trace="none", dendrogram="row", key=F, col=rgb.palette2, breaks=col_breaks, density.info=NULL,  margins=c(3,11),  lmat=rbind(4:3, 2:1),  lhei=c(1, 30),  lwid=c(1, 1), cexRow = 0.80);
+#heatmaps specifiying color break - the second line (commented out) adds expression value in each box in heatmap
+#heatmap.2(t(dev.means2), labRow = homohydra.map$symbol_seqid, scale="none", Colv=F, trace="none", dendrogram="row", key=F, col=rgb.palette2, breaks=col_breaks, density.info=NULL,  margins=c(2.5, 10.75),  lmat=rbind(4:3, 2:1),  lhei=c(1, 30),  lwid=c(1, 1), cexRow = 0.80);
+#heatmap.2(t(dev.means2), cellnote= round(t(dev.means2), digits = 3), notecol = "white", notecex = 1 , labRow = homohydra.map$symbol_seqid, scale="none", Colv=F, trace="none", dendrogram="row", key=F, col=rgb.palette2, breaks=col_breaks, density.info=NULL,  margins=c(3,11),  lmat=rbind(4:3, 2:1),  lhei=c(1, 30),  lwid=c(1, 1), cexRow = 0.80);
 
 
 
@@ -121,7 +130,7 @@ list.files()
 
 #6 groups - Sig DEGs from Gene Set
 
-#library info file
+#library info file - import salmon quant data and assign stages to samples 
 devstages<-read.table("libraries_to_stages.txt",header=F,row.names=1)
 dev1<-rownames(devstages)[which(devstages$V2==1)]; dev1files <- file.path(dir, "mapping",dev1, "quant.sf"); names(dev1files)<-dev1
 dev2 <-rownames(devstages)[which(devstages$V2==2)]; dev2files <- file.path(dir, "mapping",dev2, "quant.sf"); names(dev2files)<-dev2
@@ -136,10 +145,9 @@ head(cts)
 b<-DGEList(counts=cts, group=c(1,1,1,1,1,1,2,2,2,2,2,2,3,3,3,3,3,3,4,4,4,4,4,4,5,5,5,5,5,5,6,6,6,6,6,6))
 normcounts<-cpm(b, normalized.lib.sizes=T) #normalized l
 
-#make a matrix of significant degs from this data set - run prep_sig_DEGs_for_heatmap.py in terminal to get sig degs formated in this way
-#REDUCED
+#make a matrix of significant degs from this data set - run 9.C_prep_sig_DEGs_for_heatmap.py in terminal to get sig degs formated in this way
 sig_degs<-c("Ec_actinula_t.93443","Ec_actinula_t.66600","Ec_actinula_t.56158","Ec_actinula_t.81361","Ec_actinula_t.52742","Ec_actinula_t.82119","Ec_actinula_t.67621","Ec_actinula_t.81431","Ec_actinula_t.52197","Ec_actinula_t.85347","Ec_actinula_t.52523","Ec_actinula_t.93443","Ec_actinula_t.99863","Ec_actinula_t.81801","Ec_actinula_t.92379","Ec_actinula_t.92493","Ec_actinula_t.97444","Ec_actinula_t.76573","Ec_actinula_t.66600","Ec_actinula_t.65838","Ec_actinula_t.81361","Ec_actinula_t.52742","Ec_actinula_t.82119","Ec_actinula_t.81431","Ec_actinula_t.85347","Ec_actinula_t.81899","Ec_actinula_t.81801","Ec_actinula_t.92379","Ec_actinula_t.68641","Ec_actinula_t.53746","Ec_actinula_t.82062","Ec_actinula_t.103747","Ec_actinula_t.97444","Ec_actinula_t.81431","Ec_actinula_t.52523","Ec_actinula_t.81801","Ec_actinula_t.92379","Ec_actinula_t.81361","Ec_actinula_t.52742","Ec_actinula_t.82119","Ec_actinula_t.67621","Ec_actinula_t.52754","Ec_actinula_t.81431","Ec_actinula_t.81395","Ec_actinula_t.85347","Ec_actinula_t.53517","Ec_actinula_t.99863","Ec_actinula_t.53522","Ec_actinula_t.81801","Ec_actinula_t.92379","Ec_actinula_t.83179","Ec_actinula_t.97443","Ec_actinula_t.97444","Ec_actinula_t.76573","Ec_actinula_t.66600","Ec_actinula_t.101725","Ec_actinula_t.65960","Ec_actinula_t.81361","Ec_actinula_t.52742","Ec_actinula_t.82119","Ec_actinula_t.81395","Ec_actinula_t.66002","Ec_actinula_t.53517","Ec_actinula_t.81801","Ec_actinula_t.92379","Ec_actinula_t.68641","Ec_actinula_t.53746","Ec_actinula_t.82062","Ec_actinula_t.103747","Ec_actinula_t.95270","Ec_actinula_t.97444","Ec_actinula_t.76573","Ec_actinula_t.66600","Ec_actinula_t.81431","Ec_actinula_t.52223","Ec_actinula_t.81801","Ec_actinula_t.92379","Ec_actinula_t.52197"
-) #Reduced 
+)  
 
 
 #make into a data frame and change name of column 
@@ -147,15 +155,14 @@ sig_degs_df<-data.frame(sig_degs)
 str(sig_degs_df)
 names(sig_degs_df)[1] <- c("Actinula_seqid")
 
-#make data characters not factor so they can be compared
+#make data type character not factor so they can be compared
 sig_degs_df$Actinula_seqid<- as.character(sig_degs_df$Actinula_seqid)
 str(sig_degs_df)
 
-#homohydra.map<- read.table("Hs_detect_light_stim_genes_R_output.txt",header=T, stringsAsFactors=F) #Full
-homohydra.map<- read.table("Reduced_Ec_Sensory_Percep_Mechan_Stim_R_output_genes.txt",header=T, stringsAsFactors=F) #Reduced
+homohydra.map<- read.table("Reduced_Ec_Sensory_Percep_Mechan_Stim_R_output_genes.txt",header=T, stringsAsFactors=F) 
 str(homohydra.map) #should be data frame
 
-#import collapsed symbols for OG - add to dataset
+#import collapsed symbols for OG - add to dataset (the all_symbols_for_OG file)
 all_symbols_for_OGs <- read.delim("~/Desktop/R /Transcriptomics_Actinula_3-17-20/DEGs_p0.05_6groups/Reduced R output genes from geneset and symbols/sens_percep_mechan_stim-all_symbols_for_OGs.txt")
 names(all_symbols_for_OGs)[2] <- c("tot_symbol")
 str(all_symbols_for_OGs)
@@ -178,7 +185,7 @@ sig_set<-inner_join(homohydra.map[,1:7],sig_degs_df,by="Actinula_seqid")
 nrow(sig_set)
 length(unique(sig_set$Actinula_seqid))
 
-#Keep only unique hydractinia headers
+#Keep only unique actinula headers
 #library(dplyr)
 unique_sig_set<- sig_set[!duplicated(sig_set$Actinula_seqid), ]
 length(unique_sig_set$Actinula_seqid)
@@ -193,21 +200,20 @@ nrow(TFcts) #25
 sort(homohydra.map$symbol)  #doublecheck that IDs are correctly sampled - should be gene symbol #25 
 sort(rownames(TFcts)) #25
 
-#construct heatmap of genes in map across devs
+#construct heatmap of genes in map across devs - can use either row as the color break or sepecify color break - we use row
 #using row as color break 
 rgb.palette <- colorRampPalette(c( "red","black","green"),space = "Lab")
 #specifying color break 
-rgb.palette2 <- colorRampPalette(c( "red","black","green"))(n=299) #,space = "Lab"
-col_breaks = c(seq(0,33,length=100), seq(33.01,66,length=100), seq(66.01,100,length=100))
+#rgb.palette2 <- colorRampPalette(c( "red","black","green"))(n=299) #,space = "Lab"
+#col_breaks = c(seq(0,33,length=100), seq(33.01,66,length=100), seq(66.01,100,length=100))
 
 library(gplots)
 
 #pdf("BestTFhits all and averaged.pdf",height=11,width=8)  
 #using row as color break
-heatmap.2(TFcts,  scale="row", labRow = homohydra.map$symbol_seqid,    Colv=F,  trace="none",  dendrogram="row",  key=F,  col=rgb.palette(120),  density.info=NULL,  margins=c(5, 11),  lmat=rbind(4:3, 2:1),  lhei=c(1, 30),  lwid=c(1, 1),cexRow = 0.80);
-#                                       change to symbol col  	
+heatmap.2(TFcts,  scale="row", labRow = homohydra.map$symbol_seqid,    Colv=F,  trace="none",  dendrogram="row",  key=F,  col=rgb.palette(120),  density.info=NULL,  margins=c(5, 11),  lmat=rbind(4:3, 2:1),  lhei=c(1, 30),  lwid=c(1, 1),cexRow = 0.80); 	
 #specifying color break
-heatmap.2(TFcts,  scale="none", labRow = homohydra.map$symbol_seqid,    Colv=F,  trace="none",  dendrogram="row",  key=F,  col=rgb.palette2, breaks=col_breaks, density.info=NULL,  margins=c(5, 11),  lmat=rbind(4:3, 2:1),  lhei=c(1, 30),  lwid=c(1, 1),cexRow = 0.80);
+#heatmap.2(TFcts,  scale="none", labRow = homohydra.map$symbol_seqid,    Colv=F,  trace="none",  dendrogram="row",  key=F,  col=rgb.palette2, breaks=col_breaks, density.info=NULL,  margins=c(5, 11),  lmat=rbind(4:3, 2:1),  lhei=c(1, 30),  lwid=c(1, 1),cexRow = 0.80);
 
 
 # take average (normalized) counts for each dev stage
@@ -215,14 +221,10 @@ tcts<-t(TFcts); dev<-factor(c(1,1,1,1,1,1,2,2,2,2,2,2,3,3,3,3,3,3,4,4,4,4,4,4,5,
 dev.means<-by(dat, dev, function(x) colMeans(x[, -1]))
 dev.means2<-as.data.frame(t(sapply(dev.means, I)))
 
-#heatmaps using row as color break
-#heatmap.2(t(dev.means2), labRow = homohydra.map$symbol, scale="row", Colv=F, trace="none", dendrogram="row", key=F, col=rgb.palette(120), density.info=NULL,  margins=c(3, 10),  lmat=rbind(4:3, 2:1),  lhei=c(1, 30),  lwid=c(1, 1));
-#heatmap.2(t(dev.means2), labRow = homohydra.map$Hydractinia_seqid, scale="row", Colv=F, trace="none", dendrogram="row", key=F, col=rgb.palette(120), density.info=NULL,  margins=c(3, 10),  lmat=rbind(4:3, 2:1),  lhei=c(1, 30),  lwid=c(1, 1));
+#heatmaps using row as color break - second line adds expression value in each box of heatmap
 heatmap.2(t(dev.means2), labRow = homohydra.map$symbol_seqid, scale="row", Colv=F, trace="none", dendrogram="row", key=F, col=rgb.palette(120), density.info=NULL,  margins=c(2.5, 10.75),  lmat=rbind(4:3, 2:1),  lhei=c(1, 30),  lwid=c(1, 1), cexRow = 0.80);
 heatmap.2(t(dev.means2), cellnote= round(t(dev.means2), digits = 3), notecol = "white", labRow = homohydra.map$symbol_seqid, scale="row", Colv=F, trace="none", dendrogram="row", key=F, col=rgb.palette(120), density.info=NULL,  margins=c(2.5, 10.75),  lmat=rbind(4:3, 2:1),  lhei=c(1, 30),  lwid=c(1, 1), cexRow = 0.80);
 
 #heatmaps specifiying color break
-heatmap.2(t(dev.means2), labRow = homohydra.map$symbol_seqid, scale="none", Colv=F, trace="none", dendrogram="row", key=F, col=rgb.palette2, breaks=col_breaks, density.info=NULL,  margins=c(2.5, 10.75),  lmat=rbind(4:3, 2:1),  lhei=c(1, 30),  lwid=c(1, 1), cexRow = 0.80);
-heatmap.2(t(dev.means2), cellnote= round(t(dev.means2), digits = 3), notecol = "white", labRow = homohydra.map$symbol_seqid, scale="none", Colv=F, trace="none", dendrogram="row", key=F, col=rgb.palette2, breaks=col_breaks, density.info=NULL,  margins=c(3,11),  lmat=rbind(4:3, 2:1),  lhei=c(1, 30),  lwid=c(1, 1), cexRow = 0.80);
-
-
+#heatmap.2(t(dev.means2), labRow = homohydra.map$symbol_seqid, scale="none", Colv=F, trace="none", dendrogram="row", key=F, col=rgb.palette2, breaks=col_breaks, density.info=NULL,  margins=c(2.5, 10.75),  lmat=rbind(4:3, 2:1),  lhei=c(1, 30),  lwid=c(1, 1), cexRow = 0.80);
+#heatmap.2(t(dev.means2), cellnote= round(t(dev.means2), digits = 3), notecol = "white", labRow = homohydra.map$symbol_seqid, scale="none", Colv=F, trace="none", dendrogram="row", key=F, col=rgb.palette2, breaks=col_breaks, density.info=NULL,  margins=c(3,11),  lmat=rbind(4:3, 2:1),  lhei=c(1, 30),  lwid=c(1, 1), cexRow = 0.80);
