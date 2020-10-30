@@ -299,11 +299,21 @@ This file is the step by step instructions of our Transcriptome analysis. You wi
   
   
 #### 10. Generate Heatmaps of Significant DEGs of Gene Sets (In R environment)
-  Now that we have identified the significant actinula DEGs in the gene sets we can visualize their expression. However, first we have to run 2 prep steps before running the R script. 
+  Now that we have identified the significant actinula DEGs in the gene sets we can visualize their expression by generating 2 heatmaps for each gene set. 
   
-  * Using the output from the prep scripts, run the heatmap scripts in R *(run on each gene set)*  
-   Ec_Sensory_percep_Chem_Stim_heatmap-updated.R.  
-   Ec_Sensory_percep_light_stim_heatmap-updated.R.  
-   Ec_Sensory_percep_Mechan_Stim_heatmap-updated.R  
-
-
+  Run the heatmap scripts in R *(run on each gene set)*  
+  * 10_Ec_Sensory_percep_Chem_Stim_heatmap-updated.R.  
+  * 10_Ec_Sensory_percep_light_stim_heatmap-updated.R.  
+  * 10_Ec_Sensory_percep_Mechan_Stim_heatmap-updated.R  
+  
+  What you will need for the script:   
+ * Salmon output (the mapping dir we used before in edgeR)
+ * libraries_to_stages.txt file that we used before in edgeR
+ * The R output file from step 8 (contains gene_acc, Homo_seqid, OG, gene symbol, Actinula_seqid)
+ * all_symbols_for_OGs output from 9.D_get_all_symbols_for_OGs.py 
+ * The output string from 9.C_prep_sig_DEGs_for_heatmap.py (all sig degs in format: "header_1", "header_2", "header_3",...).  
+ 
+ Each script will make 2 heatmaps, the first is the total heatmap with all of the actinula genes found in that gene set. The second heatmap contains only significant DEGs from that gene set. This script makes heatmaps using the heatmap.2 function. Each row in the heatmap will be annotated with the actinula transcript header and will also have all of the gene symbols assoicated with the orthogroup that header is apart of. There will also only be unique headers displayed in the heatmaps, there are no redundant headers. 
+ 
+ 
+ 
