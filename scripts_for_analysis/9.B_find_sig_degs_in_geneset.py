@@ -1,5 +1,10 @@
 #! /usr/bin/env python3
 
+#The goal of this script is to identify significant Actinula Transcripts in the given gene set. This script will compare the gene set output file from R (made at step 8)
+#to the edgeR output (you will need to run this for how ever many edgeR comparison files you have). It creates a dictionary based on the headers from the step 8 file
+#and will see if any of those headers are in the edgeR output file - if there is a significant gene present it will record all of the info from the edgeR file and will write
+#it out to an output file. 
+
 #import modules
 import argparse
 import time
@@ -8,7 +13,7 @@ import time
 parser = argparse.ArgumentParser()
 parser.add_argument("-a", help="input file: gene set from R (file with gene_acc OG symbol Actinula_seqid)")
 parser.add_argument("-b", help="input file: DEG list - made from edgeR")
-parser.add_argument("-c", help="name of output file")
+parser.add_argument("-c", help="name of output file (the stage comparison)")
 
 args = parser.parse_args()
 
@@ -17,12 +22,13 @@ args = parser.parse_args()
 
 t1 = time.time()
 
+#dict set up: 
 #key = header (pos 4) in file a (in file b pos 0)
 #value = [OG,symbol, seqid, logFC, pvalue]
 	# 0    1       2     3     4 
 	
 tot_db = {}
-#part 1 populate dictionary with headers of interest in gene set
+#part 1 populate dictionary with headers of interest from gene set, and open output file and prep it
 with open("{0}_DEGs.txt".format(args.c), "w") as out_handle:
     out_handle.write("Header\tOG\tSymbol\tlogFC\tlogCPM\tPvalue\n")
     with open(args.a, "r") as in_handle:
@@ -37,7 +43,7 @@ with open("{0}_DEGs.txt".format(args.c), "w") as out_handle:
             
         print("db after 1st file: ", tot_db, len(tot_db))   
 
-        #if there are dups in the list remove here 
+        #if there are dups in the list remove here (in future make this better)
         for key in tot_db: 
             print("length of cur val", len(tot_db[key]))
             if len(tot_db[key]) == 16:
@@ -76,7 +82,7 @@ with open("{0}_DEGs.txt".format(args.c), "w") as out_handle:
  
         print("now checking for matches in edgeR file ")
             
-#part 2 add logFC value if header matches  
+#part 2 add logFC, logCPM, and P value to list in dict if header matches  
     with open(args.b, "r") as in_handle_2:
         for line_b in in_handle_2:
             line_b = line_b.rstrip()
