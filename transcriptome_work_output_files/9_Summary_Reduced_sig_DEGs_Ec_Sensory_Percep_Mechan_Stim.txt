@@ -1,0 +1,149 @@
+##Used script 9.B_find_sig_degs_in_geneset.py   8-12-20
+## Using REDUCED Prot models of Assembly 
+
+#Significant genes in Sensory Perception of Mechanical Stim (164 genes in geneset originally)
+	#Homo Gene mods before Actinula join = 123 (Homo Gene Mods)
+	#112 Unique Homo OG
+	#592 Actinula gene models mapped to genes in this geneset  
+	#446 Unique Actinula Headers
+	#93 Unique Actinula OG 	
+	
+	
+# Stage 1 vs Stage 2	
+Header  OG      Symbol  logFC   logCPM  Pvalue
+Ec_actinula_t.93443     OG0000375       EPS8L2  0.9002124       5.044821        3.79E-06
+Ec_actinula_t.66600     OG0003740       MYO3B   0.6108416       4.906727        6.74E-04
+
+# Stage 1 vs Stage 3
+Header  OG      Symbol  logFC   logCPM  Pvalue
+Ec_actinula_t.56158     OG0000003       HPN     0.7864926       5.410048        2.76E-03
+Ec_actinula_t.81361     OG0000003       HPN     1.071131        6.105926        1.76E-04
+Ec_actinula_t.52742     OG0000007       FGFR1   -0.7337915      6.805038        2.93E-03
+Ec_actinula_t.82119     OG0000009       ASIC2   1.0741132       5.762684        3.18E-04
+Ec_actinula_t.67621     OG0000012       DRGX    -1.0681651      5.461061        2.33E-06
+Ec_actinula_t.81431     OG0000045       COCH    1.9244061       6.63406 1.41E-04
+Ec_actinula_t.52197     OG0000061       OTOF    0.9323495       8.758798        1.25E-03
+Ec_actinula_t.85347     OG0000061       OTOF    1.7485136       6.78803 7.28E-06
+Ec_actinula_t.52523     OG0000189       ATP2B2  0.8914468       6.034219        2.62E-03
+Ec_actinula_t.93443     OG0000375       EPS8L2  0.8652656       4.948139        1.45E-05
+Ec_actinula_t.99863     OG0000455       SLC26A5 0.8501437       4.616219        2.34E-06
+Ec_actinula_t.81801     OG0000526       COL4A3  1.6753214       6.309558        5.21E-04
+Ec_actinula_t.92379     OG0000526       COL4A3  1.4834879       8.478856        1.44E-03
+Ec_actinula_t.92493     OG0002171       LRIG1   0.7507032       5.244574        1.34E-03
+Ec_actinula_t.97444     OG0002585       POU4F2  1.0515671       6.021669        1.01E-03
+Ec_actinula_t.76573     OG0002928       SOD1    1.4582416       5.845307        7.79E-09
+Ec_actinula_t.66600     OG0003740       MYO3B   1.8609629       5.70163 4.02E-10
+Ec_actinula_t.65838     OG0007959       ADGRV1  0.8674059       5.115341        8.88E-04
+	
+	
+# Stage 1 vs Stage 4
+Header  OG      Symbol  logFC   logCPM  Pvalue
+Ec_actinula_t.81361     OG0000003       HPN     1.1101502       6.28902 2.35E-06
+Ec_actinula_t.52742     OG0000007       FGFR1   -1.0024061      6.867932        1.83E-07
+Ec_actinula_t.82119     OG0000009       ASIC2   1.0042993       5.872062        2.15E-04
+Ec_actinula_t.81431     OG0000045       COCH    2.2861458       7.081553        3.02E-10
+Ec_actinula_t.85347     OG0000061       OTOF    0.8840442       6.335142        1.11E-04
+Ec_actinula_t.81899     OG0000210       TMC1    0.5422928       5.996356        9.06E-03
+Ec_actinula_t.81801     OG0000526       COL4A3  1.6797606       6.466483        7.33E-07
+Ec_actinula_t.92379     OG0000526       COL4A3  1.717926        8.80922 1.07E-05
+Ec_actinula_t.68641     OG0000947       CLIC5   0.5764948       5.787291        8.52E-04
+Ec_actinula_t.53746     OG0001090       TH      -1.0521157      7.058046        2.98E-03
+Ec_actinula_t.82062     OG0001426       MYO1A   0.5841235       5.86179 9.45E-03
+Ec_actinula_t.103747    OG0002106       SLC9A3R1        -0.6568313      7.775591        3.24E-03
+Ec_actinula_t.97444     OG0002585       POU4F2  0.9406257       6.110932        2.21E-04
+	
+	
+# Stage 1 vs Stage 5
+Header  OG      Symbol  logFC   logCPM  Pvalue
+Ec_actinula_t.81431     OG0000045       COCH    1.8466021       6.170289        3.11E-06
+Ec_actinula_t.52523     OG0000189       ATP2B2  0.6848337       5.488275        1.32E-02
+Ec_actinula_t.81801     OG0000526       COL4A3  1.540992        5.802373        6.00E-05
+Ec_actinula_t.92379     OG0000526       COL4A3  1.2197803       7.888524        2.03E-03	
+	
+# Stage 1 vs Stage 6
+No Significant Genes found from the comparison using script 9_find_sig_degs_in_geneset.py
+	
+	
+# Stage 2 vs Stage 3
+Header  OG      Symbol  logFC   logCPM  Pvalue
+Ec_actinula_t.81361     OG0000003       HPN     0.9897704       6.205787        7.62E-05
+Ec_actinula_t.52742     OG0000007       FGFR1   -0.624079       6.803479        5.34E-03
+Ec_actinula_t.82119     OG0000009       ASIC2   1.1209351       5.819192        5.76E-06
+Ec_actinula_t.67621     OG0000012       DRGX    -1.2033101      5.623038        4.11E-08
+Ec_actinula_t.52754     OG0000034       CHRNA9  1.4461853       4.756835        8.73E-09
+Ec_actinula_t.81431     OG0000045       COCH    1.8718596       6.724897        5.71E-05
+Ec_actinula_t.81395     OG0000061       OTOF    1.3515661       5.467318        4.02E-08
+Ec_actinula_t.85347     OG0000061       OTOF    1.0746698       7.028835        2.15E-03
+Ec_actinula_t.53517     OG0000159       SLC1A3  1.7634144       5.990528        1.69E-08
+Ec_actinula_t.99863     OG0000455       SLC26A5 0.7287619       4.72816 6.83E-06
+Ec_actinula_t.53522     OG0000489       EML2    -0.6248439      5.395683        5.20E-03
+Ec_actinula_t.81801     OG0000526       COL4A3  1.5076736       6.427145        2.25E-04
+Ec_actinula_t.92379     OG0000526       COL4A3  1.35784 8.587606        5.81E-04
+Ec_actinula_t.83179     OG0002020       WHRN    1.3464835       5.118162        1.77E-12
+Ec_actinula_t.97443     OG0002585       POU4F2  1.3283577       5.121913        2.01E-08
+Ec_actinula_t.97444     OG0002585       POU4F2  1.1189885       6.060907        4.60E-05
+Ec_actinula_t.76573     OG0002928       SOD1    0.9660397       6.060983        5.06E-06
+Ec_actinula_t.66600     OG0003740       MYO3B   1.2451029       5.918862        7.37E-06
+Ec_actinula_t.101725    OG0004299       GRXCR1  0.6974678       4.694966        2.55E-03
+Ec_actinula_t.65960     OG0006520       USH1C   0.6088063       5.055636        3.46E-03	
+	
+# Stage 2 vs Stage 4
+Header  OG      Symbol  logFC   logCPM  Pvalue
+Ec_actinula_t.81361     OG0000003       HPN     0.9998157       6.396042        3.96E-07
+Ec_actinula_t.52742     OG0000007       FGFR1   -0.9140475      6.880021        3.60E-08
+Ec_actinula_t.82119     OG0000009       ASIC2   1.0253752       5.938307        2.41E-06
+Ec_actinula_t.81395     OG0000061       OTOF    1.437098        5.71019 4.81E-10
+Ec_actinula_t.66002     OG0000096       MYH14   -0.7491288      7.361063        1.53E-02
+Ec_actinula_t.53517     OG0000159       SLC1A3  2.1531173       6.482824        1.99E-11
+Ec_actinula_t.81801     OG0000526       COL4A3  1.4794431       6.587298        3.12E-11
+Ec_actinula_t.92379     OG0000526       COL4A3  1.5640729       8.919654        2.04E-07
+Ec_actinula_t.68641     OG0000947       CLIC5   0.495995        5.893039        2.32E-03
+Ec_actinula_t.53746     OG0001090       TH      -0.7438261      6.931666        1.14E-03
+Ec_actinula_t.82062     OG0001426       MYO1A   0.4819243       5.977575        1.51E-02
+Ec_actinula_t.103747    OG0002106       SLC9A3R1        -0.5339936      7.770981        6.86E-03
+Ec_actinula_t.95270     OG0002445       FBXO11  0.6618814       6.51928 2.79E-03
+Ec_actinula_t.97444     OG0002585       POU4F2  1.0023664       6.166326        1.63E-06
+Ec_actinula_t.76573     OG0002928       SOD1    0.8423402       6.162331        4.39E-09
+Ec_actinula_t.66600     OG0003740       MYO3B   1.1859667       6.059785        5.84E-09
+
+
+# Stage 2 vs Stage 5
+Header  OG      Symbol  logFC   logCPM  Pvalue
+Ec_actinula_t.81431     OG0000045       COCH    1.815906        6.2995  5.03E-08
+Ec_actinula_t.52223     OG0000096       MYH14   -0.7199762      7.786742        3.51E-03
+Ec_actinula_t.81801     OG0000526       COL4A3  1.3986558       5.96292 4.08E-07
+Ec_actinula_t.92379     OG0000526       COL4A3  1.1216693       8.040817        1.42E-04
+
+# Stage 2 vs Stage 6
+ No Significant Genes found from the comparison using script 9_find_sig_degs_in_geneset.py
+
+
+
+# Stage 3 vs Stage 4
+**** N/A ****
+	#EdgeR Found NO Significant genes between these 2 stages
+
+
+# Stage 3 vs Stage 5
+No Significant Genes found from the comparison using script 9_find_sig_degs_in_geneset.py
+ 
+
+# Stage 3 vs Stage 6
+Header  OG      Symbol  logFC   logCPM  Pvalue
+Ec_actinula_t.52197     OG0000061       OTOF    -0.7868976      8.508501        4.97E-03
+
+# Stage 4 vs Stage 5
+No Significant Genes found from the comparison using script 9_find_sig_degs_in_geneset.py
+
+
+# Stage 4 vs Stage 6
+ No Significant Genes found from the comparison using script 9_find_sig_degs_in_geneset.py
+
+
+Stage 5 vs Stage 6
+**** N/A ****
+	#EdgeR Found NO Significant genes between these 2 stages
+	
+#RESULTS of 9.C_prep_sig_DEGs_for_Heatmap.py
+"Ec_actinula_t.93443","Ec_actinula_t.66600","Ec_actinula_t.56158","Ec_actinula_t.81361","Ec_actinula_t.52742","Ec_actinula_t.82119","Ec_actinula_t.67621","Ec_actinula_t.81431","Ec_actinula_t.52197","Ec_actinula_t.85347","Ec_actinula_t.52523","Ec_actinula_t.93443","Ec_actinula_t.99863","Ec_actinula_t.81801","Ec_actinula_t.92379","Ec_actinula_t.92493","Ec_actinula_t.97444","Ec_actinula_t.76573","Ec_actinula_t.66600","Ec_actinula_t.65838","Ec_actinula_t.81361","Ec_actinula_t.52742","Ec_actinula_t.82119","Ec_actinula_t.81431","Ec_actinula_t.85347","Ec_actinula_t.81899","Ec_actinula_t.81801","Ec_actinula_t.92379","Ec_actinula_t.68641","Ec_actinula_t.53746","Ec_actinula_t.82062","Ec_actinula_t.103747","Ec_actinula_t.97444","Ec_actinula_t.81431","Ec_actinula_t.52523","Ec_actinula_t.81801","Ec_actinula_t.92379","Ec_actinula_t.81361","Ec_actinula_t.52742","Ec_actinula_t.82119","Ec_actinula_t.67621","Ec_actinula_t.52754","Ec_actinula_t.81431","Ec_actinula_t.81395","Ec_actinula_t.85347","Ec_actinula_t.53517","Ec_actinula_t.99863","Ec_actinula_t.53522","Ec_actinula_t.81801","Ec_actinula_t.92379","Ec_actinula_t.83179","Ec_actinula_t.97443","Ec_actinula_t.97444","Ec_actinula_t.76573","Ec_actinula_t.66600","Ec_actinula_t.101725","Ec_actinula_t.65960","Ec_actinula_t.81361","Ec_actinula_t.52742","Ec_actinula_t.82119","Ec_actinula_t.81395","Ec_actinula_t.66002","Ec_actinula_t.53517","Ec_actinula_t.81801","Ec_actinula_t.92379","Ec_actinula_t.68641","Ec_actinula_t.53746","Ec_actinula_t.82062","Ec_actinula_t.103747","Ec_actinula_t.95270","Ec_actinula_t.97444","Ec_actinula_t.76573","Ec_actinula_t.66600","Ec_actinula_t.81431","Ec_actinula_t.52223","Ec_actinula_t.81801","Ec_actinula_t.92379","Ec_actinula_t.52197"
+
