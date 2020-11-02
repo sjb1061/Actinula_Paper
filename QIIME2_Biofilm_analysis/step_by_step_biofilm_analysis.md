@@ -9,7 +9,8 @@ The first step of this analysis is to activate the qiime environment and to impo
    `conda activate qiime2-2020.2`   
    
    Import data: 
-   ```qiime tools import \
+   ```
+   qiime tools import \
   --type 'SampleData[PairedEndSequencesWithQuality]' \
   --input-path ../reads \
   --input-format CasavaOneEightSingleLanePerSampleDirFmt \
