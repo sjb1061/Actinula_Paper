@@ -339,12 +339,13 @@ This file is the step by step instructions of our Transcriptome analysis. You wi
  
  Outputs: 
 * stg_5.fa 
-* stg_6.fa
- 
-  ##### C. Run Interproscan, Pull out GO terms, and visualize in ReviGO
+* stg_6.fa   
+
+##### C. Run Interproscan, Pull out GO terms, and visualize in ReviGO
  Now that we have our FASTAs of the siginificantly upregulated DEGs for stages 5 & 6, we can run interproscan on both stages to get GO terms. Run interproscan on stage 5 and 6.   
  `sbatch 11.C.1_interpro_stg_5.slurm`    
  `sbatch 11.C.1_interpro_stg_6_slurm`    
+ 
  Code in scripts:  
  `interproscan -i ./stg_5.fa -d ./interpro_stg_5 -goterms -f TSV`   
  `interproscan -i ./stg_6.fa -d ./interpro_stg_6 -goterms -f TSV` 
