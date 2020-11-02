@@ -1,0 +1,17 @@
+Ec_actinula_t.67299	GO:0005102
+Ec_actinula_t.52074	
+Ec_actinula_t.52074	
+Ec_actinula_t.52074	
+Ec_actinula_t.80990	GO:0005520, GO:0005576
+Ec_actinula_t.80990	
+Ec_actinula_t.94604	GO:0005576, GO:0009405
+Ec_actinula_t.52719	GO:0005576
+Ec_actinula_t.71797	
+Ec_actinula_t.65834	
+Ec_actinula_t.53639	
+Ec_actinula_t.71332	
+Ec_actinula_t.103857	
+Ec_actinula_t.65864	
+Ec_actinula_t.65851	
+Ec_actinula_t.65851	
+Ec_actinula_t.68558	GO:0005506, GO:0009055, GO:0020037
