@@ -317,12 +317,20 @@ This file is the step by step instructions of our Transcriptome analysis. You wi
  
  
 #### 11. Supplemental Step - Identify Significant Genes Upregulated in Stages 5 and 6   
-   In the heatmaps generated in step 10, we found a general pattern that in stages 5 (when the larvae are settled) and 6 (when larvae complete metamorphosis into a juvenile polyp) sensory gene expression is highly downregulated. We want to make sure that this pattern is not an artifact of our analysis so here we are identifying genes that are significantly upregulated in stages 5 & 6 and identifying their functions by performing a Gene Ontology (GO) analysis.   
+   In the heatmaps generated in step 10, we found a general pattern that in stages 5 (when the larvae are settled) and 6 (when larvae complete metamorphosis into a juvenile polyp) sensory gene expression is highly downregulated. We want to make sure that this pattern is not an artifact of our analysis, so here we are identifying genes that are significantly upregulated in stages 5 & 6 and identifying their functions by performing a Gene Ontology (GO) analysis using interproscan https://interproscan5-docs.readthedocs.io/en/latest/HowToRun.html and ReviGO http://revigo.irb.hr/.   
    
-   ##### A. Get DEGs that are upregulated from EdgeR output   
-   Run 2 scripts:  
-  * 11.A_find_upregulated_stg_5_genes.py   
-  * 11.A_find_upregulated_stg_6_genes.py   
+   ##### A. Find DEGs that are upregulated from EdgeR output   
+   First we need to identify all of the headers that are upregulated in both stage 5 and 6. To do this, run the two 11.A scripts which will identify all of the headers that have a positive logFC value from the edgeR output and will write out a file with these headers. Before you run these scripts make a new directory to work in (one for each stage) and copy the edgeR comparison files that involve these 2 stages from step 9: 
+  * The stage 5 edgeR files: s1vs5_0.05_6gr; s2vs5_0.05_6gr; s3vs5_0.05_6gr; s4vs5_0.05_6gr   
+  * The stage 6 edgeR files: s1vs6_0.05_6gr; s2vs6_0.05_6gr; s3vs6_0.05_6gr; s4vs6_0.05_6gr
+  
+  Now Run the 2 scripts:  
+  `./11.A_find_upregulated_stg_5_genes.py -a s1vs5_0.05_6gr -b s2vs5_0.05_6gr -c s3vs5_0.05_6gr -d s4vs5_0.05_6gr`      
+  `./11.A_find_upregulated_stg_6_genes.py -a s1vs6_0.05_6gr -b s2vs6_0.05_6gr -c s3vs6_0.05_6gr -d s4vs6_0.05_6gr` 
+  
+  Outputs: 
+ * stg_5_upregulated_headers.txt  #This file has 263 headers  
+ * stg_6_upregulated_headers.txt  #This file has 111 headers   
   
   ##### B. Make FASTA of significant DEGs using selectSeqs
   Run selectSeqs script on stage 5 and 6 outputs from above 
