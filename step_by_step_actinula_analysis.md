@@ -333,10 +333,32 @@ This file is the step by step instructions of our Transcriptome analysis. You wi
  * stg_6_upregulated_headers.txt  #This file has 111 headers   
   
   ##### B. Make FASTA of significant DEGs using selectSeqs
-  Run selectSeqs script on stage 5 and 6 outputs from above 
- * selectSeqs.pl
+  We need to make FASTA files for both stages so we can run Interproscan in the next step. Run 11.B_selectSeqs.pl script on the stage 5 and 6 outputs from above.   
+  `./11.B_selectSeqs.pl -f stg_5_upregulated_headers.txt ../../salmon_3-13-20/actinula_total.ORP.fa-mod.fa >> stg_5.fa` 
+  `./11.B_selectSeqs.pl -f stg_6_upregulated_headers.txt ../../salmon_3-13-20/actinula_total.ORP.fa-mod.fa >> stg_6.fa`   
+ 
+ Outputs: 
+* stg_5.fa 
+* stg_6.fa
  
   ##### C. Run Interproscan, Pull out GO terms, and visualize in ReviGO
- * Run interproscan on stage 5 and 6 FASTAs seperately (11.C.1_interpro_stg_5.slurm and 11.C.1_interpro_stg_6_slurm)   
- * Pull out GO terms using script: 11.C.2_make_annotations_file.py  
- * copy GO terms and paste in ReviGo to visualize functions http://revigo.irb.hr/ 
+ Now that we have our FASTAs of the siginificantly upregulated DEGs for stages 5 & 6, we can run interproscan on both stages to get GO terms. Run interproscan on stage 5 and 6.   
+ `sbatch 11.C.1_interpro_stg_5.slurm`    
+ `sbatch 11.C.1_interpro_stg_6_slurm`    
+ Code in scripts:  
+ `interproscan -i ./stg_5.fa -d ./interpro_stg_5 -goterms -f TSV`   
+ `interproscan -i ./stg_6.fa -d ./interpro_stg_6 -goterms -f TSV` 
+ 
+ Outputs: 
+* stg_5.fa.tsv
+* stg_6.fa.tsv
+ 
+ Next, we need to pull out the GO terms from the tsv file so we can copy the GO terms into ReviGo.  
+ `./11.C.2_make_annotations_file.py -i stg_5.fa.tsv`     
+ `./11.C.2_make_annotations_file.py -i stg_6.fa.tsv`   
+ 
+ Outputs: 
+* annotations.txt (rename for each stage)  
+*For each output file - open it in a text editor. Remove the headers/copy all of the GO terms and paste in a new document - organize them so there is 1 GO term per line - call this new file stg_5_GOs.txt and stg_6_GOs.txt*  
+ 
+ Now that you have all of the GO terms, organized one per line - copy and paste them into ReviGo to visualize functions http://revigo.irb.hr/ 
