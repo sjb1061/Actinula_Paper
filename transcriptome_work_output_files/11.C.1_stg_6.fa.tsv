@@ -1,0 +1,37 @@
+Ec_actinula_t.67299	8b86752644e3e768d997a76a87c2b3fd	3098	ProSitePatterns	PS60024	Agouti domain signature.	1163	1205	-	T	04-09-2020	IPR027300	Agouti domain	GO:0005102
+Ec_actinula_t.67299	8b86752644e3e768d997a76a87c2b3fd	3098	MobiDBLite	mobidb-lite	consensus disorder prediction	1	35	-	T	04-09-2020
+Ec_actinula_t.69386	758756f19b2949afa899b4114c9e1e40	2067	MobiDBLite	mobidb-lite	consensus disorder prediction	1	48	-	T	04-09-2020
+Ec_actinula_t.52074	4e445f0de6155db2aa27278158dd3c4c	16689	ProSiteProfiles	PS51110	Saposin A-type domain profile.	6699	6739	6.548	T	04-09-2020	IPR003119	Saposin A-type domain	
+Ec_actinula_t.52074	4e445f0de6155db2aa27278158dd3c4c	16689	ProSiteProfiles	PS51110	Saposin A-type domain profile.	4437	4477	6.366	T	04-09-2020	IPR003119	Saposin A-type domain	
+Ec_actinula_t.52074	4e445f0de6155db2aa27278158dd3c4c	16689	ProSiteProfiles	PS51110	Saposin A-type domain profile.	6195	6235	6.226	T	04-09-2020	IPR003119	Saposin A-type domain	
+Ec_actinula_t.80990	fbc0a6223546d8183d089102d75116ef	5438	ProSiteProfiles	PS51323	Insulin-like growth factor-binding protein (IGFBP) N-terminal domain profile.	3563	3631	8.638	T	04-09-2020	IPR000867	Insulin-like growth factor-binding protein, IGFBP	GO:0005520|GO:0005576
+Ec_actinula_t.80990	fbc0a6223546d8183d089102d75116ef	5438	ProSitePatterns	PS00222	Insulin-like growth factor-binding protein (IGFBP) N-terminal domain signature.	4418	4433	-	T	04-09-2020	IPR017891	Insulin-like growth factor binding protein, N-terminal, Cys-rich conserved site	
+Ec_actinula_t.68720	d4967ba654c21fb0e0c58f651d9173c9	2305	MobiDBLite	mobidb-lite	consensus disorder prediction	76	167	-	T	04-09-2020
+Ec_actinula_t.55906	217236de8147d6655c3994dbbaa545c7	1932	MobiDBLite	mobidb-lite	consensus disorder prediction	1	39	-	T	04-09-2020
+Ec_actinula_t.94604	bf64765279830f277552a8989ba60b4a	2471	ProSitePatterns	PS60020	Janus-faced atracotoxin (J-ACTX) family signature.	1580	1610	-	T	04-09-2020	IPR012499	Janus-atracotoxin	GO:0005576|GO:0009405
+Ec_actinula_t.52719	0cb935c55b103799b3d6600f9ad7d2e2	4118	ProSitePatterns	PS01177	Anaphylatoxin domain signature.	3867	3902	-	T	04-09-2020	IPR000020	Anaphylatoxin/fibulin	GO:0005576
+Ec_actinula_t.71797	96af5860826bcbbbe7243e6afdd97034	1466	MobiDBLite	mobidb-lite	consensus disorder prediction	1	36	-	T	04-09-2020
+Ec_actinula_t.71797	96af5860826bcbbbe7243e6afdd97034	1466	ProSitePatterns	PS00222	Insulin-like growth factor-binding protein (IGFBP) N-terminal domain signature.	386	401	-	T	04-09-2020	IPR017891	Insulin-like growth factor binding protein, N-terminal, Cys-rich conserved site	
+Ec_actinula_t.67935	4efee21ad364a833dc19a9b238158046	2670	MobiDBLite	mobidb-lite	consensus disorder prediction	2215	2306	-	T	04-09-2020
+Ec_actinula_t.91346	29f44380b714a63a06e9b22a8a032dbb	901	MobiDBLite	mobidb-lite	consensus disorder prediction	1	66	-	T	04-09-2020
+Ec_actinula_t.54276	6fafbc4cc4bb21fd74a9b805b44bebea	2590	MobiDBLite	mobidb-lite	consensus disorder prediction	27	46	-	T	04-09-2020
+Ec_actinula_t.65834	ff8cf8f5e10c8518e8325ec40c2c19ed	12947	ProSitePatterns	PS00222	Insulin-like growth factor-binding protein (IGFBP) N-terminal domain signature.	515	530	-	T	04-09-2020	IPR017891	Insulin-like growth factor binding protein, N-terminal, Cys-rich conserved site	
+Ec_actinula_t.65834	ff8cf8f5e10c8518e8325ec40c2c19ed	12947	MobiDBLite	mobidb-lite	consensus disorder prediction	10909	10997	-	T	04-09-2020
+Ec_actinula_t.96886	a892a8ca19161a6b92a431e5ed6a3e48	876	PRINTS	PR00833	Pollen allergen Poa pI signature	147	161	9.8E-5	T	04-09-2020
+Ec_actinula_t.96886	a892a8ca19161a6b92a431e5ed6a3e48	876	PRINTS	PR00833	Pollen allergen Poa pI signature	102	121	9.8E-5	T	04-09-2020
+Ec_actinula_t.96886	a892a8ca19161a6b92a431e5ed6a3e48	876	MobiDBLite	mobidb-lite	consensus disorder prediction	44	72	-	T	04-09-2020
+Ec_actinula_t.53639	c6573356276fbea5e78a702f1dbff27f	3005	ProSiteProfiles	PS51473	Gnk2-homologous domain profile.	1614	1721	8.55	T	04-09-2020	IPR002902	Gnk2-homologous domain	
+Ec_actinula_t.59332	ef21d0ccd9d056b1c49bcdbc260e5ab3	1122	MobiDBLite	mobidb-lite	consensus disorder prediction	18	39	-	T	04-09-2020
+Ec_actinula_t.67455	b2a519bc14de2669c817d48bf85073c2	2989	MobiDBLite	mobidb-lite	consensus disorder prediction	362	443	-	T	04-09-2020
+Ec_actinula_t.71332	1569cc263e60ddbec59c20cb9c8855b0	1562	ProSitePatterns	PS00222	Insulin-like growth factor-binding protein (IGFBP) N-terminal domain signature.	403	418	-	T	04-09-2020	IPR017891	Insulin-like growth factor binding protein, N-terminal, Cys-rich conserved site	
+Ec_actinula_t.56853	e57636aac5da50f7b60ef7b59b68e0c4	1644	MobiDBLite	mobidb-lite	consensus disorder prediction	1	23	-	T	04-09-2020
+Ec_actinula_t.103857	ef16266631a2ceb0233a278b00b24f5b	14766	ProSitePatterns	PS01185	C-terminal cystine knot signature.	11659	11697	-	T	04-09-2020	IPR006207	Cystine knot, C-terminal	
+Ec_actinula_t.81036	291ba6089711e6e9560ae0a54504b648	511	MobiDBLite	mobidb-lite	consensus disorder prediction	1	20	-	T	04-09-2020
+Ec_actinula_t.82541	a83b0a00e84dd89df52745307092ba25	481	MobiDBLite	mobidb-lite	consensus disorder prediction	1	23	-	T	04-09-2020
+Ec_actinula_t.69132	1a3f8b43b8adb13253da67af99d38326	2148	MobiDBLite	mobidb-lite	consensus disorder prediction	33	63	-	T	04-09-2020
+Ec_actinula_t.65864	661cb654f41fe6c7a610bcb5c5912cf2	7705	ProSiteProfiles	PS50842	Expansin, family-45 endoglucanase-like domain profile.	768	836	9.216	T	04-09-2020	IPR007112	Expansin/pollen allergen, DPBB domain	
+Ec_actinula_t.65851	98ef562836d49f30d6710a214da86258	8541	ProSitePatterns	PS00222	Insulin-like growth factor-binding protein (IGFBP) N-terminal domain signature.	4243	4258	-	T	04-09-2020	IPR017891	Insulin-like growth factor binding protein, N-terminal, Cys-rich conserved site	
+Ec_actinula_t.65851	98ef562836d49f30d6710a214da86258	8541	ProSitePatterns	PS00198	4Fe-4S ferredoxin-type iron-sulfur binding region signature.	2334	2345	-	T	04-09-2020	IPR017900	4Fe-4S ferredoxin, iron-sulphur binding, conserved site	
+Ec_actinula_t.68558	c16c4706626ee072014e9d73f5790579	2371	ProSiteProfiles	PS51009	Cytochrome c class II profile.	1	107	8.539	T	04-09-2020	IPR002321	Cytochrome c, class II	GO:0005506|GO:0009055|GO:0020037
+Ec_actinula_t.91546	a3cd09847264bdc85ca0f79521fae16a	386	MobiDBLite	mobidb-lite	consensus disorder prediction	37	74	-	T	04-09-2020
+Ec_actinula_t.101261	98577411f79268ccac4b162099f1a51a	1221	MobiDBLite	mobidb-lite	consensus disorder prediction	1	20	-	T	04-09-2020
