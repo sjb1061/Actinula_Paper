@@ -20,7 +20,8 @@ The first step of this analysis is to activate the qiime environment and to impo
   Output Artifact: demux-paired-end.qza   
   
   Visualize output:
-  ```qiime demux summarize \
+  ```
+  qiime demux summarize \
   --i-data demux-paired-end.qza \
   --o-visualization demux.qzv
   ```    
