@@ -1,0 +1,43 @@
+Ec_actinula_t.70116	GO:0005102
+Ec_actinula_t.80990	
+Ec_actinula_t.80990	GO:0005520, GO:0005576
+Ec_actinula_t.52719	GO:0005576
+Ec_actinula_t.54287	
+Ec_actinula_t.55570	
+Ec_actinula_t.69671	
+Ec_actinula_t.65834	
+Ec_actinula_t.67615	
+Ec_actinula_t.52512	
+Ec_actinula_t.53639	
+Ec_actinula_t.66104	GO:0005520, GO:0005576
+Ec_actinula_t.71332	
+Ec_actinula_t.66671	
+Ec_actinula_t.52816	
+Ec_actinula_t.65864	
+Ec_actinula_t.81158	
+Ec_actinula_t.87623	
+Ec_actinula_t.52075	
+Ec_actinula_t.81715	
+Ec_actinula_t.66415	
+Ec_actinula_t.52074	
+Ec_actinula_t.52074	
+Ec_actinula_t.52074	
+Ec_actinula_t.81146	
+Ec_actinula_t.72037	GO:0005102
+Ec_actinula_t.81136	GO:0004222, GO:0008270
+Ec_actinula_t.52772	
+Ec_actinula_t.94604	GO:0005576, GO:0009405
+Ec_actinula_t.71797	
+Ec_actinula_t.65946	GO:0005506, GO:0009055, GO:0020037
+Ec_actinula_t.52653	
+Ec_actinula_t.81412	GO:0005576, GO:0006952
+Ec_actinula_t.103857	
+Ec_actinula_t.52243	
+Ec_actinula_t.97895	
+Ec_actinula_t.54583	GO:0005102
+Ec_actinula_t.52523	GO:0005576
+Ec_actinula_t.97884	GO:0005576, GO:0009405
+Ec_actinula_t.65851	
+Ec_actinula_t.65851	
+Ec_actinula_t.68558	GO:0005506, GO:0009055, GO:0020037
+Ec_actinula_t.53024	GO:0005102
