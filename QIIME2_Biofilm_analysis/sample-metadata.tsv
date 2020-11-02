@@ -1,0 +1,7 @@
+sample-id	collection-date	collection-order	submerged-7-days	number-of-dishes	sample-group-by-week	date	group-week
+#q2:types	categorical	categorical	categorical	numeric	categorical	numeric	categorical
+BF-1	June-16-2020	sample-1	yes	2	A	6.16	A
+BF-2	June-18-2020	sample-2	yes	3	A	6.18	A
+BF-3	June-20-2020	sample-3	yes	3	A	6.20	B
+BF-4	June-22-2020	sample-4	yes	3	B	6.22	C
+BF-5	June-25-2020	sample-5	yes	3	B	6.25	C
