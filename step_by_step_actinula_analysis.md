@@ -316,4 +316,19 @@ This file is the step by step instructions of our Transcriptome analysis. You wi
  Each script will make 2 heatmaps, the first is the total heatmap with all of the actinula genes found in that gene set. The second heatmap contains only significant DEGs from that gene set. This script makes heatmaps using the heatmap.2 function. Each row in the heatmap will be annotated with the actinula transcript header and will also have all of the gene symbols assoicated with the orthogroup that header is apart of. There will also only be unique headers displayed in the heatmaps, there are no redundant headers. 
  
  
+#### 11. Supplemental Step - Identify Significant Genes Upregulated in Stages 5 and 6   
+   In the heatmaps generated in step 10, we found a general pattern that in stages 5 (when the larvae are settled) and 6 (when larvae complete metamorphosis into a juvenile polyp) sensory gene expression is highly downregulated. We want to make sure that this pattern is not an artifact of our analysis so here we are identifying genes that are significantly upregulated in stages 5 & 6 and identifying their functions by performing a Gene Ontology (GO) analysis.   
+   
+   ##### A. Get DEGs that are upregulated from EdgeR output   
+   Run 2 scripts:  
+  * 11.A_find_upregulated_stg_5_genes.py   
+  * 11.A_find_upregulated_stg_6_genes.py   
+  
+  ##### B. Make FASTA of significant DEGs using selectSeqs
+  Run selectSeqs script on stage 5 and 6 outputs from above 
+ * selectSeqs.pl
  
+  ##### C. Run Interproscan, Pull out GO terms, and visualize in ReviGO
+ * Run interproscan on stage 5 and 6 FASTAs seperately (11.C.1_interpro_stg_5.slurm and 11.C.1_interpro_stg_6_slurm)   
+ * Pull out GO terms using script: 11.C.2_make_annotations_file.py  
+ * copy GO terms and paste in ReviGo to visualize functions http://revigo.irb.hr/ 
