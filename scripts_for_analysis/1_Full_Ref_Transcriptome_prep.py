@@ -146,7 +146,7 @@ try:
         stats_db = {}  #order of columns in db(they are in a list): total seqs, Seqs length, quality (avg of mean) 
         #each key will be 1 file ex: {STG_1_R1.R1 : [total seqs, seqs length, quality(avg of mean) ], STG_1_R1.R2 : [total seqs, seqs length, quality ] ...}
     
-        os.chdir("fastqc_results")
+        os.chdir("../fastqc_results")
         print("cwd: ", os.getcwd())
     
         #iterate through the base names - open up the R1 and R2 using this base name and add 
