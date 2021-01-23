@@ -17,10 +17,10 @@ This file is the step by step instructions of our Transcriptome analysis. You wi
     `mkdir ORP_Prep`.  
     `mkdir ORP_Prep/raw_larva_reads`.    
     
-   Within raw_larva_reads you should have subdirectories for each sample. Rename your subdirs with this format: STG_1_R1, STG_1_R2, STG_1_R3, ... If you need to add additional info after the R# add a dash and the info (STG_1_R3-additional-info). For the actinula data there are a total of 36 sub dirs with a total of 72 files (an R1 and R2 read file for each sample).   
+   Within raw_larva_reads dir you should have subdirectories for each sample. Rename your subdirs with this format: group_info_additional-info, for example: STG_1_R1, STG_1_R2, STG_1_R3, ... If you need to add additional info after the R# add a dash and the info (STG_1_R3-additional-info). The group for this example will be STG1 and within that group there will be STG_1_R1, STG_1_R2, STG_1_R3, .... This is important because the script will find the best representative sample within each of your groups which will be concatenated in the total_R1.fastq.gz and total_R2.fastq.gz files. For the actinula data there are a total of 36 sub dirs with a total of 72 files (an R1 and R2 read file for each sample). Side Note: You do not need to rename the actual sample files (the R1 and R1 files within each sub directory) and keep everything zipped.   
    
    ##### Once your directory is set up, run the script:   
-   `./1_Full_Ref_Transcriptome_prep.py -d ORP_Prep`  
+   `./1_Full_Ref_Transcriptome_prep.py -d raw_larva_reads`  
     
    The highest quality replicates that are used in the Reference transcriptome are:  
    winners_R1 = ['STG_3_R2.R1', 'STG_5_R2.R1', 'STG_2_R4.R1', 'STG_6_R4.R1', 'STG_1_R6.R1', 'STG_4_R3.R1']   
