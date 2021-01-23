@@ -16,7 +16,7 @@ import shutil
 
 #create an instance of Argument Parser and add positional argument 
 parser = argparse.ArgumentParser()
-parser.add_argument("--dir", "-d", help="Path to directory with sub directories of raw reads - subdir names should be in the format of group_additional-info")
+parser.add_argument("--dir", "-d", help="Path to directory with sub directories of raw reads - subdir names should be in the format of group_info_additional-info")
 
 args = parser.parse_args()
 
