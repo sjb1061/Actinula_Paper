@@ -13,6 +13,8 @@ import os
 import gzip
 import time
 import shutil
+from zipfile import ZipFile
+import json
 
 #create an instance of Argument Parser and add positional argument 
 parser = argparse.ArgumentParser()
