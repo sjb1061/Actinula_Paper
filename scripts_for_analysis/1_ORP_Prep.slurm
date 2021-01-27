@@ -35,7 +35,7 @@
 ## SBATCH -p shared
 #SBATCH --job-name="orp_prep"
 #SBATCH --output=actinula_orp_prep.output
-#SBATCH -e actin_orp_prep.err
+#SBATCH --error=actinula_orp_prep.err
 
 ##If you want premise to email you run: 
 #SBATCH --mail-user=sjb1061@wildcats.unh.edu
