@@ -361,15 +361,6 @@ def select_best_reads(group_db, score_db):
 #Call function
 winners = select_best_reads(fastqc_prep_result, results)
 
-#Write out winning list to a seperate file 
-try: 
-    with open("samples_in_total_fa_file.txt", "w") as out_handle: 
-        out_handle.write("This file contains the samples that had the highest score from each of the groups (meaning they are represenative of their groups). These samples were concatenated in the total.R1 and total.R2 files.\n")
-	out_handle.write(winners)
-exceptIOError:
-    print("Error writing file")
-
-print("Wrote File and returned list from function: ", winners)
 
 
 #make a list of the coresponding R2  winning reads 
