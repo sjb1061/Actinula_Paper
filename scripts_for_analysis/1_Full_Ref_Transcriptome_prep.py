@@ -360,7 +360,7 @@ def select_best_reads(group_db, score_db):
 
 #Call function
 winners = select_best_reads(fastqc_prep_result, results)
-
+print("returned list from function: ", winners)
 
 
 #make a list of the coresponding R2  winning reads 
