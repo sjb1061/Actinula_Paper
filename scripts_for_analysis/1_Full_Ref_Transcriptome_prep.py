@@ -381,12 +381,17 @@ print("winners 2 ", winners_2)
 #winners = ['STG_3_R2.R1', 'STG_5_R2.R1', 'STG_2_R4.R1', 'STG_6_R4.R1', 'STG_1_R6.R1', 'STG_4_R3.R1']
 #winners_2 = ['STG_3_R2.R2', 'STG_5_R2.R2', 'STG_2_R4.R2', 'STG_6_R4.R2', 'STG_1_R6.R2', 'STG_4_R3.R2']
 
+
 #Write winners to be concatenated to output file
 with open("groups_and_winning_samples.txt", "a") as out_handle: 
     out_handle.write("\nThe winning samples from each group that will be concatenated in your total_R1 and total_R2 files are: \n")
-    out_handle.write(winners)
-    out_handle.write("\n")
-    out_handle.write(winners_2)
+    for sample in winners: 
+        out_handle.write(sample + "\t")
+    
+    out_handle.write("\n")    
+        
+    for sample in winners_2: 
+        out_handle.write(sample + "\t")   
 
 
 #Step 4 b) Concatenate the winning reads into Total R1 and Total R2 files (zipped) (the updated re-wored 4b code)
