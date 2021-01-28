@@ -47,8 +47,15 @@ def fastqc_prep (dir):
             group_db.setdefault(tot_group,[])
             group_db[tot_group].append(item.name)
     #print("group db: ", group_db)#for debug
+
+    #Write group structure to an output file
+    with open("groups_and_winning_samples.txt", "w") as out_handle:
+        out_handle.write("The groups of your samples are as follows: \n ")
+        for key in group_db:
+            out_handle.write("Group: {0}, samples in that group: {1}\n".format(key, group_db[key]))
+    
     return group_db
-#maybe later have this function write the dictionary to a file and use that file for the step 3 portion
+
 #call funciton
 fastqc_prep_result = fastqc_prep(args.dir)
 print("structure of fastqc prep db: ", fastqc_prep_result) #for debug
@@ -370,11 +377,16 @@ for name in winners:
     winners_2.append(new_name)
 print("winners 2 ", winners_2)
 
-
-
 #returned collection from step 4a: 
 #winners = ['STG_3_R2.R1', 'STG_5_R2.R1', 'STG_2_R4.R1', 'STG_6_R4.R1', 'STG_1_R6.R1', 'STG_4_R3.R1']
 #winners_2 = ['STG_3_R2.R2', 'STG_5_R2.R2', 'STG_2_R4.R2', 'STG_6_R4.R2', 'STG_1_R6.R2', 'STG_4_R3.R2']
+
+#Write winners to be concatenated to output file
+with open("groups_and_winning_samples.txt", "a") as out_handle: 
+    out_handle.write("\nThe winning samples from each group that will be concatenated in your total_R1 and total_R2 files are: \n")
+    out_handle.write(winners)
+    out_handle.write("\n")
+    out_handle.write(winners_2)
 
 
 #Step 4 b) Concatenate the winning reads into Total R1 and Total R2 files (zipped) (the updated re-wored 4b code)
