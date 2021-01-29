@@ -18,7 +18,7 @@ import json
 
 #create an instance of Argument Parser and add positional argument 
 parser = argparse.ArgumentParser()
-parser.add_argument("--dir", "-d", help="Path to directory with sub directories of raw reads - subdir names should be in the format of group_info_additional-info")
+parser.add_argument("--dir", "-d", help="Path to Read directory with sub directories of raw reads - subdir names should be in the format of group_info_additional-info")
 
 args = parser.parse_args()
 
@@ -28,7 +28,8 @@ t1 = time.time()
 #for this data - there are 36 sub dirs, with a total of 72 files (R1 and R2) 
 
 #Step 1: prep files
-#1.a) make fastqc directory and prep for fastqc run - create a dictionary with a group and all items within that group (the replicates)
+#1.a) make a fastqc directory and prep for fastqc run (identify groupings of samples) 
+#create a directory first then identify groups and all items within that group (the replicates) and write to a file
 #for example: {STG1: [STG_1_R1, STG_1_R2 ...] STG2: [STG_2_R1, STG_2_R2...]}
 
 def fastqc_prep (dir):
@@ -56,16 +57,17 @@ def fastqc_prep (dir):
     
     return group_db
 
-#call funciton
+#call function using the directory given
 fastqc_prep_result = fastqc_prep(args.dir)
-print("structure of fastqc prep db: ", fastqc_prep_result) #for debug
+print("structure of groups and fastqc prep db: ", fastqc_prep_result) #for debug
 
 
 
 #Step 2) iterate through subdirectory specified in args.d - copy zipped files and rename them - place in directory specified
 try:
     iter_v = 0
-    #iterate through the subdirectories in the directory specified - make the file name you want to change it to
+    #iterate through the subdirectories in the directory specified - it will copy the files out of the subdirs and change 
+    #the names of the read files based on the subdir names 
     for root, dirs, files in os.walk(args.dir): 
         r1_output = "{0}.R1.fastq.gz".format(root)
         #print (r1_output) #debug
@@ -146,7 +148,7 @@ print("Steps 1-3a (fastqc) is complete - move on to next steps")
 
 
 
-#3b) iterate through keys and values of group_db to get the base name of files to use in a path to open file    
+#3b) iterate through keys and values of group_db to get the base name of files to use in a path to open fastqc file and collect info    
 try: 
     def stats(db):
         #make empty dictionaries to keep track of stats values with keys 
@@ -189,7 +191,7 @@ try:
                                 stats_db["{0}.R1".format(value)].append(sp_line[1])
                                 #print("sq len sp line ", sp_line[1]) #for debug
 		
-                            #Extract the mean and take the average of the mean and add to the stats_dbb
+                            #Extract the mean and take the average of the mean and add to the stats_db
                             if sp_line[0] == "#Base":
                                 trigger = True
 		
@@ -318,7 +320,7 @@ except IOError as err:
 
 #Call stats function 
 results = stats(fastqc_prep_result) #if running in 1 full script use this call 
-#results = stats(group_db) #if doing in steps use the group_db variable - need to hardcode the db in
+#results = stats(group_db) #if doing in steps use the group_db variable 
 
 
 #Step 4 a) identify the best reads to use for reference transcriptome 
@@ -343,7 +345,7 @@ def select_best_reads(group_db, score_db):
                     print("score list: ", score_list_r1)
                     print("name list: ", name_list_r1)
 
-        #id the highest score per group using the counter variable, the index variable keeps track of where the position
+        #id the highest score per group using the counter variable, the index variable keeps track of the position
         #of the highest score - once finished iterating through lists it will append the highest scoring name to the winners list per group 
         counter = 0
         idx = 0
@@ -356,18 +358,16 @@ def select_best_reads(group_db, score_db):
             else:
                 continue
 
-
         winner_r1_name = name_list_r1[idx] 
         winners_r1.append(winner_r1_name)
         print("winners list", winners_r1)  
-        
         print("winner names:", winner_r1_name)
     
     return winners_r1
 
 #Call function
 winners = select_best_reads(fastqc_prep_result, results)
-print("returned list from function: ", winners)
+print("returned winning list from function: ", winners)
 
 
 #make a list of the coresponding R2  winning reads 
@@ -383,8 +383,8 @@ print("winners 2 ", winners_2)
 
 
 #Write winners to be concatenated to output file
-with open("groups_and_winning_samples.txt", "a") as out_handle: 
-    out_handle.write("\nThe winning samples from each group that will be concatenated in your total_R1 and total_R2 files are: \n")
+with open("../groups_and_winning_samples.txt", "a") as out_handle: 
+    out_handle.write("\nThe winning (highest quality = representitive) samples from each group that will be concatenated in your total_R1 and total_R2 files are: \n")
     for sample in winners: 
         out_handle.write(sample + "\t")
     
@@ -394,7 +394,7 @@ with open("groups_and_winning_samples.txt", "a") as out_handle:
         out_handle.write(sample + "\t")   
 
 
-#Step 4 b) Concatenate the winning reads into Total R1 and Total R2 files (zipped) (the updated re-wored 4b code)
+#Step 4 b) Concatenate the winning reads into Total R1 and Total R2 files (zipped) 
 def make_totals_files(samp_dir, win_list, win_list2):
     #change into the correct dir, open new files and concatenate the highest scoring reps for each stage in order 
     #os.chdir("./fastqc_results") #only for testing - this is where we are after the previous code 
@@ -425,12 +425,10 @@ def make_totals_files(samp_dir, win_list, win_list2):
                     for line in in_handel_2:
                         out_handel_2.write(line)
                     
-    print("total R1 and R2 files have been made")
+    print("total R1 and R2 files have been made!!")
 
 #Call function 
 make_totals_files(args.dir, winners, winners_2)
-
-
 
 #time program
 t2 = time.time()
@@ -439,4 +437,3 @@ int(secs_time)
 tot_time = secs_time/60
 
 print("Total running time: {0} minutes ".format(tot_time)) #in minutes
-
