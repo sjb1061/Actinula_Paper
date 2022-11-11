@@ -21,7 +21,17 @@ For each geneset of interest, open the the output file from the R.md script gene
 Each file contains the following information for all actinula sequences that are found in any of our annotated OGs for the cooresponding geneset:  gene_acc, Homo_seqid, OG, gene symbol, Actinula_seqid  
 
 ### 2. Make a list of the OGs of interest
+Next, make a list of all OGs you are interested in making probes for   
+  - Sensory Perception of light stimulus:  
+    - RRH,OPN5,RHO,OPN4 OG0000063  
+  
+  - Sensory Perception of chemical stimulus: 
+    - PKD1L3	OG0000024  
+    - PKD2L1	OG0000899  
 
+  - Sensory Perceeption of mechanical stimulus: 
+    - PIEZO2	OG0001782  
+    - TRPA1	OG0000887  
 
 
 ### 3. Get full sequence headers with sequence locations
