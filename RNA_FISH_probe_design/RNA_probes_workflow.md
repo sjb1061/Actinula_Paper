@@ -93,7 +93,7 @@ In each dir, make a headers of interest file and copy the information we listed 
 `nano PKD1L3_headers_of_interest_OG0000024`  
 `nano PKD2L1_headers_of_interest_OG0000899`  
 
-Next, Run the make_csv_from_OF_and_quant_files_and_sort_TPM.py on each OG of interest. This script will navigate to the salmon dir and will generate a CSV file that has all of the count information for each of the headers of interest, and will sort the file to have the highest expressed transcripts at the top. 
+Next, Run the make_csv_from_OF_and_quant_files_and_sort_TPM.py on each OG of interest. This script will navigate to the salmon dir and will generate a CSV file that has all of the count information for each of the headers of interest, and will sort the file to have the highest expressed transcripts at the top. This script requires 4 pieces of info at execution: 1) the headers of interest file, 2) the path to the salmon dir with your read quantification info, 3) the first part of each group of transcripts (STG_1_R1, STG_2_R2 - the program can ignore the STG designation and use the important piece of info), and 4) the name of the output files.
 
 Opsins:  
 	Run script  
@@ -101,9 +101,9 @@ Opsins:
 
   output:   
 		opsin_OF_expression_info.csv  
-		sorted_TPM_file.csv #rename opsin_actinula_sorted_TPM_file.csv   
+		sorted_TPM_file.csv #rename: opsin_actinula_sorted_TPM_file.csv   
 		
-		copy to desktop  
+                copy to desktop  
 		`scp sjb1061@premise.sr.unh.edu:./ectopleura_transcriptomics/ectopleura_probes_3-1-21/opsins/opsin_actinula_sorted_TPM_file.csv ./`  
 		`scp sjb1061@premise.sr.unh.edu:./ectopleura_transcriptomics/ectopleura_probes_3-1-21/opsins/opsin_OF_expression_info.csv ./`  
 
@@ -113,9 +113,9 @@ Piezo:
 	`./make_csv_from_OF_and_quant_files_and_sort_TPM.py -a piezo_headers_of_interest_OG0001782 -b ../../salmon_3-13-20/ -c STG_ -d piezo_OF_expression_info`  
 		output:  
 			opsin_OF_expression_info.csv  
-			sorted_TPM_file.csv #rename piezo_actinula_sorted_TPM_file.csv   
+			sorted_TPM_file.csv #rename: piezo_actinula_sorted_TPM_file.csv   
 		
-		copy to desktop  
+                copy to desktop  
 		`scp sjb1061@premise.sr.unh.edu:./ectopleura_transcriptomics/ectopleura_probes_3-1-21/piezo/piezo_actinula_sorted_TPM_file.csv ./`  
 		`scp sjb1061@premise.sr.unh.edu:./ectopleura_transcriptomics/ectopleura_probes_3-1-21/piezo/piezo_OF_expression_info.csv ./`  
 
@@ -125,7 +125,7 @@ Run on PKD1L3:
 	`./make_csv_from_OF_and_quant_files_and_sort_TPM.py -a PKD1L3_headers_of_interest_OG0000024 -b ../../salmon_3-13-20/ -c STG_ -d PKD1L3_OF_expression_info`   
 		output:  
 			PKD1L3_OF_expression_info.csv  
-			sorted_TPM_file.csv #rename PKD1L3_actinula_sorted_TPM_file.csv    
+			sorted_TPM_file.csv #rename: PKD1L3_actinula_sorted_TPM_file.csv    
 		
 		copy to desktop  
 		`scp sjb1061@premise.sr.unh.edu:./ectopleura_transcriptomics/ectopleura_probes_3-1-21/PKD1L3/PKD1L3_actinula_sorted_TPM_file.csv ./`   
@@ -137,7 +137,7 @@ Run on PKD2L1:
 	`./make_csv_from_OF_and_quant_files_and_sort_TPM.py -a PKD2L1_headers_of_interest_OG0000899 -b ../../salmon_3-13-20/ -c STG_ -d PKD2L1_OF_expression_info`  
 		output:  
 			PKD2L1_OF_expression_info.csv  
-			sorted_TPM_file.csv #rename PKD2L1_actinula_sorted_TPM_file.csv   
+			sorted_TPM_file.csv #rename: PKD2L1_actinula_sorted_TPM_file.csv   
 		
 		copy to desktop  
 		`scp sjb1061@premise.sr.unh.edu:./ectopleura_transcriptomics/ectopleura_probes_3-1-21/PKD2L1/PKD2L1_actinula_sorted_TPM_file.csv ./`  
@@ -149,7 +149,7 @@ Run on TRP:
 	`./make_csv_from_OF_and_quant_files_and_sort_TPM.py -a TRP_headers_of_interest_OG0000887 -b ../../salmon_3-13-20/ -c STG_ -d TRP_OF_expression_info`  
 		output:   
 			TRP_OF_expression_info.csv   
-			sorted_TPM_file.csv #rename TRP_actinula_sorted_TPM_file.csv   
+			sorted_TPM_file.csv #rename: TRP_actinula_sorted_TPM_file.csv   
 		
 		copy to desktop  
 		`scp sjb1061@premise.sr.unh.edu:./ectopleura_transcriptomics/ectopleura_probes_3-1-21/TRP/TRP_actinula_sorted_TPM_file.csv ./`  
