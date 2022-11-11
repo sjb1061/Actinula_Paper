@@ -19,7 +19,8 @@ For each geneset of interest, open the the output file from the R.md script gene
   - Sensory Perceeption of mechanical stimulus: *8_Reduced_Ec_Sensory_Percep_Mechan_Stim_R_output_genes.txt*  
   
 Each file contains the following information for all actinula sequences that are found in any of our annotated OGs for the cooresponding geneset:  gene_acc, Homo_seqid, OG, gene symbol, Actinula_seqid  
-
+    
+    
 ### 2. Make a list of the OGs of interest
 Next, make a list of all OGs you are interested in making probes for   
   - Sensory Perception of light stimulus:  
@@ -32,11 +33,45 @@ Next, make a list of all OGs you are interested in making probes for
   - Sensory Perceeption of mechanical stimulus: 
     - PIEZO2	OG0001782  
     - TRPA1	OG0000887  
-
-
+    
+    
 ### 3. Get full sequence headers with sequence locations
+  A. Open the Rmd scripts for the genesets of interest and go through the script until line 146.  
+  B. Open the actinula_acc_apo_OGs_acc_sym dataframe and search the OG of interest  
+  C. For each OG, write out the full actinula sequence header which contains the sequence location - we will need that later in Step 7.  
 
+  - Sensory Perception of light stimulus:  
+     - Ec_actinula_t.28006..356-39	RRH,OPN5,RHO,OPN4	OG0000063
+     - Ec_actinula_t.72976..146-1048	RRH,OPN5,RHO,OPN4	OG0000063
+     - Ec_actinula_t.97788..1291-986	RRH,OPN5,RHO,OPN4	OG0000063
+     - Ec_actinula_t.97788..970-584	RRH,OPN5,RHO,OPN4	OG0000063 
+  
+  - Sensory Perception of chemical stimulus: 
+     - Ec_actinula_t.100430..3134-5638	PKD1L3	OG0000024
+     - Ec_actinula_t.100430..6459-9845	PKD1L3	OG0000024
+     - Ec_actinula_t.103146..3-2969	PKD1L3	OG0000024
+     - Ec_actinula_t.1124..593-237	PKD1L3	OG0000024
+     - Ec_actinula_t.33359..1-705	PKD1L3	OG0000024
+     - Ec_actinula_t.637..3846-322	PKD1L3	OG0000024
+     - Ec_actinula_t.66208..2940-1282	PKD1L3	OG0000024
+     - Ec_actinula_t.66208..4060-2882	PKD1L3	OG0000024
+     - Ec_actinula_t.90542..2-2404	PKD1L3	OG0000024
+     - Ec_actinula_t.90542..2196-2618	PKD1L3	OG0000024
 
+     - Ec_actinula_t.17768..3508-1277	PKD2L1	OG0000899
+     - Ec_actinula_t.27738..1-2184	PKD2L1	OG0000899
+     - Ec_actinula_t.37685..108-947	PKD2L1	OG0000899
+     - Ec_actinula_t.50415..1309-167	PKD2L1	OG0000899
+     - Ec_actinula_t.50416..1024-557	PKD2L1	OG0000899
+     - Ec_actinula_t.81080..203-2761	PKD2L1	OG0000899
+     - Ec_actinula_t.82249..123-2579	PKD2L1	OG0000899 
+
+  - Sensory Perceeption of mechanical stimulus: 
+     - Ec_actinula_t.17544..7629-1057	PIEZO2	OG0001782
+     - Ec_actinula_t.46001..442-2	PIEZO2	OG0001782
+
+     - Ec_actinula_t.66269..63-3458	TRPA1	OG0000887
+     - Ec_actinula_t.84956..107-3508	TRPA1	OG0000887
 
 ### 4. Make a CSV of gene expression values for sequences of interest
 
