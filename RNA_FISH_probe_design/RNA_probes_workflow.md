@@ -20,7 +20,30 @@ For each geneset of interest, open the the output file from the R.md script gene
   
 Each file contains the following information for all actinula sequences that are found in any of our annotated OGs for the cooresponding geneset:  gene_acc, Homo_seqid, OG, gene symbol, Actinula_seqid  
 
+### 2. Make a list of the OGs of interest
 
+
+
+### 3. Get full sequence headers with sequence locations
+
+
+
+### 4. Make a CSV of gene expression values for sequences of interest
+
+
+
+### 5. Select the highest expressed actinula sequences for each OG 
+
+
+
+### 6. Blastp highly expressed sequences 
+
+
+### 7. Pull out FASTA sequences for all transcripts of interest and get exact sequence locaiton of transcript
+
+
+
+### 8. Design probes in stellaris and order
 
 
 
