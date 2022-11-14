@@ -161,10 +161,11 @@ Run on TRP:
   Next we will select the highest expressed actinual transcripts to investigate as our probe seequences.   
   
   1. For each of your OGs of interest, open the actinula_sorted_TPM_file.csv  
-  2. Next, filter the table by the first unique transcript header and record the Sample stage/group with the highest TPMs (Transcript per million). For actinula, stages 3 and 4 are when we believe larvae are competent to settle so this is the stage we would expect high expression of sensory genes. We want to make probes out of the highest expressed transcripts during stages 3 andd 4. Do this filter step for the top 2-4 transcripts and recrod the unique transcript header, and the TPM range of stages 3 and 4.      
+  2. Next, filter the table by the first unique transcript header and record the Sample stage/group with the highest TPMs (Transcript per million). For actinula, stages 3 and 4 are when we believe larvae are competent to settle so this is the stage we would expect high expression of sensory genes. We want to make probes out of the highest expressed transcripts during stages 3 and 4. Do this filter step for the top 2-4 highhest expressed transcripts and recrod the unique transcript header, and the TPM range of stages 3 and 4.      
 
 ### 6. Blastp highly expressed sequences 
-
+  Next, we will look at the alignments of the sequences in each OG, which can be found in the OrthoFinder MultipleSequenceAlignments output dir. 
+  
 
 ### 7. Pull out FASTA sequences for all transcripts of interest and get exact sequence locaiton of transcript
 
