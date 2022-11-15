@@ -234,7 +234,10 @@ For example:
 The protien header for a potential opsin sequence is Ec_actinula_t.97788..1291-986_(-). Open the Ec_actinula_t.97788 tab in snapgene and go to the sequence location of 1291-986 and copy that range and paste into a new text document that will contain all probe sequences (called exact_nuc_seqs_for_probes.fa). Take note of the bp and GC content in your notes file. You will do this for each of your sequences.
 
 ### 8. Design probes in stellaris and order
+Now that you have a fasta file of nucleotide sequences of your exact region for probes, we are going to make a custom probeset using Stellaris: https://www.biosearchtech.com/products/rna-fish/custom-stellaris-probe-sets. I recommend reading over the design information provided by stellaris.    
 
-
-
-
+	1. Select the Stellaris rrna fish probe designer option and start design
+	2. Enter in the name of your probe set name, for organism select other, masking level change to 2, Max number of probes keep at 48. For the first test keep oligo length at 20 and min spacing length (nt) at 2 - alter these according to the recomendations depending on the number of probes generated. Next, paste in your target sequence and click design probes
+	3. This will generate a probe set. Stellaris recommends a minimum of 25 oligos for a single probe set. If the count number is too low, alter the lenggth and min spacing length according to their recomendations for troubleshooting/designing: https://blog.biosearchtech.com/considerations-for-optimizing-stellaris-rna-fish-probe-design.   
+	4. Next, selectt your stellaris dye and order. Check out https://www.biosearchtech.com/support/education/stellaris-rna-fish/dyes-and-modifications-for-stellaris.  
+You have now completed the RNA FISH Probe Design!!
