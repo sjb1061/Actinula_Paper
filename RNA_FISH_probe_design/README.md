@@ -4,4 +4,4 @@ This directory contains the step-by-step instructions for designing RNA Fluoresc
 
 Follow the step-by-step instructions of the workflow: RNA_Probes_workflow.md   
 Scripts for this section can be found in the directory: Probe_design_scripts   
-Outputs can be found in the directory: Probe_design_outputs   
+Inputs and Outputs can be found in the directory: Probe_design_inputs_and_outputs   
