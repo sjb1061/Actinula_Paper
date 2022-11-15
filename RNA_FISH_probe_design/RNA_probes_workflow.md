@@ -164,9 +164,44 @@ Run on TRP:
   2. Next, filter the table by the first unique transcript header and record the Sample stage/group with the highest TPMs (Transcript per million). For actinula, stages 3 and 4 are when we believe larvae are competent to settle so this is the stage we would expect high expression of sensory genes. We want to make probes out of the highest expressed transcripts during stages 3 and 4. Do this filter step for the top 2-4 highhest expressed transcripts and recrod the unique transcript header, and the TPM range of stages 3 and 4.      
 
 ### 6. Blastp highly expressed sequences 
-  Next, we will look at the alignments of the sequences in each OG, which can be found in the OrthoFinder MultipleSequenceAlignments output dir. 
+  Next, we will look at the alignments of the sequences in each OG, which can be found in the OrthoFinder MultipleSequenceAlignments output dir. Create a new dir that will contain all of your alignments outside of the MultipleSequenceAlignments dir (side note: don't `ls` in MultipleSequenceAlignments). Then transfer alignment to desktop to view alignment   
   
+  ```
+     mkdir OrthoFinder/Results/OGs_of_interest_alignments
+  
+     cp MultipleSequenceAlignments/OG0000063.fa ./OGs_of_interest_alignments #opsin
+     cp MultipleSequenceAlignments/OG0001782.fa ./OGs_of_interest_alignments #piezo
+     cp MultipleSequenceAlignments/OG0000899.fa ./OGs_of_interest_alignments #PKD2L1
+     cp MultipleSequenceAlignments/OG0000024.fa ./OGs_of_interest_alignments #PKD1L3
+     cp MultipleSequenceAlignments/OG0000887.fa ./OGs_of_interest_alignments #TRPA1
+  ```
+  Next, open the file in seaviewer (or other alignment viewer) and compare the sequences - make note of potential good/bad seqs based on alignment. Then copy the actinula sequences into a text editor  and remove all dashes (find/replace dash with nothing). Now blastp the sequences in NCBI and record hits and potential sequences for probes. This is a reciprocal blast to try to verify highly expressed seqences to make probes. 
+  
+  ```
+# Opsins OG0000063 
+>actinula_total_ORP_famod_reduced_Ec_actinula_t.28006..35639	Select seq ref|XP_027053517.1|	melanopsin-B-like isoform X1 [Pocillopora damicornis]; Select seq gb|AGB67494.1|	c-like opsin [Tripedalia cystophora]
+>actinula_total_ORP_famod_reduced_Ec_actinula_t.72976..1461048  #(Had K in 926 position) Select seq ref|XP_012555438.1|	PREDICTED: melanopsin-B-like [Hydra vulgaris] and Select seq gb|QHF16595.1|	opsin [Hydra vulgaris].  
+>actinula_total_ORP_famod_reduced_Ec_actinula_t.97788..970584	Select seq gb|QHF16601.1|	opsin [Hydra vulgaris]
+>actinula_total_ORP_famod_reduced_Ec_actinula_t.97788..1291986	Select seq ref|XP_004211965.1|	PREDICTED: opsin-3-like [Hydra vulgaris]
 
+#Piezo OG0001782
+>actinula_total_ORP_famod_reduced_Ec_actinula_t.17544..76291057	  Select seq ref|XP_027057832.1|	piezo-type mechanosensitive ion channel component 2-like [Pocillopora damicornis]; and Select seq ref|XP_032220159.1|	piezo-type mechanosensitive ion channel component 1 [Nematostella vectensis]
+>actinula_total_ORP_famod_reduced_Ec_actinula_t.46001..4422	Select seq ref|XP_032225286.1|	piezo-type mechanosensitive ion channel component 1 [Nematostella vectensis]
+
+#PKD2L1 OG0000899
+>actinula_total_ORP_famod_reduced_Ec_actinula_t.81080..2032761		Select seq ref|XP_029208330.1|	polycystic kidney disease 2-like 1 protein [Acropora millepora]
+>actinula_total_ORP_famod_reduced_Ec_actinula_t.82249..1232579		Select seq ref|XP_029208330.1|	polycystic kidney disease 2-like 1 protein [Acropora millepora]
+
+#PKD1L3 OG0000024	
+>actinula_total_ORP_famod_reduced_Ec_actinula_t.66208..29401282		Select seq ref|XP_012563290.1|	PREDICTED: polycystic kidney disease 2-like 1 protein [Hydra vulgaris]
+>actinula_total_ORP_famod_reduced_Ec_actinula_t.66208..40602882		Select seq ref|XP_012560253.1|	PREDICTED: polycystic kidney disease protein 1-like 2 [Hydra vulgaris]
+
+#TRPA1 OG0000887
+>actinula_total_ORP_famod_reduced_Ec_actinula_t.66269..633458		Select seq ref|XP_012557933.1|	PREDICTED: transient receptor potential cation channel subfamily A member 1-like [Hydra vulgaris]
+>actinula_total_ORP_famod_reduced_Ec_actinula_t.84956..1073508		Select seq ref|XP_012565640.1|	PREDICTED: transient receptor potential cation channel subfamily A member 1-like [Hydra vulgaris]
+		
+```
+  
 ### 7. Pull out FASTA sequences for all transcripts of interest and get exact sequence locaiton of transcript
 
 
