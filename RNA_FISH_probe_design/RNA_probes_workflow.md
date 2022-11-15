@@ -205,6 +205,29 @@ Run on TRP:
 ```
   
 ### 7. Pull out FASTA sequences for all transcripts of interest and get exact sequence locaiton of transcript
+Next, we will pull out the sequences across all OGs that we are interested in making probes for.  
+
+First, make a header file of all the headers you want to pull sequences out call it: `nano actinula_headers_for_probes`   
+Copy all headers of interest into the actinula_headers_for_probes file:
+
+```
+#actinula_headers_for_probes file should look like this: 
+Ec_actinula_t.97788
+Ec_actinula_t.28006
+Ec_actinula_t.72976
+Ec_actinula_t.17544
+Ec_actinula_t.81080
+Ec_actinula_t.82249
+Ec_actinula_t.66208
+Ec_actinula_t.66269
+Ec_actinula_t.84956 
+
+```
+
+Next, run selectSeqs.pl to get all of the fasta nuc seqs for these headers. You will give this script the headers file, the transcriptome fasta, and the output file name: 
+`	./selectSeqs.pl -f actinula_headers_for_probes ./actinula_total.ORP.fa-mod.fa >> actinula_highest_expression_sensory_seqs_for_probes.fa`
+
+Save this fasta file on your local computer and open it with a sequence viewer, here I use the free version of SnapGene. In SnapGene, each header will have its own page, go through each one, click on the translation option which shows tthe reading frame, and copy tthe specified sequence region from the location portion of the protien header. This will be the exact sequence you use to make probes. 
 
 
 
