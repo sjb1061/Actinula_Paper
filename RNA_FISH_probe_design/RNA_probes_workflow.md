@@ -79,20 +79,22 @@ In the terminal, make a probes directory where you can easily navigate to your s
   `mkdir ectopleura_transcriptomics/ectopleura_probes`  
   
 Next, in the ectopleura_probes dir, make dirs for each of your OGs of interest:   
-  `mkdir ectopleura_transcriptomics/ectopleura_probes/opsins`  
-  `mkdir ectopleura_transcriptomics/ectopleura_probes/PKD1L3`  
-  `mkdir ectopleura_transcriptomics/ectopleura_probes/PKD2L1`  
-  `mkdir ectopleura_transcriptomics/ectopleura_probes/piezo`  
-  `mkdir ectopleura_transcriptomics/ectopleura_probes/TRP`  
+  ```
+  mkdir ectopleura_transcriptomics/ectopleura_probes/opsins  
+  mkdir ectopleura_transcriptomics/ectopleura_probes/PKD1L3  
+  mkdir ectopleura_transcriptomics/ectopleura_probes/PKD2L1 
+  mkdir ectopleura_transcriptomics/ectopleura_probes/piezo  
+  mkdir ectopleura_transcriptomics/ectopleura_probes/TRP
+  ```
   
 In each dir, make a headers of interest file and copy the information we listed out in Step 3. Each line should contain the following information in order for however many headers you have in each OG: complete header (described in the above step), the gene symbol, and OG. (Each item should be tab seperated) 
-
-`nano opsin_headers_of_interest_OG0000063`  
-`nano piezo_headers_of_interest_OG0001782`  
-`nano TRP_headers_of_interest_OG0000887`  
-`nano PKD1L3_headers_of_interest_OG0000024`  
-`nano PKD2L1_headers_of_interest_OG0000899`  
-
+```
+nano opsin_headers_of_interest_OG0000063  
+nano piezo_headers_of_interest_OG0001782  
+nano TRP_headers_of_interest_OG0000887  
+nano PKD1L3_headers_of_interest_OG0000024  
+nano PKD2L1_headers_of_interest_OG0000899  
+```
 Next, Run the make_csv_from_OF_and_quant_files_and_sort_TPM.py on each OG of interest. This script will navigate to the salmon dir and will generate a CSV file that has all of the count information for each of the headers of interest, and will sort the file to have the highest expressed transcripts at the top. This script requires 4 pieces of info at execution: 1) the headers of interest file, 2) the path to the salmon dir with your read quantification info, 3) the first part of each group of transcripts (STG_1_R1, STG_2_R2 - the program can ignore the STG designation and use the important piece of info), and 4) the name of the output files.
 
 Opsins:  
@@ -103,7 +105,7 @@ Opsins:
 		opsin_OF_expression_info.csv  
 		sorted_TPM_file.csv #rename: opsin_actinula_sorted_TPM_file.csv   
 		
-                copy to desktop  
+                #copy to desktop  
 		`scp sjb1061@premise.sr.unh.edu:./ectopleura_transcriptomics/ectopleura_probes_3-1-21/opsins/opsin_actinula_sorted_TPM_file.csv ./`  
 		`scp sjb1061@premise.sr.unh.edu:./ectopleura_transcriptomics/ectopleura_probes_3-1-21/opsins/opsin_OF_expression_info.csv ./`  
 
@@ -115,7 +117,7 @@ Piezo:
 			opsin_OF_expression_info.csv  
 			sorted_TPM_file.csv #rename: piezo_actinula_sorted_TPM_file.csv   
 		
-                copy to desktop  
+                #copy to desktop  
 		`scp sjb1061@premise.sr.unh.edu:./ectopleura_transcriptomics/ectopleura_probes_3-1-21/piezo/piezo_actinula_sorted_TPM_file.csv ./`  
 		`scp sjb1061@premise.sr.unh.edu:./ectopleura_transcriptomics/ectopleura_probes_3-1-21/piezo/piezo_OF_expression_info.csv ./`  
 
@@ -127,7 +129,7 @@ Run on PKD1L3:
 			PKD1L3_OF_expression_info.csv  
 			sorted_TPM_file.csv #rename: PKD1L3_actinula_sorted_TPM_file.csv    
 		
-		copy to desktop  
+		#copy to desktop  
 		`scp sjb1061@premise.sr.unh.edu:./ectopleura_transcriptomics/ectopleura_probes_3-1-21/PKD1L3/PKD1L3_actinula_sorted_TPM_file.csv ./`   
 		`scp sjb1061@premise.sr.unh.edu:./ectopleura_transcriptomics/ectopleura_probes_3-1-21/PKD1L3/PKD1L3_OF_expression_info.csv ./`  
 
@@ -139,7 +141,7 @@ Run on PKD2L1:
 			PKD2L1_OF_expression_info.csv  
 			sorted_TPM_file.csv #rename: PKD2L1_actinula_sorted_TPM_file.csv   
 		
-		copy to desktop  
+		#copy to desktop  
 		`scp sjb1061@premise.sr.unh.edu:./ectopleura_transcriptomics/ectopleura_probes_3-1-21/PKD2L1/PKD2L1_actinula_sorted_TPM_file.csv ./`  
 		`scp sjb1061@premise.sr.unh.edu:./ectopleura_transcriptomics/ectopleura_probes_3-1-21/PKD2L1/PKD2L1_OF_expression_info.csv ./`   
 
@@ -151,7 +153,7 @@ Run on TRP:
 			TRP_OF_expression_info.csv   
 			sorted_TPM_file.csv #rename: TRP_actinula_sorted_TPM_file.csv   
 		
-		copy to desktop  
+		#copy to desktop  
 		`scp sjb1061@premise.sr.unh.edu:./ectopleura_transcriptomics/ectopleura_probes_3-1-21/TRP/TRP_actinula_sorted_TPM_file.csv ./`  
 		`scp sjb1061@premise.sr.unh.edu:./ectopleura_transcriptomics/ectopleura_probes_3-1-21/TRP/TRP_OF_expression_info.csv ./`  
 
