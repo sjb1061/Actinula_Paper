@@ -224,12 +224,14 @@ Ec_actinula_t.84956
 
 ```
 
-Next, run selectSeqs.pl to get all of the fasta nuc seqs for these headers. You will give this script the headers file, the transcriptome fasta, and the output file name: 
-`	./selectSeqs.pl -f actinula_headers_for_probes ./actinula_total.ORP.fa-mod.fa >> actinula_highest_expression_sensory_seqs_for_probes.fa`
+Next, run selectSeqs.pl to get all of the fasta nuc seqs for these headers. You will give this script the headers file, the transcriptome fasta, and the output file name:   
+
+`	./selectSeqs.pl -f actinula_headers_for_probes ./actinula_total.ORP.fa-mod.fa >> actinula_highest_expression_sensory_seqs_for_probes.fa`   
 
 Save this fasta file on your local computer and open it with a sequence viewer, here I use the free version of SnapGene. In SnapGene, each header will have its own page, go through each one, click on the translation option which shows tthe reading frame, and copy tthe specified sequence region from the location portion of the protien header. This will be the exact sequence you use to make probes. 
 
-
+For example:  
+The protien header for a potential opsin sequence is Ec_actinula_t.97788..1291-986_(-). Open the Ec_actinula_t.97788 tab in snapgene and go to the sequence location of 1291-986 and copy that range and paste into a new text document that will contain all probe sequences (called exact_nuc_seqs_for_probes.fa). Take note of the bp and GC content in your notes file. You will do this for each of your sequences.
 
 ### 8. Design probes in stellaris and order
 
